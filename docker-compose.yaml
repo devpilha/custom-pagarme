@@ -1,0 +1,12 @@
+version: '2'
+services:
+  php:
+    image: pagarme-lib
+    volumes:
+      - .:/code
+    working_dir: /code
+  composer:
+    image: composer/composer:php5
+    volumes:
+      - .:/code
+    working_dir: /code

@@ -1,0 +1,38 @@
+{
+    "repositories" : [
+        {
+            "type" : "vcs",
+            "url" : "https://github.com/pagarme/git-hooks.git"
+        }
+    ],
+    "name": "pagarme/pagarme-php",
+    "description": "Pagar.Me PHP Library",
+    "type": "lib",
+    "keywords": [
+        "pagar.me",
+        "pagarme",
+        "pagamentos",
+        "payments brazil",
+        "pagamento brasil",
+        "api"
+    ],
+    "homepage": "http://pagar.me",
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "2.*",
+        "pagarme/git-hooks": "dev-master"
+    },
+    "scripts": {
+        "post-update-cmd": "bash vendor/pagarme/git-hooks/phpcs-pre-commit/install.sh"
+    },
+     "autoload": {
+        "psr-4": {"PagarMe\\Sdk\\": "lib/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"PagarMe\\SdkTest\\": "tests/"}
+    }
+}
