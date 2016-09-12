@@ -26,7 +26,15 @@
         "pagarme/git-hooks": "dev-master"
     },
     "scripts": {
-        "post-update-cmd": "bash vendor/pagarme/git-hooks/phpcs-pre-commit/install.sh"
+        "post-update-cmd": "bash vendor/pagarme/git-hooks/phpcs-pre-commit/install.sh",
+        "test": [
+            "@composer install",
+            "vendor/bin/phpunit"
+        ],
+        "coverage": [
+            "@composer install",
+            "vendor/bin/phpunit --coverage-html tests/_reports"
+        ]
     },
      "autoload": {
         "psr-4": {"PagarMe\\Sdk\\": "lib/"}
