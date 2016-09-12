@@ -6,6 +6,12 @@ use PagarMe\Sdk\Client;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
+    const REQUEST_METHOD = 'POST';
+    const REQUEST_PATH   = 'test';
+    const CONTENT        = 'sample content';
+    const API_KEY        = 'myApiKey';
+    const ENCRYPTION_KEY = 'myEncryptionKey';
+
     /**
      * @test
     **/
@@ -25,11 +31,58 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request->method('getMethod')->willReturn('POST');
-        $request->method('getPath')->willReturn('test');
-        $request->method('getPayload')->willReturn(['content' => 'test']);
+        $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
+        $request->method('getPath')->willReturn(self::REQUEST_PATH);
+        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
 
-        $client = new Client($guzzleClientMock, 'myApiKey', 'myEncryptionKey');
+        $client = new Client(
+            $guzzleClientMock,
+            self::API_KEY,
+            self::ENCRYPTION_KEY
+        );
+
+        $client->send($request);
+    }
+
+    /**
+     * @test
+    **/
+    public function mustSendRequestWithProperContent()
+    {
+        $guzzleClientMock = $this->getMockBuilder('GuzzleHttp\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $guzzleClientMock->expects($this->once())
+            ->method('createRequest')
+            ->with(
+                self::REQUEST_METHOD,
+                self::REQUEST_PATH,
+                [
+                    'body' => [
+                        'content'        => self::CONTENT,
+                        'api_key'        => self::API_KEY,
+                        'encryption_key' => self::ENCRYPTION_KEY
+                    ]
+                ]
+            )
+            ->willReturn($this->getMock('GuzzleHttp\Message\RequestInterface'));
+
+        $guzzleClientMock->expects($this->once())->method('send');
+
+        $request = $this->getMockBuilder('PagarMe\Sdk\Request')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
+        $request->method('getPath')->willReturn(self::REQUEST_PATH);
+        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
+
+        $client = new Client(
+            $guzzleClientMock,
+            self::API_KEY,
+            self::ENCRYPTION_KEY
+        );
 
         $client->send($request);
     }
@@ -66,11 +119,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request->method('getMethod')->willReturn('POST');
-        $request->method('getPath')->willReturn('test');
-        $request->method('getPayload')->willReturn(['content' => 'test']);
+        $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
+        $request->method('getPath')->willReturn(self::REQUEST_PATH);
+        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
 
-        $client = new Client($guzzleClientMock, 'myApiKey', 'myEncryptionKey');
+        $client = new Client(
+            $guzzleClientMock,
+            self::API_KEY,
+            self::ENCRYPTION_KEY
+        );
 
         $client->send($request);
     }
