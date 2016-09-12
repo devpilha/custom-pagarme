@@ -19,11 +19,10 @@
     "homepage": "http://pagar.me",
     "license": "MIT",
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^5.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "2.*",
         "pagarme/git-hooks": "dev-master"
     },
     "scripts": {

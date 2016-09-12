@@ -1,12 +1,7 @@
 version: '2'
 services:
   php:
-    image: pagarme-lib
-    volumes:
-      - .:/code
-    working_dir: /code
-  composer:
-    image: composer/composer:php5
+    image: xduh/php54
     volumes:
       - .:/code
     working_dir: /code
