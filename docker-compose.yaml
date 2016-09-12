@@ -5,3 +5,8 @@ services:
     volumes:
       - .:/code
     working_dir: /code
+  composer:
+    image: xduh/composer
+    volumes:
+      - .:/code
+    working_dir: /code
