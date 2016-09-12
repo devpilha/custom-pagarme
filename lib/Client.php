@@ -25,7 +25,11 @@ class Client
             $this->buildBody($apiRequest)
         );
 
-        return $this->client->send($request);
+        try {
+            return $this->client->send($request);
+        } catch (\GuzzleHttp\Exception\RequestException $exception) {
+            throw new ClientException($exception);
+        }
     }
 
     private function buildBody(Request $request)
