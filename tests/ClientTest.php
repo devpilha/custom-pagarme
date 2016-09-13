@@ -25,7 +25,19 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('createRequest')
             ->willReturn($this->getMock('GuzzleHttp\Message\RequestInterface'));
 
-        $guzzleClientMock->expects($this->once())->method('send');
+        $responseMock = $this->getMockBuilder('GuzzleHttp\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $streamMock = $this->getMockBuilder('GuzzleHttp\Stream\Stream')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $responseMock->method('getBody')
+            ->willReturn($streamMock);
+
+        $guzzleClientMock->expects($this->once())->method('send')
+            ->willReturn($responseMock);
 
         $request = $this->getMockBuilder('PagarMe\Sdk\Request')
             ->disableOriginalConstructor()
@@ -33,7 +45,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
         $request->method('getPath')->willReturn(self::REQUEST_PATH);
-        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
+        $request->method('getPayload')->willReturn(
+            ['content' => self::CONTENT]
+        );
 
         $client = new Client(
             $guzzleClientMock,
@@ -68,7 +82,19 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturn($this->getMock('GuzzleHttp\Message\RequestInterface'));
 
-        $guzzleClientMock->expects($this->once())->method('send');
+        $responseMock = $this->getMockBuilder('GuzzleHttp\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $streamMock = $this->getMockBuilder('GuzzleHttp\Stream\Stream')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $responseMock->method('getBody')
+            ->willReturn($streamMock);
+
+        $guzzleClientMock->expects($this->once())->method('send')
+            ->willReturn($responseMock);
 
         $request = $this->getMockBuilder('PagarMe\Sdk\Request')
             ->disableOriginalConstructor()
@@ -76,7 +102,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
         $request->method('getPath')->willReturn(self::REQUEST_PATH);
-        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
+        $request->method('getPayload')->willReturn(
+            ['content' => self::CONTENT]
+        );
 
         $client = new Client(
             $guzzleClientMock,
@@ -121,7 +149,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $request->method('getMethod')->willReturn(self::REQUEST_METHOD);
         $request->method('getPath')->willReturn(self::REQUEST_PATH);
-        $request->method('getPayload')->willReturn(['content' => self::CONTENT]);
+        $request->method('getPayload')->willReturn(
+            ['content' => self::CONTENT]
+        );
 
         $client = new Client(
             $guzzleClientMock,

@@ -3,6 +3,7 @@
 namespace PagarMe\Sdk;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Message\Response as Response;
 
 class Client
 {
@@ -26,7 +27,8 @@ class Client
         );
 
         try {
-            return $this->client->send($request);
+            $response = $this->client->send($request);
+            return $response->getBody()->getContents();
         } catch (\GuzzleHttp\Exception\RequestException $exception) {
             throw new ClientException($exception);
         }
