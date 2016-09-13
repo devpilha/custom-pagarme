@@ -11,8 +11,6 @@ class ClientException extends PagarMeException
         parent::__construct(
             [
                 'message'  => $exception->getMessage(),
-                'request'  => $exception->getRequest(),
-                'response' => $exception->getResponse(),
             ],
             $exception->getCode()
         );
