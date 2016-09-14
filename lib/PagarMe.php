@@ -4,6 +4,7 @@ namespace PagarMe\Sdk;
 
 use GuzzleHttp\Client as GuzzleClient;
 use PagarMe\Sdk\Customer\Handler as CustomerHandler;
+use PagarMe\Sdk\Card\Handler as CardHandler;
 
 class PagarMe
 {
@@ -26,5 +27,14 @@ class PagarMe
         }
 
         return $this->customerHandler;
+    }
+
+    public function card()
+    {
+        if (!$this->cardHandler instanceof CardHandler) {
+            $this->cardHandler = new CardHandler($this->client);
+        }
+
+        return $this->cardHandler;
     }
 }
