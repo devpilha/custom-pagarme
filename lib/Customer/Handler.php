@@ -16,6 +16,14 @@ class Handler
         $this->client = $client;
     }
 
+    public function create(Customer $customer)
+    {
+        $request = new CustomerCreate($customer);
+        $response = $this->client->send($request);
+
+        return new Customer(get_object_vars($response));
+    }
+
     public function get($customerId)
     {
         $request = new CustomerGet($customerId);

@@ -3,6 +3,7 @@
 namespace Pagarme\SdkTests\Customer;
 
 use PagarMe\Sdk\Customer\Handler;
+use PagarMe\Sdk\Customer\Customer;
 
 class HandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,6 +42,45 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             'PagarMe\Sdk\Customer\Customer',
             $handler->get(rand(1000, 2000))
+        );
+    }
+
+    /**
+     * @test
+    **/
+    public function mustReturnCustomerWithId()
+    {
+        $clientMock =  $this->getMockBuilder('PagarMe\Sdk\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $clientMock->method('send')
+            ->willReturn(json_decode($this->customerGetResponse()));
+
+        $handler = new Handler($clientMock);
+
+        $data = [
+            'bornAt' => '15071991',
+            'documentNumber' => '44628816808',
+            'email' => 'cliente@empresa.com',
+            'gender' => 'M',
+            'name' => 'João Silva',
+            'address' => [
+                'street' => 'rua teste',
+                'street_number' => 42,
+                'neighborhood' => 'centro',
+                'zipcode' => '01227200'
+            ],
+            'phone' => [
+                'ddd' => 15,
+                'number' => 987523421
+            ]
+        ];
+
+        $customer = new Customer($data);
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Customer\Customer',
+            $handler->create($customer)
         );
     }
 
