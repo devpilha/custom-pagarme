@@ -4,6 +4,8 @@ namespace PagarMe\Sdk\Card;
 
 class Card
 {
+    use \PagarMe\Sdk\Fillable;
+
     private $id;
     private $dateCreated;
     private $dateUpdated;
@@ -17,31 +19,11 @@ class Card
 
     public function __construct($arrayData)
     {
-        $replaceableFields = array_keys($this->attributeRelation());
-        foreach ($arrayData as $key => $value) {
-            $field = $key;
-            if (in_array($key, $replaceableFields)) {
-                $field = $this->attributeRelation()[$key];
-            }
-            if (property_exists($this, $field)) {
-                $this->$field = $value;
-            }
-        }
+        $this->fill($arrayData);
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    private function attributeRelation()
-    {
-        return [
-            'date_created' => 'dateCreated',
-            'date_updated' => 'dateUpdated',
-            'holder_name'  => 'holderName',
-            'first_digits' => 'firstDigits',
-            'last_digits'  => 'lastDigits'
-        ];
     }
 }
