@@ -5,6 +5,7 @@ namespace PagarMe\Sdk\Card;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Card\Request\CardCreate;
+use PagarMe\Sdk\Card\Request\CardGet;
 
 class Handler
 {
@@ -21,6 +22,15 @@ class Handler
             $cardNumber,
             $holderName,
             $cardExpirationDate
+        );
+
+        return new Card($this->client->send($request));
+    }
+
+    public function get($cardId)
+    {
+        $request = new CardGet(
+            $cardId
         );
 
         return new Card($this->client->send($request));
