@@ -4,7 +4,7 @@ namespace PagarMe\SdkTest\Card\Request;
 
 use PagarMe\Sdk\Card\Request\CardCreate;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class CardCreateTest extends \PHPUnit_Framework_TestCase
 {
     const PATH            = 'cards';
     const METHOD          = 'POST';
