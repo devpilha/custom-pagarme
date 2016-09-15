@@ -10,6 +10,7 @@ class PagarMe
 {
     private $client;
     private $customerHandler;
+    private $cardHandler;
 
     public function __construct($apiKey, $encryptionKey)
     {
