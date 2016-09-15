@@ -25,7 +25,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
             $handler->create(
                 4018720572598048,
                 'API CUSTOMER',
-                0419
+                '0419'
             )
         );
     }
