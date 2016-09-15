@@ -5,7 +5,7 @@
 >
     <testsuites>
         <testsuite name="Pagar.Me Sdk">
-            <directory suffix="Test.php">./tests/</directory>
+            <directory suffix="Test.php">./tests/unit/</directory>
             <exclude>vendor</exclude>
         </testsuite>
     </testsuites>
@@ -13,7 +13,7 @@
         <whitelist>
             <directory>./lib</directory>
             <exclude>
-                <directory>./tests</directory>
+                <directory>./tests/unit</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
