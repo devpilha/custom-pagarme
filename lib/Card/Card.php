@@ -26,4 +26,14 @@ class Card
     {
         return $this->id;
     }
+
+    public function getFirstDigits()
+    {
+        return $this->firstDigits;
+    }
+
+    public function getLastDigits()
+    {
+        return $this->lastDigits;
+    }
 }
