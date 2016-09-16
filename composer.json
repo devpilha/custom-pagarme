@@ -40,6 +40,9 @@
         "psr-4": {"PagarMe\\Sdk\\": "lib/"}
     },
     "autoload-dev": {
-        "psr-4": {"PagarMe\\SdkTest\\": "tests/"}
+        "psr-4": {
+            "PagarMe\\SdkTest\\": "tests/unit",
+            "PagarMe\\Acceptance\\": "tests/acceptance"
+        }
     }
 }
