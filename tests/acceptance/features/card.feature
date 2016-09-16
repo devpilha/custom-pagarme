@@ -16,7 +16,6 @@ Feature: Cards
       |  6062828347922862   |  Carla Silva  |    0623    | 606282 | 2862 |
       |  6363689025822139   |  Marta Silva  |    0623    | 636368 | 2139 |
 
-  @only
   Scenario Outline: Registering credit cards
     Given I register a card with "<number>", "<holder>" and "<expiration>"
     When I query for the card
