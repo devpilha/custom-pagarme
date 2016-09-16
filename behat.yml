@@ -1,0 +1,7 @@
+default:
+  suites:
+    default:
+      paths:
+        - %paths.base%/tests/acceptance/features
+      contexts:
+        - PagarMe\Acceptance\CardContext
