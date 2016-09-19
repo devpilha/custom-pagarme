@@ -21,8 +21,8 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'born_at' => '14061990',
-                'document_number' => '38462194873',
+                'born_at' => '15071991',
+                'document_number' => '10586649727',
                 'email' => 'eduardo@eduardo.com',
                 'gender' => 'M',
                 'name' => 'Eduardo Nascimento',
