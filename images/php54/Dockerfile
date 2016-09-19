@@ -48,6 +48,7 @@ RUN buildDeps=" \
         $PHP_EXTRA_CONFIGURE_ARGS \
         --disable-cgi \
         --enable-mysqlnd \
+        --enable-mbstring \
         --with-curl \
         --with-openssl \
         --with-pcre \

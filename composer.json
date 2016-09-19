@@ -22,8 +22,10 @@
         "guzzlehttp/guzzle": "^5.3"
     },
     "require-dev": {
+        "ext-mbstring": "*",
         "phpunit/phpunit": "^4.8",
-        "pagarme/git-hooks": "dev-master"
+        "pagarme/git-hooks": "dev-master",
+        "behat/mink-extension": "^2.2"
     },
     "scripts": {
         "post-update-cmd": "bash vendor/pagarme/git-hooks/phpcs-pre-commit/install.sh",
