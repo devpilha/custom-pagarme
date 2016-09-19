@@ -66,8 +66,8 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
     private function getCustomer()
     {
         $customerData = [
-            'bornAt' => '14061990',
-            'documentNumber' => '38462194873',
+            'bornAt' => '15071991',
+            'documentNumber' => '10586649727',
             'email' => 'eduardo@eduardo.com',
             'gender' => 'M',
             'name' => 'Eduardo Nascimento',
