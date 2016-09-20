@@ -3,6 +3,7 @@
 namespace PagarMe\Sdk\Transaction;
 
 use PagarMe\Sdk\Client;
+use PagarMe\Sdk\Transaction\Request\TransactionCreate;
 
 class Handler
 {

@@ -29,8 +29,15 @@ class Client
         try {
             $response = $this->client->send($request);
             return json_decode($response->getBody()->getContents());
+        } catch (\GuzzleHttp\Exception\ClientException $exception) {
+            $response = $exception->getResponse()->getBody()->getContents();
+            $code = $exception->getResponse()->getStatusCode();
+            throw new ClientException($response, $code);
         } catch (\GuzzleHttp\Exception\RequestException $exception) {
-            throw new ClientException($exception);
+            throw new ClientException(
+                $exception->getMessage(),
+                $exception->getCode()
+            );
         }
     }
 
