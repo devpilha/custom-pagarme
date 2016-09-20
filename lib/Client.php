@@ -32,7 +32,6 @@ class Client
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
             $response = $exception->getResponse()->getBody()->getContents();
             $code = $exception->getResponse()->getStatusCode();
-
             throw new ClientException($response, $code);
         } catch (\GuzzleHttp\Exception\RequestException $exception) {
             throw new ClientException(
