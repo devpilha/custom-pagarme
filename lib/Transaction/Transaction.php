@@ -43,7 +43,7 @@ class Transaction
         return $this->card->getId();
     }
 
-    public function getID()
+    public function getId()
     {
         return $this->id;
     }
