@@ -9,13 +9,11 @@ class Client
 {
     private $apiKey;
     private $client;
-    private $encryptionKey;
 
-    public function __construct(GuzzleClient $client, $apiKey, $encryptionKey)
+    public function __construct(GuzzleClient $client, $apiKey)
     {
         $this->client        = $client;
         $this->apiKey        = $apiKey;
-        $this->encryptionKey = $encryptionKey;
     }
 
     public function send(Request $apiRequest)
@@ -47,8 +45,7 @@ class Client
             'body' => array_merge(
                 $request->getPayload(),
                 [
-                    'api_key'        => $this->apiKey,
-                    'encryption_key' => $this->encryptionKey
+                    'api_key' => $this->apiKey
                 ]
             )
         ];
