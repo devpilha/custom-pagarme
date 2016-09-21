@@ -14,12 +14,11 @@ class PagarMe
     private $transactionHandler;
     private $cardHandler;
 
-    public function __construct($apiKey, $encryptionKey)
+    public function __construct($apiKey)
     {
         $this->client = new Client(
             new GuzzleClient(['base_url' => 'https://api.pagar.me/1/']),
-            $apiKey,
-            $encryptionKey
+            $apiKey
         );
     }
 

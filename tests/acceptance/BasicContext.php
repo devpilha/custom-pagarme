@@ -22,8 +22,7 @@ abstract class BasicContext implements Context, SnippetAcceptingContext
             $companyData = self::createCompany();
 
             self::$pagarMe = new PagarMe(
-                $companyData->api_key->test,
-                $companyData->encryption_key->test
+                $companyData->api_key->test
             );
         }
 
@@ -38,7 +37,7 @@ abstract class BasicContext implements Context, SnippetAcceptingContext
         curl_setopt(
             $ch,
             CURLOPT_URL,
-            "https://api.pagar.me/1//companies/temporary"
+            "https://api.pagar.me/1/companies/temporary"
         );
 
         date_default_timezone_set('America/Sao_Paulo');
