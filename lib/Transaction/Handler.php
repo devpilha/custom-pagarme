@@ -4,6 +4,7 @@ namespace PagarMe\Sdk\Transaction;
 
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\TransactionCreate;
+use PagarMe\Sdk\Card\Card;
 
 class Handler
 {
@@ -14,14 +15,18 @@ class Handler
         $this->client = $client;
     }
 
-    public function create($amount, $cardId, $metadata)
+    public function create($amount, Card $card)
     {
-        $request = new TransactionCreate(
-            $amount,
-            $cardId,
-            $metadata
+        $transaction = new Transaction(
+            [
+                'amount' => $amount,
+                'card'   => $card
+            ]
         );
 
-        return new Transaction($this->client->send($request));
+        $request = new TransactionCreate($transaction);
+        $result = $this->client->send($request);
+
+        return new Transaction($result);
     }
 }
