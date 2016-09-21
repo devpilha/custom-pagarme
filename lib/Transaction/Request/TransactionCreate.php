@@ -32,7 +32,7 @@ class TransactionCreate implements Request
                 'address' => [
                     'street'        => $address['street'],
                     'street_number' => $address['street_number'],
-                    'complementary' => $address['complementary'],
+                    'complementary' => isset($address['complementary']) ? $address['complementary']: null,
                     'neighborhood'  => $address['neighborhood'],
                     'zipcode'       => $address['zipcode']
                 ],
