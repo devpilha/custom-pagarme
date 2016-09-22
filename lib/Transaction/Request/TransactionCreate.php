@@ -17,6 +17,7 @@ class TransactionCreate implements Request
     public function getPayload()
     {
         $customer = $this->transaction->getCustomer();
+
         $address  = $customer->getAddress();
         $phone    = $customer->getPhone();
 

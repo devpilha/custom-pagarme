@@ -6,3 +6,4 @@ default:
       contexts:
         - PagarMe\Acceptance\CustomerContext
         - PagarMe\Acceptance\CardContext
+        - PagarMe\Acceptance\TransactionContext

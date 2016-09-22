@@ -12,6 +12,8 @@ use PagarMe\Sdk\Customer\Customer;
 
 class CustomerContext extends BasicContext
 {
+    use Helper\CustomerDataProvider;
+
     private $customer;
     private $customerData;
     private $customerList;
@@ -21,28 +23,7 @@ class CustomerContext extends BasicContext
      */
     public function customerData()
     {
-        $this->customerData = [
-            'born_at'         => '13121988',
-            'document_number' => '18152564000105',
-            'email'           => 'eee@email.com',
-            'gender'          => 'M',
-            'name'            => 'nome do cliente',
-            'address' => [
-                'city'          => 'sao paulo,',
-                'complementary' => 'apto,',
-                'country'       => 'Brasil,',
-                'neighborhood'  => 'pinheiros,',
-                'state'         => 'SP,',
-                'street'        => 'rua qualquer,',
-                'street_number' => '13,',
-                'zipcode'       => '05444040,',
-            ],
-            'phone' => [
-                'ddd'    => 11,
-                'ddi'    => 55,
-                'number' => 999887766,
-            ]
-        ];
+        $this->customerData = $this->getValidCustomerData();
     }
 
     /**
