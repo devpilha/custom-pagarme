@@ -17,7 +17,6 @@ Feature: Customer
       |  6062828347922862   |  Carla Silva  |    0623    |  123456  |
       |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |
 
-  @only
   Scenario Outline: Creating a Transaction
     Given a valid customer
     And make a boleto transaction with "<amount>"
