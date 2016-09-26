@@ -2,13 +2,15 @@
 
 namespace PagarMe\SdkTest\Transaction\Request;
 
-use PagarMe\Sdk\Transaction\Request\TransactionCreate;
-use PagarMe\Sdk\Transaction\Transaction;
+use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
+use PagarMe\Sdk\Transaction\CreditCardTransaction;
 
-class TransactionCreateTest extends \PHPUnit_Framework_TestCase
+class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
 {
     const PATH   = 'transactions';
     const METHOD = 'POST';
+
+    const CARD_ID = 1;
 
     /**
      * @test
@@ -16,12 +18,13 @@ class TransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustPayloadBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new TransactionCreate($transaction);
+        $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(
             [
-                'amount'  => 1337,
-                'card_id' => 'card_ci6l9fx8f0042rt16rtb477gj',
+                'amount'       => 1337,
+                'card_id'      => self::CARD_ID,
+                'installments' => 1,
                 'customer' => [
                     'name'            => 'Eduardo Nascimento',
                     'born_at'         => '15071991',
@@ -51,7 +54,7 @@ class TransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustPathBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new TransactionCreate($transaction);
+        $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(self::PATH, $transactionCreate->getPath());
     }
@@ -62,7 +65,7 @@ class TransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustMethodBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new TransactionCreate($transaction);
+        $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(self::METHOD, $transactionCreate->getMethod());
     }
@@ -72,11 +75,12 @@ class TransactionCreateTest extends \PHPUnit_Framework_TestCase
         $customerMock = $this->getCustomerMock();
         $cardMock     = $this->getCardMock();
 
-        $transaction =  new Transaction(
+        $transaction =  new CreditCardTransaction(
             [
                 'amount'       => 1337,
                 'card'         => $cardMock,
                 'customer'     => $customerMock,
+                'installments' => 1
             ]
         );
 
@@ -90,7 +94,7 @@ class TransactionCreateTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $cardMock->method('getId')
-            ->willReturn('card_ci6l9fx8f0042rt16rtb477gj');
+            ->willReturn(self::CARD_ID);
 
         return $cardMock;
     }

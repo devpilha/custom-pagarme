@@ -44,7 +44,7 @@ class TransactionContext extends BasicContext
     {
         $this->transaction = self::getPagarMe()
             ->transaction()
-            ->create($amount, $this->creditCard, $this->customer);
+            ->creditCardTransaction($amount, $this->creditCard, $this->customer);
     }
 
     /**

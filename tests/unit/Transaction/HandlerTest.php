@@ -30,7 +30,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Transaction\Transaction',
-            $handler->create(
+            $handler->creditCardTransaction(
                 310000,
                 $card,
                 $customer

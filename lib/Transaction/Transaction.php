@@ -2,48 +2,39 @@
 
 namespace PagarMe\Sdk\Transaction;
 
-class Transaction
+abstract class Transaction
 {
     use \PagarMe\Sdk\Fillable;
 
-    private $id;
-    private $status;
-    private $refuseReason;
-    private $statusReason;
-    private $acquirerName;
-    private $acquirerResponseCode;
-    private $authorizationCode;
-    private $softDescriptor;
-    private $tid;
-    private $nsu;
-    private $dateCreated;
-    private $dateUpdated;
-    private $amount;
-    private $installments;
-    private $cost;
-    private $postbackUrl;
-    private $paymentMethod;
-    private $antifraudScore;
-    private $referer;
-    private $ip;
-    private $subscriptionId;
-    private $phone;
-    private $address;
-    private $customer;
-    private $card;
-    private $metadata;
+    protected $id;
+    protected $status;
+    protected $refuseReason;
+    protected $statusReason;
+    protected $acquirerName;
+    protected $acquirerResponseCode;
+    protected $authorizationCode;
+    protected $softDescriptor;
+    protected $tid;
+    protected $nsu;
+    protected $dateCreated;
+    protected $dateUpdated;
+    protected $amount;
+    protected $cost;
+    protected $postbackUrl;
+    protected $paymentMethod;
+    protected $antifraudScore;
+    protected $referer;
+    protected $ip;
+    protected $subscriptionId;
+    protected $phone;
+    protected $address;
+    protected $customer;
+    protected $card;
+    protected $metadata;
 
     public function __construct($arrayData)
     {
         $this->fill($arrayData);
-    }
-
-    /**
-    * @codeCoverageIgnore
-    */
-    public function getCardId()
-    {
-        return $this->card->getId();
     }
 
     /**

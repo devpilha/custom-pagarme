@@ -3,7 +3,7 @@
 namespace PagarMe\Sdk\Transaction;
 
 use PagarMe\Sdk\Client;
-use PagarMe\Sdk\Transaction\Request\TransactionCreate;
+use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -16,13 +16,13 @@ class Handler
         $this->client = $client;
     }
 
-    public function create(
+    public function creditCardTransaction(
         $amount,
         Card $card,
         Customer $customer,
         $installments = 1
     ) {
-        $transaction = new Transaction(
+        $transaction = new CreditCardTransaction(
             [
                 'amount'       => $amount,
                 'card'         => $card,
@@ -31,10 +31,30 @@ class Handler
             ]
         );
 
-        $request = new TransactionCreate($transaction);
+        $request = new CreditCardTransactionCreate($transaction);
 
         $result = $this->client->send($request);
 
-        return new Transaction($result);
+        return new CreditCardTransaction($result);
+    }
+
+    public function boletoTransaction(
+        $amount,
+        Customer $customer,
+        $postBackUrl
+    ) {
+        $transaction = new BoletoTransaction(
+            [
+                'amount'       => $amount,
+                'customer'     => $customer,
+                'installments' => $installments
+            ]
+        );
+
+        $request = new BoletoTransactionCreate($transaction);
+
+        $result = $this->client->send($request);
+
+        return new BoletoTransaction($result);
     }
 }

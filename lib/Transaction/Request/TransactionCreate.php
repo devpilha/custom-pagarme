@@ -7,7 +7,7 @@ use PagarMe\Sdk\Transaction\Transaction;
 
 class TransactionCreate implements Request
 {
-    private $transaction;
+    protected $transaction;
 
     public function __construct(Transaction $transaction)
     {
@@ -23,7 +23,6 @@ class TransactionCreate implements Request
 
         return [
             'amount'  => $this->transaction->getAmount(),
-            'card_id' => $this->transaction->getCardId(),
             'customer' => [
                 'name'            => $customer->getName(),
                 'document_number' => $customer->getDocumentNumber(),
