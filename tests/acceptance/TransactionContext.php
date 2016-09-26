@@ -14,6 +14,8 @@ class TransactionContext extends BasicContext
 {
     use Helper\CustomerDataProvider;
 
+    const POSTBACK_URL = 'example.com/postback';
+
     private $creditCard;
     private $customer;
 
@@ -38,14 +40,25 @@ class TransactionContext extends BasicContext
 
 
     /**
-     * @When make a transaction with :amount
+     * @When make a credit card transaction with :amount
      */
-    public function makeATransactionWith($amount)
+    public function makeACreditCardTransactionWith($amount)
     {
         $this->transaction = self::getPagarMe()
             ->transaction()
             ->creditCardTransaction($amount, $this->creditCard, $this->customer);
     }
+
+    /**
+     * @Given make a boleto transaction with :amount
+     */
+    public function makeABoletoTransactionWith($amount)
+    {
+        $this->transaction = self::getPagarMe()
+            ->transaction()
+            ->boletoTransaction($amount, $this->customer, self::POSTBACK_URL);
+    }
+
 
     /**
      * @Then a valid transaction must be created

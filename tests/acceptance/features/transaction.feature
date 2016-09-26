@@ -6,7 +6,7 @@ Feature: Customer
   Scenario Outline: Creating a Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And make a transaction with "<amount>"
+    And make a credit card transaction with "<amount>"
     Then a valid transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  |
@@ -16,3 +16,13 @@ Feature: Customer
       |  372780906958878    |  Cesar Silva  |    0623    |  1337    |
       |  6062828347922862   |  Carla Silva  |    0623    |  123456  |
       |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |
+
+  @only
+  Scenario Outline: Creating a Transaction
+    Given a valid customer
+    And make a boleto transaction with "<amount>"
+    Then a valid transaction must be created
+    Examples:
+      |  amount  |
+      |  123456  |
+      |  1000001 |
