@@ -12,19 +12,31 @@ class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
 
     const CARD_ID = 1;
 
+    public function boletoOptions()
+    {
+        $customer = $this->getCustomerMock();
+
+        return [
+            [null],
+            [date('Y-m-d', strtotime("tomorrow"))],
+            [date('Y-m-d', strtotime("+15 days"))]
+        ];
+    }
+
     /**
+     * @dataProvider boletoOptions
      * @test
     **/
-    public function mustPayloadBeCorrect()
+    public function mustPayloadBeCorrect($expirationDate)
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->createTransaction($expirationDate);
         $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(
             [
                 'amount'         => 1337,
                 'payment_method' => 'boleto',
-                'boleto_expiration_date' => null,
+                'boleto_expiration_date' => $expirationDate,
                 'customer' => [
                     'name'            => 'Eduardo Nascimento',
                     'born_at'         => '15071991',
@@ -53,7 +65,10 @@ class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustPathBeCorrect()
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->getMockBuilder('PagarMe\Sdk\Transaction\BoletoTransaction')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(self::PATH, $transactionCreate->getPath());
@@ -64,21 +79,25 @@ class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustMethodBeCorrect()
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->getMockBuilder('PagarMe\Sdk\Transaction\BoletoTransaction')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(self::METHOD, $transactionCreate->getMethod());
     }
 
-    private function getTransaction()
+    private function createTransaction($expirationDate)
     {
         $customerMock = $this->getCustomerMock();
 
         $transaction =  new BoletoTransaction(
             [
-                'amount'        => 1337,
-                'post_back_url' => 'example.com/postback',
-                'customer'      => $customerMock,
+                'amount'                 => 1337,
+                'post_back_url'          => 'example.com/postback',
+                'customer'               => $customerMock,
+                'boleto_expiration_date' => $expirationDate
             ]
         );
 

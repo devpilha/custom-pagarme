@@ -16,6 +16,6 @@ class BoletoTransaction extends Transaction
 
     public function getBoletoExpirationDate()
     {
-        return $boletoExpirationDate;
+        return $this->boletoExpirationDate;
     }
 }
