@@ -9,6 +9,9 @@ class TransactionCreate implements Request
 {
     protected $transaction;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct(Transaction $transaction)
     {
         $this->transaction = $transaction;
