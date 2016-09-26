@@ -22,7 +22,8 @@ class TransactionCreate implements Request
         $phone    = $customer->getPhone();
 
         return [
-            'amount'  => $this->transaction->getAmount(),
+            'amount'         => $this->transaction->getAmount(),
+            'payment_method' => $this->transaction->getPaymentMethod(),
             'customer' => [
                 'name'            => $customer->getName(),
                 'document_number' => $customer->getDocumentNumber(),

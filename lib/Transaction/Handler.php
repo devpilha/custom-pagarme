@@ -4,6 +4,7 @@ namespace PagarMe\Sdk\Transaction;
 
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
+use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -45,9 +46,9 @@ class Handler
     ) {
         $transaction = new BoletoTransaction(
             [
-                'amount'       => $amount,
-                'customer'     => $customer,
-                'installments' => $installments
+                'amount'      => $amount,
+                'customer'    => $customer,
+                'postBackUrl' => $postBackUrl
             ]
         );
 

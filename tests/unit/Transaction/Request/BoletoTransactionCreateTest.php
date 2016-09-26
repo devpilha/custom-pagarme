@@ -2,10 +2,10 @@
 
 namespace PagarMe\SdkTest\Transaction\Request;
 
-use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
-use PagarMe\Sdk\Transaction\CreditCardTransaction;
+use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
+use PagarMe\Sdk\Transaction\BoletoTransaction;
 
-class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
+class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
 {
     const PATH   = 'transactions';
     const METHOD = 'POST';
@@ -18,14 +18,13 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustPayloadBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new CreditCardTransactionCreate($transaction);
+        $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(
             [
                 'amount'         => 1337,
-                'card_id'        => self::CARD_ID,
-                'installments'   => 1,
-                'payment_method' => 'credit_card',
+                'payment_method' => 'boleto',
+                'boleto_expiration_date' => null,
                 'customer' => [
                     'name'            => 'Eduardo Nascimento',
                     'born_at'         => '15071991',
@@ -55,7 +54,7 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustPathBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new CreditCardTransactionCreate($transaction);
+        $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(self::PATH, $transactionCreate->getPath());
     }
@@ -66,7 +65,7 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     public function mustMethodBeCorrect()
     {
         $transaction =  $this->getTransaction();
-        $transactionCreate = new CreditCardTransactionCreate($transaction);
+        $transactionCreate = new BoletoTransactionCreate($transaction);
 
         $this->assertEquals(self::METHOD, $transactionCreate->getMethod());
     }
@@ -74,32 +73,17 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     private function getTransaction()
     {
         $customerMock = $this->getCustomerMock();
-        $cardMock     = $this->getCardMock();
 
-        $transaction =  new CreditCardTransaction(
+        $transaction =  new BoletoTransaction(
             [
-                'amount'       => 1337,
-                'card'         => $cardMock,
-                'customer'     => $customerMock,
-                'installments' => 1
+                'amount'        => 1337,
+                'post_back_url' => 'example.com/postback',
+                'customer'      => $customerMock,
             ]
         );
 
         return $transaction;
     }
-
-    public function getCardMock()
-    {
-        $cardMock = $this->getMockBuilder('PagarMe\Sdk\Card\Card')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cardMock->method('getId')
-            ->willReturn(self::CARD_ID);
-
-        return $cardMock;
-    }
-
 
     public function getCustomerMock()
     {
