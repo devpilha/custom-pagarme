@@ -22,14 +22,4 @@ class CreditCardTransactionCreate extends TransactionCreate
 
         return array_merge($basicData, $cardData);
     }
-
-    public function getPath()
-    {
-        return 'transactions';
-    }
-
-    public function getMethod()
-    {
-        return 'POST';
-    }
 }

@@ -21,14 +21,4 @@ class BoletoTransactionCreate extends TransactionCreate
 
         return array_merge($basicData, $boletoData);
     }
-
-    public function getPath()
-    {
-        return 'transactions';
-    }
-
-    public function getMethod()
-    {
-        return 'POST';
-    }
 }
