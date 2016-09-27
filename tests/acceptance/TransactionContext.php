@@ -18,6 +18,8 @@ class TransactionContext extends BasicContext
 
     private $creditCard;
     private $customer;
+    private $transaction;
+    private $transactionList;
 
      /**
      * @When register a card with :number, :holder and :expiration
@@ -110,5 +112,35 @@ class TransactionContext extends BasicContext
             ->get($this->transaction->getId());
 
         assertEquals($this->transaction, $transaction);
+    }
+
+    /**
+     * @Given I had multiple transactions registered
+     */
+    public function iHadMultipleTransactionsRegistered()
+    {
+        $this->aValidCustomer();
+        $this->makeABoletoTransactionWith(1337);
+        $this->makeABoletoTransactionWith(486);
+        $this->makeABoletoTransactionWith(8008);
+    }
+
+    /**
+     * @When query transactions
+     */
+    public function queryTransactions()
+    {
+        $this->transactionList = self::getPagarMe()
+            ->transaction()
+            ->getList();
+    }
+
+    /**
+     * @Then an array of transactions must be returned
+     */
+    public function anArrayOfTransactionsMustBeReturned()
+    {
+        assertContainsOnly('PagarMe\Sdk\Transaction\Transaction', $this->transactionList);
+        assertGreaterThanOrEqual(2, count($this->transactionList));
     }
 }

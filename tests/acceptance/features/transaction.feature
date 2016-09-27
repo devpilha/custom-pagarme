@@ -35,3 +35,9 @@ Feature: Customer
     Given a valid customer
     And a valid boleto transaction
     Then then transaction must be retriavable
+
+  @only
+  Scenario: Getting transactions
+    Given I had multiple transactions registered
+    When query transactions
+    Then an array of transactions must be returned
