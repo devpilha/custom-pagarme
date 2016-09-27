@@ -75,4 +75,40 @@ class TransactionContext extends BasicContext
             $this->transaction
         );
     }
+
+    /**
+     * @Given a valid card
+     */
+    public function aValidCard()
+    {
+        $this->registerACardWithAnd(4539706041746367, "John Doe", '0725');
+    }
+
+    /**
+     * @Given a valid credit card transaction
+     */
+    public function aValidCreditCardTransaction()
+    {
+        $this->makeACreditCardTransactionWithAnd('1337', rand(1, 12));
+    }
+
+    /**
+     * @Given a valid boleto transaction
+     */
+    public function aValidBoletoTransaction()
+    {
+        $this->makeABoletoTransactionWith(1337);
+    }
+
+    /**
+     * @Then then transaction must be retriavable
+     */
+    public function thenTransactionMustBeRetriavable()
+    {
+        $transaction = self::getPagarMe()
+            ->transaction()
+            ->get($this->transaction->getId());
+
+        assertEquals($this->transaction, $transaction);
+    }
 }

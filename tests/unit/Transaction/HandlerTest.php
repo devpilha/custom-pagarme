@@ -29,7 +29,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->assertInstanceOf(
-            'PagarMe\Sdk\Transaction\Transaction',
+            'PagarMe\Sdk\Transaction\CreditCardTransaction',
             $handler->creditCardTransaction(
                 310000,
                 $card,
@@ -56,12 +56,58 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->assertInstanceOf(
-            'PagarMe\Sdk\Transaction\Transaction',
+            'PagarMe\Sdk\Transaction\BoletoTransaction',
             $handler->boletoTransaction(
                 310000,
                 $customer,
                 'example.com/postback'
             )
+        );
+    }
+
+    /**
+     * @test
+    **/
+    public function mustReturnBoletoTransaction()
+    {
+        $clientMock = $this->getMockBuilder('PagarMe\Sdk\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $clientMock->method('send')
+            ->willReturn($this->boletoTransactionCreateResponse());
+
+        $handler = new Handler($clientMock);
+
+        $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Transaction\BoletoTransaction',
+            $handler->get(12345)
+        );
+    }
+
+    /**
+     * @test
+    **/
+    public function mustReturnCreditCardTransaction()
+    {
+        $clientMock = $this->getMockBuilder('PagarMe\Sdk\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $clientMock->method('send')
+            ->willReturn($this->creditCardTransactionCreateResponse());
+
+        $handler = new Handler($clientMock);
+
+        $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Transaction\CreditCardTransaction',
+            $handler->get(12345)
         );
     }
 

@@ -5,6 +5,7 @@ namespace PagarMe\Sdk\Transaction;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
+use PagarMe\Sdk\Transaction\Request\TransactionGet;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -57,5 +58,28 @@ class Handler
         $result = $this->client->send($request);
 
         return new BoletoTransaction($result);
+    }
+
+    public function get($transactionId)
+    {
+        $request = new TransactionGet($transactionId);
+
+        $result = $this->client->send($request);
+
+        if ($result->payment_method == BoletoTransaction::PAYMENT_METHOD) {
+            return new BoletoTransaction($result);
+        }
+
+        if ($result->payment_method == CreditCardTransaction::PAYMENT_METHOD) {
+            return new CreditCardTransaction($result);
+        }
+
+        throw new UnsupportedTransaction(
+            sprintf(
+                'Transaction type: %s, is not supported',
+                $result->payment_method
+            ),
+            1
+        );
     }
 }

@@ -29,7 +29,6 @@ abstract class Transaction
     protected $phone;
     protected $address;
     protected $customer;
-    protected $card;
     protected $metadata;
 
     public function __construct($arrayData)
