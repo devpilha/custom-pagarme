@@ -6,6 +6,7 @@ use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\TransactionGet;
+use PagarMe\Sdk\Transaction\Request\TransactionList;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -66,18 +67,36 @@ class Handler
 
         $result = $this->client->send($request);
 
-        if ($result->payment_method == BoletoTransaction::PAYMENT_METHOD) {
-            return new BoletoTransaction($result);
+        return $this->buildTransaction($result);
+    }
+
+    public function getList($page = 1, $count = 10)
+    {
+        $request = new TransactionList($page, $count);
+        $response = $this->client->send($request);
+
+        $transactions = [];
+        foreach ($response as $transactionData) {
+            $transactions[] = $this->buildTransaction($transactionData);
         }
 
-        if ($result->payment_method == CreditCardTransaction::PAYMENT_METHOD) {
-            return new CreditCardTransaction($result);
+        return $transactions;
+    }
+
+    private function buildTransaction($transactionData)
+    {
+        if ($transactionData->payment_method == BoletoTransaction::PAYMENT_METHOD) {
+            return new BoletoTransaction($transactionData);
+        }
+
+        if ($transactionData->payment_method == CreditCardTransaction::PAYMENT_METHOD) {
+            return new CreditCardTransaction($transactionData);
         }
 
         throw new UnsupportedTransaction(
             sprintf(
                 'Transaction type: %s, is not supported',
-                $result->payment_method
+                $transactionData->payment_method
             ),
             1
         );
