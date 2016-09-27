@@ -83,6 +83,6 @@ class CustomerContext extends BasicContext
     public function anArrayOfCustomersMustBeReturned()
     {
         assertContainsOnly('PagarMe\Sdk\Customer\Customer', $this->customerList);
-        assertGreaterThanOrEqual(2, $this->customerList);
+        assertGreaterThanOrEqual(2, count($this->customerList));
     }
 }
