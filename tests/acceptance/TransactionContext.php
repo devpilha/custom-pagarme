@@ -39,14 +39,19 @@ class TransactionContext extends BasicContext
     }
 
 
-    /**
-     * @When make a credit card transaction with :amount
+     /**
+     * @Given make a credit card transaction with :amount and :installments
      */
-    public function makeACreditCardTransactionWith($amount)
+    public function makeACreditCardTransactionWithAnd($amount, $installments)
     {
         $this->transaction = self::getPagarMe()
             ->transaction()
-            ->creditCardTransaction($amount, $this->creditCard, $this->customer);
+            ->creditCardTransaction(
+                $amount,
+                $this->creditCard,
+                $this->customer,
+                $installments
+            );
     }
 
     /**

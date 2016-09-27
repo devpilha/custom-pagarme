@@ -12,19 +12,30 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
 
     const CARD_ID = 1;
 
+    public function installmentsProvider()
+    {
+        return [
+            [1],
+            [3],
+            [12],
+            [rand(1, 12)]
+        ];
+    }
+
     /**
+     * @dataProvider installmentsProvider
      * @test
     **/
-    public function mustPayloadBeCorrect()
+    public function mustPayloadBeCorrect($installments)
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->getTransaction($installments);
         $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(
             [
                 'amount'         => 1337,
                 'card_id'        => self::CARD_ID,
-                'installments'   => 1,
+                'installments'   => $installments,
                 'payment_method' => 'credit_card',
                 'customer' => [
                     'name'            => 'Eduardo Nascimento',
@@ -54,7 +65,7 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustPathBeCorrect()
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->getTransaction(rand(1, 12));
         $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(self::PATH, $transactionCreate->getPath());
@@ -65,13 +76,13 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustMethodBeCorrect()
     {
-        $transaction =  $this->getTransaction();
+        $transaction =  $this->getTransaction(rand(1, 12));
         $transactionCreate = new CreditCardTransactionCreate($transaction);
 
         $this->assertEquals(self::METHOD, $transactionCreate->getMethod());
     }
 
-    private function getTransaction()
+    private function getTransaction($installments)
     {
         $customerMock = $this->getCustomerMock();
         $cardMock     = $this->getCardMock();
@@ -81,7 +92,7 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
                 'amount'       => 1337,
                 'card'         => $cardMock,
                 'customer'     => $customerMock,
-                'installments' => 1
+                'installments' => $installments
             ]
         );
 

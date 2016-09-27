@@ -44,7 +44,9 @@ abstract class BasicContext implements Context, SnippetAcceptingContext
 
         $params = sprintf(
             'name=acceptance_test_company&email=%s@sdksuitetest.com&password=password',
-            date('YmdHis')
+            date(
+                'YmdHis'
+            )
         );
 
         curl_setopt($ch, CURLOPT_POST, 1);

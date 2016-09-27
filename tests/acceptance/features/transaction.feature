@@ -6,16 +6,16 @@ Feature: Customer
   Scenario Outline: Creating a Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And make a credit card transaction with "<amount>"
+    And make a credit card transaction with "<amount>" and "<installments>"
     Then a valid transaction must be created
     Examples:
-      |       number        |     holder    | expiration |  amount  |
-      |  4916686854918357   |  João Silva   |    0623    |  20000   |
-      |  5423291241332322   |  Maria Silva  |    0623    |  9900    |
-      |  30025079488046     |  Pedro Silva  |    0623    |  250     |
-      |  372780906958878    |  Cesar Silva  |    0623    |  1337    |
-      |  6062828347922862   |  Carla Silva  |    0623    |  123456  |
-      |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |
+      |       number        |     holder    | expiration |  amount  | installments  |
+      |  4916686854918357   |  João Silva   |    0623    |  20000   |       1       |
+      |  5423291241332322   |  Maria Silva  |    0623    |  9900    |       7       |
+      |  30025079488046     |  Pedro Silva  |    0623    |  250     |       3       |
+      |  372780906958878    |  Cesar Silva  |    0623    |  1337    |       12      |
+      |  6062828347922862   |  Carla Silva  |    0623    |  123456  |       10      |
+      |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |       1       |
 
   Scenario Outline: Creating a Transaction
     Given a valid customer
