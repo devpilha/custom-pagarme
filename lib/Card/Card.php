@@ -22,16 +22,25 @@ class Card
         $this->fill($arrayData);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getFirstDigits()
     {
         return $this->firstDigits;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getLastDigits()
     {
         return $this->lastDigits;

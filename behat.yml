@@ -4,5 +4,6 @@ default:
       paths:
         - %paths.base%/tests/acceptance/features
       contexts:
-        - PagarMe\Acceptance\CardContext
         - PagarMe\Acceptance\CustomerContext
+        - PagarMe\Acceptance\CardContext
+        - PagarMe\Acceptance\TransactionContext

@@ -4,20 +4,21 @@ namespace PagarMe\Sdk;
 
 use GuzzleHttp\Client as GuzzleClient;
 use PagarMe\Sdk\Customer\Handler as CustomerHandler;
+use PagarMe\Sdk\Transaction\Handler as TransactionHandler;
 use PagarMe\Sdk\Card\Handler as CardHandler;
 
 class PagarMe
 {
     private $client;
     private $customerHandler;
+    private $transactionHandler;
     private $cardHandler;
 
-    public function __construct($apiKey, $encryptionKey)
+    public function __construct($apiKey)
     {
         $this->client = new Client(
             new GuzzleClient(['base_url' => 'https://api.pagar.me/1/']),
-            $apiKey,
-            $encryptionKey
+            $apiKey
         );
     }
 
@@ -28,6 +29,15 @@ class PagarMe
         }
 
         return $this->customerHandler;
+    }
+
+    public function transaction()
+    {
+        if (!$this->transactionHandler instanceof TransactionHandler) {
+            $this->transactionHandler = new TransactionHandler($this->client);
+        }
+
+        return $this->transactionHandler;
     }
 
     public function card()
