@@ -111,7 +111,9 @@ class TransactionContext extends BasicContext
     public function aAuthorizedTransactionMustBeCreated()
     {
         $this->aValidTransactionMustBeCreated();
-        sleep(3);
+
+        sleep(getenv('BEHAT_TIMEOUT'));
+
         $transaction = self::getPagarMe()
             ->transaction()
             ->get($this->transaction->getId());
@@ -131,7 +133,7 @@ class TransactionContext extends BasicContext
             ->transaction()
             ->capture($transactionId);
 
-        sleep(1);
+        sleep(getenv('BEHAT_TIMEOUT'));
 
         $this->transaction = self::getPagarMe()
             ->transaction()
