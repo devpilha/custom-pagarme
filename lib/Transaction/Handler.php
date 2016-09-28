@@ -89,9 +89,9 @@ class Handler
         return $transactions;
     }
 
-    public function capture($transactionId)
+    public function capture($transactionId, $amount = null)
     {
-        $request = new TransactionCapture($transactionId);
+        $request = new TransactionCapture($transactionId, $amount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);
