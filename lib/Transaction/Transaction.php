@@ -32,9 +32,9 @@ abstract class Transaction
     protected $card;
     protected $metadata;
 
-    public function __construct($arrayData)
+    public function __construct($transactionData)
     {
-        $this->fill($arrayData);
+        $this->fill($transactionData);
     }
 
     /**

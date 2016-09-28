@@ -8,9 +8,9 @@ class BoletoTransaction extends Transaction
 
     protected $boletoExpirationDate;
 
-    public function __construct($arrayData)
+    public function __construct($transactioData)
     {
-        parent::__construct($arrayData);
+        parent::__construct($transactioData);
         $this->paymentMethod = self::PAYMENT_METHOD;
     }
 
