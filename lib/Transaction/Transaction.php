@@ -39,9 +39,9 @@ abstract class Transaction
     protected $customer;
     protected $metadata;
 
-    public function __construct($arrayData)
+    public function __construct($transactionData)
     {
-        $this->fill($arrayData);
+        $this->fill($transactionData);
     }
 
     /**
