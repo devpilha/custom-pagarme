@@ -1,12 +1,13 @@
-Feature: Customer
+Feature: Transaction
  Como cliente da Pagar.me integrando uma aplicação PHP
  Eu quero uma camada de abstração
  Para que eu possa realizar transações
-  Scenario Outline: Creating a Credit Card Transaction
+
+  Scenario Outline: Create and capture a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
     And make a credit card transaction with "<amount>" and "<installments>"
-    Then a valid transaction must be created
+    Then a paid transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
       |  4916686854918357   |  João Silva   |    0623    |  20000   |       1       |
@@ -15,6 +16,36 @@ Feature: Customer
       |  372780906958878    |  Cesar Silva  |    0623    |  1337    |       12      |
       |  6062828347922862   |  Carla Silva  |    0623    |  123456  |       10      |
       |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |       1       |
+
+  Scenario Outline: Authorize a Credit Card Transaction
+    Given a valid customer
+    And register a card with "<number>", "<holder>" and "<expiration>"
+    And authorize a credit card transaction with "<amount>" and "<installments>"
+    Then a authorized transaction must be created
+    Examples:
+      |       number        |     holder    | expiration |  amount  | installments  |
+      |  4916686854918357   |  João Silva   |    0623    |  20000   |       1       |
+      |  5423291241332322   |  Maria Silva  |    0623    |  9900    |       7       |
+      |  30025079488046     |  Pedro Silva  |    0623    |  250     |       3       |
+      |  372780906958878    |  Cesar Silva  |    0623    |  1337    |       12      |
+      |  6062828347922862   |  Carla Silva  |    0623    |  123456  |       10      |
+      |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |       1       |
+
+  @only
+  Scenario Outline: Authorize and capture a Credit Card Transaction
+    Given a valid customer
+    And register a card with "<number>", "<holder>" and "<expiration>"
+    And authorize a credit card transaction with "<amount>" and "<installments>"
+    And capture the transaction
+    Then a paid transaction must be created
+    Examples:
+      |       number        |     holder    | expiration |  amount  | installments  |
+      |  4916686854918357   |  João Silva   |    0623    |  666   |       1       |
+      |  5423291241332322   |  Maria Silva  |    0623    |  666    |       7       |
+      |  30025079488046     |  Pedro Silva  |    0623    |  666     |       3       |
+      |  372780906958878    |  Cesar Silva  |    0623    |  666    |       12      |
+      |  6062828347922862   |  Carla Silva  |    0623    |  666  |       10      |
+      |  6363689025822139   |  Marta Silva  |    0623    |  666 |       1       |
 
   Scenario Outline: Creating a Boleto Transaction
     Given a valid customer
@@ -36,7 +67,6 @@ Feature: Customer
     And a valid boleto transaction
     Then then transaction must be retriavable
 
-  @only
   Scenario: Getting transactions
     Given I had multiple transactions registered
     When query transactions

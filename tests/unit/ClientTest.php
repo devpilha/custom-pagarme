@@ -71,7 +71,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 self::REQUEST_METHOD,
                 self::REQUEST_PATH,
                 [
-                    'body' => [
+                    'json' => [
                         'content'        => self::CONTENT,
                         'api_key'        => self::API_KEY
                     ]

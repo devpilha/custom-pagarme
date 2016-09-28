@@ -27,6 +27,7 @@ class TransactionCreate implements Request
         return [
             'amount'         => $this->transaction->getAmount(),
             'payment_method' => $this->transaction->getPaymentMethod(),
+            'postback_url'   => $this->transaction->getPostbackUrl(),
             'customer' => [
                 'name'            => $customer->getName(),
                 'document_number' => $customer->getDocumentNumber(),
@@ -41,8 +42,8 @@ class TransactionCreate implements Request
                     'zipcode'       => $address['zipcode']
                 ],
                 'phone' => [
-                    'ddd'    => $phone['ddd'],
-                    'number' => $phone['number']
+                    'ddd'    => (string) $phone['ddd'],
+                    'number' => (string) $phone['number']
                 ]
             ]
         ];

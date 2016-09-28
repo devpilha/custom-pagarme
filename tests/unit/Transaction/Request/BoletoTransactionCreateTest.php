@@ -34,8 +34,9 @@ class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'amount'         => 1337,
-                'payment_method' => 'boleto',
+                'amount'                 => 1337,
+                'payment_method'         => 'boleto',
+                'postback_url'           => 'example.com/postback',
                 'boleto_expiration_date' => $expirationDate,
                 'customer' => [
                     'name'            => 'Eduardo Nascimento',
@@ -95,7 +96,7 @@ class BoletoTransactionCreateTest extends \PHPUnit_Framework_TestCase
         $transaction =  new BoletoTransaction(
             [
                 'amount'                 => 1337,
-                'post_back_url'          => 'example.com/postback',
+                'postback_url'          => 'example.com/postback',
                 'customer'               => $customerMock,
                 'boleto_expiration_date' => $expirationDate
             ]

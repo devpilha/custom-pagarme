@@ -79,11 +79,69 @@ class TransactionContext extends BasicContext
     }
 
     /**
+     * @Then a paid transaction must be created
+     */
+    public function aPaidTransactionMustBeCreated()
+    {
+        $this->aValidTransactionMustBeCreated();
+        assertTrue($this->transaction->isPaid());
+    }
+
+    /**
+     * @Given authorize a credit card transaction with :amount and :installments
+     */
+    public function authorizeACreditCardTransactionWithAnd($amount, $installments)
+    {
+        $this->transaction = self::getPagarMe()
+            ->transaction()
+            ->creditCardTransaction(
+                $amount,
+                $this->creditCard,
+                $this->customer,
+                $installments,
+                false,
+                self::POSTBACK_URL
+            );
+    }
+
+    /**
+     * @Then a authorized transaction must be created
+     */
+    public function aAuthorizedTransactionMustBeCreated()
+    {
+        $this->aValidTransactionMustBeCreated();
+
+        $transaction = self::getPagarMe()
+            ->transaction()
+            ->get($this->transaction->getId());
+
+        assertTrue($transaction->isAuthorized());
+    }
+
+    /**
+     * @Given capture the transaction
+     */
+    public function captureTheTransaction()
+    {
+        $transactionId = $this->transaction->getId();
+
+        self::getPagarMe()
+            ->transaction()
+            ->capture($transactionId);
+
+        sleep(1);
+
+        $this->transaction = self::getPagarMe()
+            ->transaction()
+            ->get($transactionId);
+    }
+
+    /**
      * @Given a valid card
      */
     public function aValidCard()
     {
-        $this->registerACardWithAnd(4539706041746367, "John Doe", '0725');
+        $this->registerACardWithAnd('4539706041746367', "John Doe", '0725');
     }
 
     /**
@@ -92,14 +150,6 @@ class TransactionContext extends BasicContext
     public function aValidCreditCardTransaction()
     {
         $this->makeACreditCardTransactionWithAnd('1337', rand(1, 12));
-    }
-
-    /**
-     * @Given a valid boleto transaction
-     */
-    public function aValidBoletoTransaction()
-    {
-        $this->makeABoletoTransactionWith(1337);
     }
 
     /**
@@ -115,6 +165,14 @@ class TransactionContext extends BasicContext
     }
 
     /**
+     * @Given a valid boleto transaction
+     */
+    public function aValidBoletoTransaction()
+    {
+        $this->makeABoletoTransactionWith(1337);
+    }
+
+     /**
      * @Given I had multiple transactions registered
      */
     public function iHadMultipleTransactionsRegistered()

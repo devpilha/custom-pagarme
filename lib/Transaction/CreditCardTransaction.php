@@ -8,6 +8,7 @@ class CreditCardTransaction extends Transaction
 
     protected $card;
     protected $installments;
+    protected $capture;
 
     public function __construct($transactioData)
     {
@@ -23,5 +24,10 @@ class CreditCardTransaction extends Transaction
     public function getInstallments()
     {
         return $this->installments;
+    }
+
+    public function isCapturable()
+    {
+        return (bool) $this->capture;
     }
 }
