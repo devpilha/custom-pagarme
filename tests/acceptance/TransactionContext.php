@@ -84,6 +84,7 @@ class TransactionContext extends BasicContext
     public function aPaidTransactionMustBeCreated()
     {
         $this->aValidTransactionMustBeCreated();
+        echo sprintf("TransactionId: %s\n", $this->transaction->getid());
         assertTrue($this->transaction->isPaid());
     }
 
@@ -110,11 +111,12 @@ class TransactionContext extends BasicContext
     public function aAuthorizedTransactionMustBeCreated()
     {
         $this->aValidTransactionMustBeCreated();
-
+        sleep(1);
         $transaction = self::getPagarMe()
             ->transaction()
             ->get($this->transaction->getId());
 
+        echo sprintf("TransactionId: %s\n", $this->transaction->getid());
         assertTrue($transaction->isAuthorized());
     }
 

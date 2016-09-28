@@ -10,12 +10,12 @@ Feature: Transaction
     Then a paid transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
-      |  4916686854918357   |  João Silva   |    0623    |  20000   |       1       |
-      |  5423291241332322   |  Maria Silva  |    0623    |  9900    |       7       |
-      |  30025079488046     |  Pedro Silva  |    0623    |  250     |       3       |
-      |  372780906958878    |  Cesar Silva  |    0623    |  1337    |       12      |
-      |  6062828347922862   |  Carla Silva  |    0623    |  123456  |       10      |
-      |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |       1       |
+      |  4556425889100276   |  João Silva   |    0623    |  20000   |       1       |
+      |  5435375979338399   |  Maria Silva  |    0623    |  9900    |       7       |
+      |  30171632321686     |  Pedro Silva  |    0623    |  250     |       3       |
+      |  341611978581611    |  Cesar Silva  |    0623    |  1337    |       12      |
+      |  6062825718246608   |  Carla Silva  |    0623    |  123456  |       10      |
+      |  6363685469431429   |  Marta Silva  |    0623    |  1000001 |       1       |
 
   Scenario Outline: Authorize a Credit Card Transaction
     Given a valid customer
@@ -24,12 +24,12 @@ Feature: Transaction
     Then a authorized transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
-      |  4916686854918357   |  João Silva   |    0623    |  20000   |       1       |
-      |  5423291241332322   |  Maria Silva  |    0623    |  9900    |       7       |
-      |  30025079488046     |  Pedro Silva  |    0623    |  250     |       3       |
-      |  372780906958878    |  Cesar Silva  |    0623    |  1337    |       12      |
-      |  6062828347922862   |  Carla Silva  |    0623    |  123456  |       10      |
-      |  6363689025822139   |  Marta Silva  |    0623    |  1000001 |       1       |
+      |  4556655568781331   |  João Silva   |    0623    |  20000   |       1       |
+      |  5312843659611045   |  Maria Silva  |    0623    |  9900    |       7       |
+      |  38207356445228     |  Pedro Silva  |    0623    |  250     |       3       |
+      |  371604330597394    |  Cesar Silva  |    0623    |  1337    |       12      |
+      |  6062824410079680   |  Carla Silva  |    0623    |  123456  |       10      |
+      |  5041754485700738   |  Marta Silva  |    0623    |  1000001 |       1       |
 
   @only
   Scenario Outline: Authorize and capture a Credit Card Transaction
@@ -40,12 +40,12 @@ Feature: Transaction
     Then a paid transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
-      |  4916686854918357   |  João Silva   |    0623    |  666   |       1       |
-      |  5423291241332322   |  Maria Silva  |    0623    |  666    |       7       |
-      |  30025079488046     |  Pedro Silva  |    0623    |  666     |       3       |
-      |  372780906958878    |  Cesar Silva  |    0623    |  666    |       12      |
-      |  6062828347922862   |  Carla Silva  |    0623    |  666  |       10      |
-      |  6363689025822139   |  Marta Silva  |    0623    |  666 |       1       |
+      |  4539927448873758   |  João Silva   |    0623    |  20000   |       1       |
+      |  5475972816746627   |  Maria Silva  |    0623    |  9900    |       7       |
+      |  30323500265699     |  Pedro Silva  |    0623    |  250     |       3       |
+      |  371733354333913    |  Cesar Silva  |    0623    |  1337    |       12      |
+      |  6062822300852208   |  Carla Silva  |    0623    |  123456  |       10      |
+      |  4514161325131598   |  Marta Silva  |    0623    |  1000001 |       1       |
 
   Scenario Outline: Creating a Boleto Transaction
     Given a valid customer
