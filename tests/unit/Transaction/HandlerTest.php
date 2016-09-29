@@ -39,6 +39,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
     **/
     public function mustCreateBoletoTransaction()
     {
@@ -65,6 +66,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
     **/
     public function mustReturnBoletoTransaction()
     {
@@ -87,6 +89,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
     **/
     public function mustReturnCreditCardTransaction()
     {
@@ -109,6 +112,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
      * @expectedException PagarMe\Sdk\Transaction\UnsupportedTransaction
     **/
     public function mustThrowUnsupportedTransaction()
@@ -129,6 +133,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
     **/
     public function mustReturnArrayOfTransaction()
     {
