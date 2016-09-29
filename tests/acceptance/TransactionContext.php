@@ -242,4 +242,22 @@ class TransactionContext extends BasicContext
     {
         assertTrue($this->transaction->isRefunded());
     }
+
+    /**
+     * @When refund given :amount the transaction
+     */
+    public function refundGivenTheTransaction($amount)
+    {
+        $this->transaction = $transaction = self::getPagarMe()
+            ->transaction()
+            ->refund($this->transaction, $amount);
+    }
+
+    /**
+     * @Then the transaction must be refunded with :amount
+     */
+    public function theTransactionMustBeRefundedWith($amount)
+    {
+        assertEquals($amount, $this->transaction->getRefundedAmount());
+    }
 }

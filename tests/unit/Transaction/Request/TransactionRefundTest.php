@@ -11,38 +11,38 @@ class TransactionRefundTest extends \PHPUnit_Framework_TestCase
     const PATH           = 'transactions/1337/refund';
     const TRANSACTION_ID = 1337;
 
-    /**
-     * @test
-    **/
-    public function mustPayloadBeCorrect()
+    public function refundAmountProvider()
     {
-        $transactionCreate = new TransactionRefund($this->getTransactionMock());
-
-        $this->assertEquals(
-            [],
-            $transactionCreate->getPayload()
-        );
+        return [
+            [null],
+            [1000],
+            [300],
+            [5050]
+        ];
     }
 
     /**
+     * @dataProvider refundAmountProvider
      * @test
     **/
-    public function mustPathBeCorrect()
+    public function mustContentBeCorrect($amount)
     {
-        $transactionCreate = new TransactionRefund($this->getTransactionMock());
+        $transactionCreate = new TransactionRefund(
+            $this->getTransactionMock(),
+            $amount
+        );
+
+        $this->assertEquals(
+            [
+                'amount' => $amount
+            ],
+            $transactionCreate->getPayload()
+        );
 
         $this->assertEquals(
             sprintf(self::PATH, $transactionId),
             $transactionCreate->getPath()
         );
-    }
-
-    /**
-     * @test
-    **/
-    public function mustMethodBeCorrect()
-    {
-        $transactionCreate = new TransactionRefund($this->getTransactionMock());
 
         $this->assertEquals(self::METHOD, $transactionCreate->getMethod());
     }

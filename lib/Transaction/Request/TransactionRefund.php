@@ -8,18 +8,22 @@ use PagarMe\Sdk\Transaction\Transaction;
 class TransactionRefund implements Request
 {
     protected $transaction;
+    protected $amount;
 
     /**
      * @codeCoverageIgnore
      */
-    public function __construct(Transaction $transaction)
+    public function __construct(Transaction $transaction, $amount)
     {
         $this->transaction = $transaction;
+        $this->amount      = $amount;
     }
 
     public function getPayload()
     {
-        return [];
+        return [
+            'amount' => $this->amount
+        ];
     }
 
     public function getPath()

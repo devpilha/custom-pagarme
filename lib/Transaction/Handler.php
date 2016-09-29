@@ -98,9 +98,9 @@ class Handler
         return $this->buildTransaction($response);
     }
 
-    public function refund(Transaction $transaction)
+    public function refund(Transaction $transaction, $amount = null)
     {
-        $request = new TransactionRefund($transaction);
+        $request = new TransactionRefund($transaction, $amount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);
