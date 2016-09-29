@@ -38,6 +38,7 @@ abstract class Transaction
     protected $address;
     protected $customer;
     protected $metadata;
+    protected $paidAmount;
 
     public function __construct($transactionData)
     {
@@ -250,6 +251,14 @@ abstract class Transaction
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function getPaidAmount()
+    {
+        return $this->paidAmount;
     }
 
     /**

@@ -31,7 +31,6 @@ Feature: Transaction
       |  6062824410079680   |  Carla Silva  |    0623    |  123456  |       10      |
       |  5041754485700738   |  Marta Silva  |    0623    |  1000001 |       1       |
 
-  @only
   Scenario Outline: Authorize and capture a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
@@ -46,6 +45,21 @@ Feature: Transaction
       |  371733354333913    |  Cesar Silva  |    0623    |  1337    |       12      |
       |  6062822300852208   |  Carla Silva  |    0623    |  123456  |       10      |
       |  4514161325131598   |  Marta Silva  |    0623    |  1000001 |       1       |
+
+  Scenario Outline: Authorize and capture different values
+    Given a valid customer
+    And register a card with "<number>", "<holder>" and "<expiration>"
+    And authorize a credit card transaction with "<amount>" and "<installments>"
+    And capture the transaction with amount "<capture>"
+    Then a paid transaction must be created with "<capture>" paid amount
+    Examples:
+      |       number        |     holder    | expiration |  amount  | installments  | capture |
+      |  4556111382970890   |  João Silva   |    0623    |  20000   |       1       |  14900  |
+      |  5157798910157725   |  Maria Silva  |    0623    |  9900    |       7       |  9899   |
+      |  30257387840192     |  Pedro Silva  |    0623    |  250     |       3       |  230    |
+      |  345066740083873    |  Cesar Silva  |    0623    |  1337    |       12      |  509    |
+      |  6062827431932910   |  Carla Silva  |    0623    |  123456  |       10      |  78910  |
+      |  4514164981119485   |  Marta Silva  |    0623    |  1000001 |       1       |  10001  |
 
   Scenario Outline: Creating a Boleto Transaction
     Given a valid customer

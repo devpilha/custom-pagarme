@@ -125,7 +125,7 @@ class TransactionContext extends BasicContext
     /**
      * @Given capture the transaction
      */
-    public function captureTheTransaction()
+    public function captureTheTransaction($amount = null)
     {
         $transactionId = $this->transaction->getId();
 
@@ -133,7 +133,7 @@ class TransactionContext extends BasicContext
 
         self::getPagarMe()
             ->transaction()
-            ->capture($transactionId);
+            ->capture($transactionId, $amount);
 
         sleep(getenv('BEHAT_TIMEOUT'));
 
@@ -206,5 +206,22 @@ class TransactionContext extends BasicContext
     {
         assertContainsOnly('PagarMe\Sdk\Transaction\Transaction', $this->transactionList);
         assertGreaterThanOrEqual(2, count($this->transactionList));
+    }
+
+     /**
+     * @Given capture the transaction with amount :amount
+     */
+    public function captureTheTransactionWithAmount($amount)
+    {
+        $this->captureTheTransaction($amount);
+    }
+
+    /**
+     * @Then a paid transaction must be created with :amount paid amount
+     */
+    public function aPaidTransactionMustBeCreatedWithPaidAmount($amount)
+    {
+        $this->aPaidTransactionMustBeCreated();
+        assertEquals($amount, $this->transaction->getPaidAmount());
     }
 }
