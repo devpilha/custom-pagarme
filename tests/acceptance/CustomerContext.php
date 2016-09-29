@@ -65,7 +65,7 @@ class CustomerContext extends BasicContext
         $this->registerThisData();
         $this->customerData['document_number'] = '55453790962';
         $this->registerThisData();
-        sleep(getenv(BEHAT_TIMEOUT));
+        sleep(getenv('BEHAT_TIMEOUT'));
     }
 
     /**
