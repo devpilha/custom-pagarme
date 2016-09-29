@@ -129,6 +129,8 @@ class TransactionContext extends BasicContext
     {
         $transactionId = $this->transaction->getId();
 
+        sleep(getenv('BEHAT_TIMEOUT'));
+
         self::getPagarMe()
             ->transaction()
             ->capture($transactionId);
