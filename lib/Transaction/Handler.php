@@ -8,6 +8,7 @@ use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\TransactionGet;
 use PagarMe\Sdk\Transaction\Request\TransactionList;
 use PagarMe\Sdk\Transaction\Request\TransactionCapture;
+use PagarMe\Sdk\Transaction\Request\TransactionRefund;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -92,6 +93,14 @@ class Handler
     public function capture($transactionId, $amount = null)
     {
         $request = new TransactionCapture($transactionId, $amount);
+        $response = $this->client->send($request);
+
+        return $this->buildTransaction($response);
+    }
+
+    public function refund(Transaction $transaction)
+    {
+        $request = new TransactionRefund($transaction);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);

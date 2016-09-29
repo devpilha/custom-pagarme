@@ -224,4 +224,22 @@ class TransactionContext extends BasicContext
         $this->aPaidTransactionMustBeCreated();
         assertEquals($amount, $this->transaction->getPaidAmount());
     }
+
+    /**
+     * @When full refund the transaction
+     */
+    public function fullRefundTheTransaction()
+    {
+        $this->transaction = $transaction = self::getPagarMe()
+            ->transaction()
+            ->refund($this->transaction);
+    }
+
+    /**
+     * @Then the transaction must be refunded
+     */
+    public function theTransactionMustBeRefunded()
+    {
+        assertTrue($this->transaction->isRefunded());
+    }
 }
