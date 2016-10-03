@@ -4,6 +4,7 @@ namespace PagarMe\Sdk\Customer;
 
 class Customer
 {
+    use \PagarMe\Sdk\Fillable;
 
     private $address;
     private $bornAt;
@@ -18,17 +19,7 @@ class Customer
 
     public function __construct($arrayData)
     {
-        $replaceableFields = array_keys($this->attributeRelation());
-        foreach ($arrayData as $key => $value) {
-            $field = $key;
-            if (in_array($key, $replaceableFields)) {
-                $field = $this->attributeRelation()[$key];
-            }
-
-            if (property_exists($this, $field)) {
-                $this->$field = $value;
-            }
-        }
+        $this->fill($arrayData);
     }
 
     /**
