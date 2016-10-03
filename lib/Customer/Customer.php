@@ -85,16 +85,4 @@ class Customer
     {
         return $this->phone;
     }
-
-    private function attributeRelation()
-    {
-        return [
-            'born_at'         => 'bornAt',
-            'date_created'    => 'dateCreated',
-            'document_number' => 'documentNumber',
-            'document_type'   => 'documentType',
-            'addresses'       => 'address',
-            'phones'          => 'phone'
-        ];
-    }
 }
