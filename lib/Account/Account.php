@@ -27,36 +27,36 @@ class Account
 
     public function getBankCode()
     {
-        return $this->bankCode();
+        return $this->bankCode;
     }
 
     public function getAgencia()
     {
-        return $this->agencia();
+        return $this->agencia;
     }
 
     public function getAgenciaDv()
     {
-        return $this->agenciaDv();
+        return $this->agenciaDv;
     }
 
     public function getConta()
     {
-        return $this->conta();
+        return $this->conta;
     }
 
     public function getContaDv()
     {
-        return $this->contaDv();
+        return $this->contaDv;
     }
 
     public function getDocumentNumber()
     {
-        return $this->documentNumber();
+        return $this->documentNumber;
     }
 
     public function getLegalName()
     {
-        return $this->legalName();
+        return $this->legalName;
     }
 }
