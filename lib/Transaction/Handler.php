@@ -8,7 +8,9 @@ use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\TransactionGet;
 use PagarMe\Sdk\Transaction\Request\TransactionList;
 use PagarMe\Sdk\Transaction\Request\TransactionCapture;
-use PagarMe\Sdk\Transaction\Request\TransactionRefund;
+use PagarMe\Sdk\Transaction\Request\CreditCardTransactionRefund;
+use PagarMe\Sdk\Transaction\Request\BoletoTransactionRefund;
+use PagarMe\Sdk\Account\Account;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
@@ -98,9 +100,17 @@ class Handler
         return $this->buildTransaction($response);
     }
 
-    public function refund(Transaction $transaction, $amount = null)
+    public function creditCardRefund(CreditCardTransaction $transaction, $amount = null)
     {
-        $request = new TransactionRefund($transaction, $amount);
+        $request = new CreditCardTransactionRefund($transaction, $amount);
+        $response = $this->client->send($request);
+
+        return $this->buildTransaction($response);
+    }
+
+    public function boletoRefund(BoletoTransaction $transaction, Account $account, $amount = null)
+    {
+        $request = new BoletoTransactionRefund($transaction, $account, $amount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);

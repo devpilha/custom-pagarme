@@ -2,10 +2,10 @@
 
 namespace PagarMe\SdkTest\Transaction\Request;
 
-use PagarMe\Sdk\Transaction\Request\TransactionRefund;
+use PagarMe\Sdk\Transaction\Request\CreditCardTransactionRefund;
 use PagarMe\Sdk\Transaction\CreditCardTransaction;
 
-class TransactionRefundTest extends \PHPUnit_Framework_TestCase
+class CreditCardTransactionRefundTest extends \PHPUnit_Framework_TestCase
 {
     const METHOD         = 'POST';
     const PATH           = 'transactions/1337/refund';
@@ -27,7 +27,7 @@ class TransactionRefundTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustContentBeCorrect($amount)
     {
-        $transactionCreate = new TransactionRefund(
+        $transactionCreate = new CreditCardTransactionRefund(
             $this->getTransactionMock(),
             $amount
         );
@@ -49,7 +49,7 @@ class TransactionRefundTest extends \PHPUnit_Framework_TestCase
 
     private function getTransactionMock()
     {
-        $transactionMock = $this->getMockBuilder('PagarMe\Sdk\Transaction\Transaction')
+        $transactionMock = $this->getMockBuilder('PagarMe\Sdk\Transaction\CreditCardTransaction')
             ->disableOriginalConstructor()
             ->getMock();
 

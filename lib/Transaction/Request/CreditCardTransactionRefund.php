@@ -3,9 +3,9 @@
 namespace PagarMe\Sdk\Transaction\Request;
 
 use PagarMe\Sdk\Request;
-use PagarMe\Sdk\Transaction\Transaction;
+use PagarMe\Sdk\Transaction\CreditCardTransaction;
 
-class TransactionRefund implements Request
+class CreditCardTransactionRefund implements Request
 {
     protected $transaction;
     protected $amount;
@@ -13,7 +13,7 @@ class TransactionRefund implements Request
     /**
      * @codeCoverageIgnore
      */
-    public function __construct(Transaction $transaction, $amount)
+    public function __construct(CreditCardTransaction $transaction, $amount)
     {
         $this->transaction = $transaction;
         $this->amount      = $amount;

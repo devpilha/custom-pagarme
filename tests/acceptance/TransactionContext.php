@@ -232,7 +232,7 @@ class TransactionContext extends BasicContext
     {
         $this->transaction = $transaction = self::getPagarMe()
             ->transaction()
-            ->refund($this->transaction);
+            ->creditCardRefund($this->transaction);
     }
 
     /**
@@ -250,7 +250,7 @@ class TransactionContext extends BasicContext
     {
         $this->transaction = $transaction = self::getPagarMe()
             ->transaction()
-            ->refund($this->transaction, $amount);
+            ->creditCardRefund($this->transaction, $amount);
     }
 
     /**
