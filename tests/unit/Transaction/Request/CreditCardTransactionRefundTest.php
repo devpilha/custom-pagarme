@@ -40,7 +40,7 @@ class CreditCardTransactionRefundTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            sprintf(self::PATH, $transactionId),
+            sprintf(self::PATH, self::TRANSACTION_ID),
             $transactionCreate->getPath()
         );
 
