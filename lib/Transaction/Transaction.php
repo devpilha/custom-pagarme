@@ -39,6 +39,7 @@ abstract class Transaction
     protected $customer;
     protected $metadata;
     protected $paidAmount;
+    protected $refundedAmount;
 
     public function __construct($transactionData)
     {
@@ -259,6 +260,14 @@ abstract class Transaction
     public function getPaidAmount()
     {
         return $this->paidAmount;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function getRefundedAmount()
+    {
+        return $this->refundedAmount;
     }
 
     /**

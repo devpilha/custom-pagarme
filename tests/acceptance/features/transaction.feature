@@ -17,6 +17,36 @@ Feature: Transaction
       |  6062825718246608   |  Carla Silva  |    0623    |  123456  |       10      |
       |  6363685469431429   |  Marta Silva  |    0623    |  1000001 |       1       |
 
+  Scenario Outline: Create and refund a Credit Card Transaction
+    Given a valid customer
+    And register a card with "<number>", "<holder>" and "<expiration>"
+    And make a credit card transaction with "<amount>" and "<installments>"
+    When full refund the transaction
+    Then the transaction must be refunded
+    Examples:
+      |       number        |     holder    | expiration |  amount  | installments  |
+      |  4539225249511077   |  João Silva   |    0623    |  1000    |       1       |
+      |  5326284789092430   |  Maria Silva  |    0623    |  1300    |       7       |
+      |  36016500807288     |  Pedro Silva  |    0623    |  1500    |       3       |
+      |  377255656605321    |  Cesar Silva  |    0623    |  2100    |       12      |
+      |  6062820984030620   |  Carla Silva  |    0623    |  4000    |       10      |
+      |  5041754009357643   |  Marta Silva  |    0623    |  5000    |       1       |
+
+  Scenario Outline: Create and partial refund a Credit Card Transaction
+    Given a valid customer
+    And register a card with "<number>", "<holder>" and "<expiration>"
+    And make a credit card transaction with "<amount>" and "<installments>"
+    When refund given "<value>" the transaction
+    Then the transaction must be refunded with "<value>"
+    Examples:
+      |       number        |     holder    | expiration |  amount  | installments  | value |
+      |  4539225249511077   |  João Silva   |    0623    |  1000    |       1       |   500  |
+      |  5326284789092430   |  Maria Silva  |    0623    |  1300    |       7       |   700  |
+      |  36016500807288     |  Pedro Silva  |    0623    |  1500    |       3       |   1300 |
+      |  377255656605321    |  Cesar Silva  |    0623    |  2100    |       12      |   2000 |
+      |  6062820984030620   |  Carla Silva  |    0623    |  4000    |       10      |   1337 |
+      |  5041754009357643   |  Marta Silva  |    0623    |  5000    |       1       |   2500 |
+
   Scenario Outline: Authorize a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
