@@ -42,7 +42,7 @@ class Client
     private function buildBody(Request $request)
     {
         return [
-            'body' => array_merge(
+            'json' => array_merge(
                 $request->getPayload(),
                 [
                     'api_key' => $this->apiKey

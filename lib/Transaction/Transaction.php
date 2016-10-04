@@ -6,6 +6,14 @@ abstract class Transaction
 {
     use \PagarMe\Sdk\Fillable;
 
+    const PROCESSING      = 'processing';
+    const AUTHORIZED      = 'authorized';
+    const PAID            = 'paid';
+    const REFUNDED        = 'refunded';
+    const WAITING_PAYMENT = 'waiting_payment';
+    const PENDING_REFUND  = 'pending_refund';
+    const REFUSED         = 'refused';
+
     protected $id;
     protected $status;
     protected $refuseReason;
@@ -29,8 +37,8 @@ abstract class Transaction
     protected $phone;
     protected $address;
     protected $customer;
-    protected $card;
     protected $metadata;
+    protected $paidAmount;
 
     public function __construct($transactionData)
     {
@@ -243,5 +251,69 @@ abstract class Transaction
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function getPaidAmount()
+    {
+        return $this->paidAmount;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isProcessing()
+    {
+        return $this->status == self::PROCESSING;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isAuthorized()
+    {
+        return $this->status == self::AUTHORIZED;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isPaid()
+    {
+        return $this->status == self::PAID;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isRefunded()
+    {
+        return $this->status == self::REFUNDED;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isWaitingPayment()
+    {
+        return $this->status == self::WAITING_PAYMENT;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isPendingRefund()
+    {
+        return $this->status == self::PENDING_REFUND;
+    }
+
+    /**
+    * @codeCoverageIgnore
+    */
+    public function isRefused()
+    {
+        return $this->status == self::REFUSED;
     }
 }

@@ -17,7 +17,8 @@ class CreditCardTransactionCreate extends TransactionCreate
 
         $cardData = [
             'card_id'      => $this->transaction->getCardId(),
-            'installments' => $this->transaction->getInstallments()
+            'installments' => $this->transaction->getInstallments(),
+            'capture'      => $this->transaction->isCapturable()
         ];
 
         return array_merge($basicData, $cardData);

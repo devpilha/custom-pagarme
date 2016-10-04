@@ -65,6 +65,7 @@ class CustomerContext extends BasicContext
         $this->registerThisData();
         $this->customerData['document_number'] = '55453790962';
         $this->registerThisData();
+        sleep(3);
     }
 
     /**
@@ -83,6 +84,6 @@ class CustomerContext extends BasicContext
     public function anArrayOfCustomersMustBeReturned()
     {
         assertContainsOnly('PagarMe\Sdk\Customer\Customer', $this->customerList);
-        assertGreaterThanOrEqual(2, $this->customerList);
+        assertGreaterThanOrEqual(2, count($this->customerList));
     }
 }

@@ -17,7 +17,11 @@ class PagarMe
     public function __construct($apiKey)
     {
         $this->client = new Client(
-            new GuzzleClient(['base_url' => 'https://api.pagar.me/1/']),
+            new GuzzleClient(
+                [
+                    'base_url' => 'https://api.pagar.me/1/'
+                ]
+            ),
             $apiKey
         );
     }
