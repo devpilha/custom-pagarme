@@ -3,7 +3,6 @@ Feature: Calculation
  Eu quero uma camada de abstração
  Para que eu possa calcular a incidencia de juros sobre parcelas
 
-  @installment
   Scenario Outline: Calculating installments
     Given a "<amount>"
     And a "<interest_rate>" in "<installments>"
