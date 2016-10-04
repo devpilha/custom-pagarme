@@ -10,9 +10,9 @@ class CreditCardTransaction extends Transaction
     protected $installments;
     protected $capture;
 
-    public function __construct($transactioData)
+    public function __construct($transactionData)
     {
-        parent::__construct($transactioData);
+        parent::__construct($transactionData);
         $this->paymentMethod = self::PAYMENT_METHOD;
     }
 
