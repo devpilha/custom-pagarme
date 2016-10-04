@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use PagarMe\Sdk\Customer\Handler as CustomerHandler;
 use PagarMe\Sdk\Transaction\Handler as TransactionHandler;
 use PagarMe\Sdk\Card\Handler as CardHandler;
+use PagarMe\Sdk\Calculation\Handler as CalculationHandler;
 
 class PagarMe
 {
@@ -13,6 +14,7 @@ class PagarMe
     private $customerHandler;
     private $transactionHandler;
     private $cardHandler;
+    private $calculationHandler;
 
     public function __construct($apiKey)
     {
@@ -47,5 +49,14 @@ class PagarMe
         }
 
         return $this->cardHandler;
+    }
+
+    public function calculation()
+    {
+        if (!$this->calculationHandler instanceof CalculationHandler) {
+            $this->calculationHandler = new CalculationHandler($this->client);
+        }
+
+        return $this->calculationHandler;
     }
 }
