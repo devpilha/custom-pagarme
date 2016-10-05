@@ -1,10 +1,22 @@
 default:
   suites:
-    default:
+    customer:
       paths:
-        - %paths.base%/tests/acceptance/features
+        - %paths.base%/tests/acceptance/features/customer.feature
       contexts:
         - PagarMe\Acceptance\CustomerContext
+    card:
+      paths:
+        - %paths.base%/tests/acceptance/features/card.feature
+      contexts:
         - PagarMe\Acceptance\CardContext
+    transaction:
+      paths:
+        - %paths.base%/tests/acceptance/features/transaction.feature
+      contexts:
         - PagarMe\Acceptance\TransactionContext
+    calculation:
+      paths:
+        - %paths.base%/tests/acceptance/features/calculation.feature
+      contexts:
         - PagarMe\Acceptance\CalculationContext
