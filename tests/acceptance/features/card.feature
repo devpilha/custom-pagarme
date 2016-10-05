@@ -4,8 +4,9 @@ Feature: Cards
   Para que eu possa gerenciar cartoes de crédito
 
   Scenario Outline: Registering credit cards
-    Given I register a card with "<number>", "<holder>" and "<expiration>"
-    Then I should have a card starting with <start> and ending with <end>
+    Given a card with "<number>", "<holder>" and "<expiration>"
+    When register the card
+    Then should have a card starting with <start> and ending with <end>
 
     Examples:
       |       number        |     holder    | expiration |  start | end  |
@@ -17,9 +18,10 @@ Feature: Cards
       |  6363688420875031   |  Marta Silva  |    0623    | 636368 | 5031 |
 
   Scenario Outline: Registering credit cards
-    Given I register a card with "<number>", "<holder>" and "<expiration>"
-    When I query for the card
-    Then I should have the same card
+    Given a card with "<number>", "<holder>" and "<expiration>"
+    When register the card
+    And query for the card
+    Then should have the same card
 
     Examples:
       |       number        |     holder    | expiration |

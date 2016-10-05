@@ -42,7 +42,8 @@ class TransactionContext extends BasicContext
 
 
      /**
-     * @Given make a credit card transaction with :amount and :installments
+     * @When make a credit card transaction with :arg1 and :arg2
+     * @And make a credit card transaction with :amount and :installments
      */
     public function makeACreditCardTransactionWithAnd($amount, $installments)
     {
@@ -219,7 +220,7 @@ class TransactionContext extends BasicContext
     }
 
     /**
-     * @When full refund the transaction
+     * @Then full refund the transaction
      */
     public function fullRefundTheTransaction()
     {
@@ -230,6 +231,7 @@ class TransactionContext extends BasicContext
 
     /**
      * @Then the transaction must be refunded
+     * @And the transaction must be refunded
      */
     public function theTransactionMustBeRefunded()
     {

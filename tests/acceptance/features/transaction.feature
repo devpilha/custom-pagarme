@@ -6,7 +6,7 @@ Feature: Transaction
   Scenario Outline: Create and capture a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And make a credit card transaction with "<amount>" and "<installments>"
+    When make a credit card transaction with "<amount>" and "<installments>"
     Then a paid transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
@@ -20,9 +20,9 @@ Feature: Transaction
   Scenario Outline: Create and refund a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And make a credit card transaction with "<amount>" and "<installments>"
-    When full refund the transaction
-    Then the transaction must be refunded
+    When make a credit card transaction with "<amount>" and "<installments>"
+    Then full refund the transaction
+    And the transaction must be refunded
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
       |  4539225249511077   |  João Silva   |    0623    |  1000    |       1       |
@@ -35,9 +35,9 @@ Feature: Transaction
   Scenario Outline: Create and partial refund a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And make a credit card transaction with "<amount>" and "<installments>"
-    When refund given "<value>" the transaction
-    Then the transaction must be refunded with "<value>"
+    When make a credit card transaction with "<amount>" and "<installments>"
+    Then refund given "<value>" the transaction
+    And the transaction must be refunded with "<value>"
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  | value |
       |  4539225249511077   |  João Silva   |    0623    |  1000    |       1       |   500  |
@@ -50,7 +50,7 @@ Feature: Transaction
   Scenario Outline: Authorize a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And authorize a credit card transaction with "<amount>" and "<installments>"
+    When authorize a credit card transaction with "<amount>" and "<installments>"
     Then a authorized transaction must be created
     Examples:
       |       number        |     holder    | expiration |  amount  | installments  |
@@ -64,7 +64,7 @@ Feature: Transaction
   Scenario Outline: Authorize and capture a Credit Card Transaction
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And authorize a credit card transaction with "<amount>" and "<installments>"
+    When authorize a credit card transaction with "<amount>" and "<installments>"
     And capture the transaction
     Then a paid transaction must be created
     Examples:
@@ -79,7 +79,7 @@ Feature: Transaction
   Scenario Outline: Authorize and capture different values
     Given a valid customer
     And register a card with "<number>", "<holder>" and "<expiration>"
-    And authorize a credit card transaction with "<amount>" and "<installments>"
+    When authorize a credit card transaction with "<amount>" and "<installments>"
     And capture the transaction with amount "<capture>"
     Then a paid transaction must be created with "<capture>" paid amount
     Examples:
@@ -93,7 +93,7 @@ Feature: Transaction
 
   Scenario Outline: Creating a Boleto Transaction
     Given a valid customer
-    And make a boleto transaction with "<amount>"
+    When make a boleto transaction with "<amount>"
     Then a valid transaction must be created
     Examples:
       |  amount  |
@@ -103,12 +103,12 @@ Feature: Transaction
   Scenario: Retrieving a Credit Card Transaction
     Given a valid customer
     And a valid card
-    And a valid credit card transaction
+    When a valid credit card transaction
     Then then transaction must be retriavable
 
   Scenario: Retrieving a Boleto Transaction
     Given a valid customer
-    And a valid boleto transaction
+    When a valid boleto transaction
     Then then transaction must be retriavable
 
   Scenario: Getting transactions
