@@ -31,7 +31,7 @@ class CustomerHandler extends AbstractHandler
 
         $response = $this->client->send($request);
 
-        return new Customer(get_object_vars($response));
+        return new Customer($this->getCustomerInfo($response));
     }
 
     public function get($customerId)
@@ -39,7 +39,7 @@ class CustomerHandler extends AbstractHandler
         $request = new CustomerGet($customerId);
         $response = $this->client->send($request);
 
-        return new Customer(get_object_vars($response));
+        return new Customer($this->getCustomerInfo($response));
     }
 
     public function getList($page = 1, $count = 10)
@@ -48,10 +48,53 @@ class CustomerHandler extends AbstractHandler
         $response = $this->client->send($request);
 
         $customers = [];
-        foreach ($response as $customerData) {
-            $customers[] = new Customer(get_object_vars($customerData));
+        foreach ($response as $customerResponse) {
+            $customers[] = new Customer($this->getCustomerInfo($customerResponse));
         }
 
         return $customers;
+    }
+
+    private function buildAddress($addressData)
+    {
+        $address = new Address(
+            $addressData->street,
+            $addressData->street_number,
+            $addressData->neighborhood,
+            $addressData->zipcode
+        );
+
+        $address->setComplementary($addressData->complementary);
+        $address->setCity($addressData->city);
+        $address->setState($addressData->state);
+        $address->setCountry($addressData->country);
+
+        return $address;
+    }
+
+    private function buildPhone($phoneData)
+    {
+        $phone = new Phone(
+            $phoneData->ddd,
+            $phoneData->number,
+            $phoneData->ddi
+        );
+
+        return $phone;
+    }
+
+    private function getCustomerInfo($response)
+    {
+        $customerInfo = get_object_vars($response);
+
+        $customerInfo['address'] = $this->buildAddress(
+            $customerInfo['addresses'][0]
+        );
+
+        $customerInfo['phone'] = $this->buildPhone(
+            $customerInfo['phones'][0]
+        );
+
+        return $customerInfo;
     }
 }

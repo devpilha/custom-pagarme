@@ -32,6 +32,10 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
             self::NEIGHBORHOOD,
             self::ZIPCODE
         );
+        $address->setComplementary('Apto 42');
+        $address->setCity('São Paulo');
+        $address->setState('SP');
+        $address->setCountry('Brasil');
 
         $customerCreate = new CustomerCreate(
             self::NAME,
@@ -45,19 +49,23 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'born_at' => '15071991',
+                'born_at'         => '15071991',
                 'document_number' => '10586649727',
-                'email' => 'eduardo@eduardo.com',
-                'gender' => 'M',
-                'name' => 'Eduardo Nascimento',
+                'email'           => 'eduardo@eduardo.com',
+                'gender'          => 'M',
+                'name'            => 'Eduardo Nascimento',
                 'address' => [
-                    'street' => 'rua teste',
+                    'street'        => 'rua teste',
                     'street_number' => 42,
-                    'neighborhood' => 'centro',
-                    'zipcode' => '01227200'
+                    'neighborhood'  => 'centro',
+                    'zipcode'       => '01227200',
+                    'complementary' => 'Apto 42',
+                    'city'          => 'São Paulo',
+                    'state'         => 'SP',
+                    'country'       => 'Brasil'
                 ],
                 'phone' => [
-                    'ddd' => 15,
+                    'ddd'    => 15,
                     'number' => 987523421
                 ]
             ],

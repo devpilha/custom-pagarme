@@ -8,6 +8,10 @@ class Address
     private $streetNumber;
     private $neighborhood;
     private $zipcode;
+    private $complementary;
+    private $city;
+    private $state;
+    private $country;
 
     public function __construct($street, $streetNumber, $neighborhood, $zipcode)
     {
@@ -35,5 +39,42 @@ class Address
     public function getZipcode()
     {
         return $this->zipcode;
+    }
+
+    public function setComplementary($complementary)
+    {
+        $this->complementary = $complementary;
+    }
+
+    public function getComplementary()
+    {
+        return $this->complementary;
+    }
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

@@ -66,6 +66,22 @@ class CustomerCreate implements Request
             'zipcode'       => $this->address->getZipcode()
         ];
 
+        if (!is_null($this->address->getComplementary())) {
+            $addressData['complementary'] = $this->address->getComplementary();
+        }
+
+        if (!is_null($this->address->getCity())) {
+            $addressData['city'] = $this->address->getCity();
+        }
+
+        if (!is_null($this->address->getState())) {
+            $addressData['state'] = $this->address->getState();
+        }
+
+        if (!is_null($this->address->getCountry())) {
+            $addressData['country'] = $this->address->getCountry();
+        }
+
         return $addressData;
     }
 

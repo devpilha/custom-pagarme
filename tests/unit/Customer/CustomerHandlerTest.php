@@ -61,24 +61,6 @@ class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
 
         $handler = new CustomerHandler($clientMock);
 
-        $data = [
-            'bornAt' => '15071991',
-            'documentNumber' => '44628816808',
-            'email' => 'cliente@empresa.com',
-            'gender' => 'M',
-            'name' => 'João Silva',
-            'address' => [
-                'street' => 'rua teste',
-                'street_number' => 42,
-                'neighborhood' => 'centro',
-                'zipcode' => '01227200'
-            ],
-            'phone' => [
-                'ddd' => 15,
-                'number' => 987523421
-            ]
-        ];
-
         $customer = $handler->create(
             self::NAME,
             self::EMAIL,
