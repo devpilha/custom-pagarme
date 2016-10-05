@@ -124,15 +124,15 @@ class TransactionContext extends BasicContext
      */
     public function captureTheTransaction($amount = null)
     {
-        $transactionId = $this->transaction->getId();
+        $transaction = $this->transaction;
 
         self::getPagarMe()
             ->transaction()
-            ->capture($transactionId, $amount);
+            ->capture($transaction, $amount);
 
         $this->transaction = self::getPagarMe()
             ->transaction()
-            ->get($transactionId);
+            ->get($transaction->getId());
     }
 
     /**

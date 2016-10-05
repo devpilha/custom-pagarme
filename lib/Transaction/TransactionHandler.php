@@ -86,9 +86,9 @@ class TransactionHandler extends AbstractHandler
         return $transactions;
     }
 
-    public function capture($transactionId, $amount = null)
+    public function capture(CreditCardTransaction $transaction, $amount = null)
     {
-        $request = new TransactionCapture($transactionId, $amount);
+        $request = new TransactionCapture($transaction->getId(), $amount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);
