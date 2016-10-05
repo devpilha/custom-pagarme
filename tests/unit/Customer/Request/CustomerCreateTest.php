@@ -7,17 +7,41 @@ use PagarMe\Sdk\Customer\Customer;
 
 class CustomerCreateTest extends \PHPUnit_Framework_TestCase
 {
-    const PATH   = 'customers';
-    const METHOD = 'POST';
+    const PATH            = 'customers';
+    const METHOD          = 'POST';
+
+    const NAME            = 'Eduardo Nascimento';
+    const EMAIL           = 'eduardo@eduardo.com';
+    const DOCUMENT_NUMBER = '10586649727';
+    const BORN_AT         = '15071991';
+    const GENDER          = 'M';
+
+    const STREET          = 'rua teste';
+    const STREET_NUMBER   = 42;
+    const NEIGHBORHOOD    = 'centro';
+    const ZIPCODE         = '01227200';
 
     /**
      * @test
     **/
     public function mustPayloadBeCorrect()
     {
-        $customer = $this->getCustomer();
+        $address = new \PagarMe\Sdk\Customer\Address(
+            self::STREET,
+            self::STREET_NUMBER,
+            self::NEIGHBORHOOD,
+            self::ZIPCODE
+        );
 
-        $customerCreate = new CustomerCreate($customer);
+        $customerCreate = new CustomerCreate(
+            self::NAME,
+            self::EMAIL,
+            self::DOCUMENT_NUMBER,
+            $address,
+            new \PagarMe\Sdk\Customer\Phone(15, 987523421),
+            self::BORN_AT,
+            self::GENDER
+        );
 
         $this->assertEquals(
             [
@@ -46,9 +70,16 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustPathBeCorrect()
     {
-        $customer = $this->getCustomer();
+        $customerCreate = new CustomerCreate(
+            self::NAME,
+            self::EMAIL,
+            self::DOCUMENT_NUMBER,
+            $this->getAddressMock(),
+            $this->getPhoneMock(),
+            null,
+            null
+        );
 
-        $customerCreate = new CustomerCreate($customer);
         $this->assertEquals(self::PATH, $customerCreate->getPath());
     }
 
@@ -57,32 +88,30 @@ class CustomerCreateTest extends \PHPUnit_Framework_TestCase
     **/
     public function mustMethodBeCorrect()
     {
-        $customer = $this->getCustomer();
+        $customerCreate = new CustomerCreate(
+            self::NAME,
+            self::EMAIL,
+            self::DOCUMENT_NUMBER,
+            $this->getAddressMock(),
+            $this->getPhoneMock(),
+            null,
+            null
+        );
 
-        $customerCreate = new CustomerCreate($customer);
         $this->assertEquals(self::METHOD, $customerCreate->getMethod());
     }
 
-    private function getCustomer()
+    private function getAddressMock()
     {
-        $customerData = [
-            'bornAt' => '15071991',
-            'documentNumber' => '10586649727',
-            'email' => 'eduardo@eduardo.com',
-            'gender' => 'M',
-            'name' => 'Eduardo Nascimento',
-            'address' => [
-                'street' => 'rua teste',
-                'street_number' => 42,
-                'neighborhood' => 'centro',
-                'zipcode' => '01227200'
-            ],
-            'phone' => [
-                'ddd' => 15,
-                'number' => 987523421
-            ]
-        ];
+        return $this->getMockBuilder('PagarMe\Sdk\Customer\Address')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
 
-        return new Customer($customerData);
+    private function getPhoneMock()
+    {
+        return $this->getMockBuilder('PagarMe\Sdk\Customer\Phone')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

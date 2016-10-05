@@ -31,9 +31,22 @@ class CustomerContext extends BasicContext
      */
     public function registerThisData()
     {
+        $address = new \PagarMe\Sdk\Customer\Address(
+            'rua teste',
+            42,
+            'centro',
+            '01227200'
+        );
+
         $this->customer = self::getPagarMe()
             ->customer()
-            ->create(new Customer($this->customerData));
+            ->create(
+                $this->getCustomerName(),
+                $this->getCustomerEmail(),
+                $this->getCustomerDocumentNumber(),
+                $address,
+                new \PagarMe\Sdk\Customer\Phone(11, 987654321)
+            );
     }
 
     /**

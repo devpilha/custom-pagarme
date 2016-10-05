@@ -10,9 +10,25 @@ use PagarMe\Sdk\Customer\Request\CustomerList;
 
 class CustomerHandler extends AbstractHandler
 {
-    public function create(Customer $customer)
-    {
-        $request = new CustomerCreate($customer);
+    public function create(
+        $name,
+        $email,
+        $documentNumber,
+        Address $address,
+        Phone $phone,
+        $bornAt = null,
+        $gender = null
+    ) {
+        $request = new CustomerCreate(
+            $name,
+            $email,
+            $documentNumber,
+            $address,
+            $phone,
+            $bornAt,
+            $gender
+        );
+
         $response = $this->client->send($request);
 
         return new Customer(get_object_vars($response));

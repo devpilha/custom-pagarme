@@ -7,6 +7,10 @@ use PagarMe\Sdk\Customer\Customer;
 
 class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    const NAME = 'João Silva';
+    const EMAIL = 'joao@silva.com';
+    const DOCUMENT_NUMBER = '78863832064';
+
     /**
      * @test
     **/
@@ -46,7 +50,6 @@ class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
     **/
     public function mustReturnCustomerWithId()
     {
@@ -76,11 +79,17 @@ class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $customer = new Customer($data);
+        $customer = $handler->create(
+            self::NAME,
+            self::EMAIL,
+            self::DOCUMENT_NUMBER,
+            new \PagarMe\Sdk\Customer\Address(),
+            new \PagarMe\Sdk\Customer\Phone()
+        );
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Customer\Customer',
-            $handler->create($customer)
+            $customer
         );
     }
 

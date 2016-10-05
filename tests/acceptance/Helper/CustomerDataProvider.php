@@ -2,16 +2,45 @@
 
 namespace PagarMe\Acceptance\Helper;
 
+use PagarMe\Sdk\Customer\Address;
+use PagarMe\Sdk\Customer\Phone;
+
 trait CustomerDataProvider
 {
-    public function getValidCustomerData()
+
+    protected function getCustomerName()
+    {
+        return 'Eduardo Nascimento';
+    }
+
+    protected function getCustomerEmail()
+    {
+        return uniqid('user') . '@email.com';
+    }
+
+    protected function getCustomerDocumentNumber()
+    {
+        return '78863832064';
+    }
+
+    protected function getCustomerBornAt()
+    {
+        return '15071991';
+    }
+
+    protected function getCustomerGender()
+    {
+        return 'M';
+    }
+
+    protected function getValidCustomerData()
     {
         return [
-            'born_at'         => '13121988',
-            'document_number' => '18152564000105',
-            'email'           => uniqid('user') . '@email.com',
-            'gender'          => 'M',
-            'name'            => 'nome do cliente',
+            'born_at'         => $this->getCustomerBornAt(),
+            'document_number' => $this->getCustomerDocumentNumber(),
+            'email'           => $this->getCustomerEmail(),
+            'gender'          => $this->getCustomerGender(),
+            'name'            => $this->getCustomerName(),
             'address' => [
                 'city'          => 'sao paulo,',
                 'complementary' => 'apto,',
