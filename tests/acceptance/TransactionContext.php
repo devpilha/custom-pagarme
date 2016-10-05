@@ -73,7 +73,7 @@ class TransactionContext extends BasicContext
     public function aValidTransactionMustBeCreated()
     {
         assertInstanceOf(
-            'PagarMe\Sdk\Transaction\Transaction',
+            'PagarMe\Sdk\Transaction\AbstractTransaction',
             $this->transaction
         );
     }
@@ -197,7 +197,7 @@ class TransactionContext extends BasicContext
      */
     public function anArrayOfTransactionsMustBeReturned()
     {
-        assertContainsOnly('PagarMe\Sdk\Transaction\Transaction', $this->transactionList);
+        assertContainsOnly('PagarMe\Sdk\Transaction\AbstractTransaction', $this->transactionList);
         assertGreaterThanOrEqual(2, count($this->transactionList));
     }
 
