@@ -2,7 +2,7 @@
 
 namespace PagarMe\Sdk\Transaction;
 
-class BoletoTransaction extends Transaction
+class BoletoTransaction extends AbstractTransaction
 {
     const PAYMENT_METHOD = 'boleto';
 

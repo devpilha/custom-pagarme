@@ -2,10 +2,10 @@
 
 namespace Pagarme\SdkTests\Transaction;
 
-use PagarMe\Sdk\Transaction\Handler;
-use PagarMe\Sdk\Transaction\Transaction;
+use PagarMe\Sdk\Transaction\TransactionHandler;
+use PagarMe\Sdk\Transaction\AbstractTransaction;
 
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class TransactionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
     * @test
@@ -18,7 +18,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->creditCardTransactionCreateResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $card = $this->getMockBuilder('PagarMe\Sdk\Card\Card')
             ->disableOriginalConstructor()
@@ -49,7 +49,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->boletoTransactionCreateResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
             ->disableOriginalConstructor()
@@ -76,7 +76,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->boletoTransactionCreateResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
             ->disableOriginalConstructor()
@@ -99,7 +99,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->creditCardTransactionCreateResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
             ->disableOriginalConstructor()
@@ -122,7 +122,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->creditCardTransactionRefundResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $creditCardTransactionMock = $this->getMockBuilder('PagarMe\Sdk\Transaction\CreditCardTransaction')
             ->disableOriginalConstructor()
@@ -147,7 +147,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->boletoTransactionRefundResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $boletoTransactionMock = $this->getMockBuilder('PagarMe\Sdk\Transaction\BoletoTransaction')
             ->disableOriginalConstructor()
@@ -180,7 +180,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode('{"object":"transaction","payment_method":"other"}'));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $customer = $this->getMockBuilder('PagarMe\Sdk\Customer\Customer')
             ->disableOriginalConstructor()
@@ -200,10 +200,10 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->transactionListResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new TransactionHandler($clientMock);
 
         $this->assertContainsOnly(
-            'PagarMe\Sdk\Transaction\Transaction',
+            'PagarMe\Sdk\Transaction\AbstractTransaction',
             $handler->getList()
         );
     }

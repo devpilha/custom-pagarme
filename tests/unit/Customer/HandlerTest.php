@@ -2,10 +2,10 @@
 
 namespace Pagarme\SdkTests\Customer;
 
-use PagarMe\Sdk\Customer\Handler;
+use PagarMe\Sdk\Customer\CustomerHandler;
 use PagarMe\Sdk\Customer\Customer;
 
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -18,7 +18,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerListResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
         $this->assertContainsOnly(
             'PagarMe\Sdk\Customer\Customer',
@@ -37,7 +37,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerGetResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Customer\Customer',
@@ -56,7 +56,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerGetResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
         $data = [
             'bornAt' => '15071991',

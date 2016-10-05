@@ -2,6 +2,7 @@
 
 namespace PagarMe\Sdk\Transaction;
 
+use PagarMe\Sdk\AbstractHandler;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
@@ -14,15 +15,8 @@ use PagarMe\Sdk\Account\Account;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
-class Handler
+class TransactionHandler extends AbstractHandler
 {
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     public function creditCardTransaction(
         $amount,
         Card $card,

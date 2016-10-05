@@ -2,7 +2,7 @@
 
 namespace PagarMe\Sdk\Transaction;
 
-abstract class Transaction
+abstract class AbstractTransaction
 {
     use \PagarMe\Sdk\Fillable;
 

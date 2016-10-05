@@ -2,20 +2,14 @@
 
 namespace PagarMe\Sdk\Customer;
 
+use PagarMe\Sdk\AbstractHandler;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Customer\Request\CustomerCreate;
 use PagarMe\Sdk\Customer\Request\CustomerGet;
 use PagarMe\Sdk\Customer\Request\CustomerList;
 
-class Handler
+class CustomerHandler extends AbstractHandler
 {
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     public function create(Customer $customer)
     {
         $request = new CustomerCreate($customer);

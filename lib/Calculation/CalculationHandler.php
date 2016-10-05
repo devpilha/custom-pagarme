@@ -2,18 +2,12 @@
 
 namespace PagarMe\Sdk\Calculation;
 
+use PagarMe\Sdk\AbstractHandler;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Calculation\Request\CalculateInstallmentsRequest;
 
-class Handler
+class CalculationHandler extends AbstractHandler
 {
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     public function calculateInstallmentsAmount(
         $amount,
         $interestRate,
