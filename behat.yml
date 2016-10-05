@@ -7,3 +7,4 @@ default:
         - PagarMe\Acceptance\CustomerContext
         - PagarMe\Acceptance\CardContext
         - PagarMe\Acceptance\TransactionContext
+        - PagarMe\Acceptance\CalculationContext
