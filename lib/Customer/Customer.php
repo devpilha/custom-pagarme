@@ -6,17 +6,59 @@ class Customer
 {
     use \PagarMe\Sdk\Fillable;
 
-    private $address;
-    private $bornAt;
-    private $dateCreated;
-    private $documentNumber;
-    private $documentType;
-    private $email;
-    private $gender;
+    /**
+     * @var int | Identificador do cliente
+     */
     private $id;
+
+    /**
+     * @var PagarMe\Sdk\Customer\Address | Endereço do cliente
+     */
+    private $address;
+
+    /**
+     * @var string | Data de nascimento
+     */
+    private $bornAt;
+
+    /**
+     * @var string | Data de criação do registro
+     */
+    private $dateCreated;
+
+    /**
+     * @var int | Numero do documento do cliente
+     */
+    private $documentNumber;
+
+    /**
+     * @var string | Tipo de documento do cliente
+     */
+    private $documentType;
+
+    /**
+     * @var string | E-mail do cliente
+     */
+    private $email;
+
+    /**
+     * @var string | Gênero
+     */
+    private $gender;
+
+    /**
+     * @var string | Nome do cliente
+     */
     private $name;
+
+    /**
+     * @var PagarMe\Sdk\Customer\PagarMe\Sdk\Customer\Phone | Telefone do cliente
+     */
     private $phone;
 
+    /**
+     * @var array $arrayData
+     */
     public function __construct($arrayData)
     {
         $this->fill($arrayData);
@@ -24,6 +66,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param int $id
      */
     public function getId()
     {
@@ -32,6 +75,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param string $bornAt
      */
     public function getBornAt()
     {
@@ -40,6 +84,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param int $documentNumber
      */
     public function getDocumentNumber()
     {
@@ -48,6 +93,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param string $email
      */
     public function getEmail()
     {
@@ -56,6 +102,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param string $gender
      */
     public function getGender()
     {
@@ -64,6 +111,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param string $name
      */
     public function getName()
     {
@@ -72,6 +120,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param string $address
      */
     public function getAddress()
     {
@@ -80,6 +129,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
+     * @param object $phone
      */
     public function getPhone()
     {

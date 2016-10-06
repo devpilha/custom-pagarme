@@ -10,6 +10,12 @@ use PagarMe\Sdk\Card\Request\CardGet;
 
 class CardHandler extends AbstractHandler
 {
+    /**
+     * @param int $cardNumber
+     * @param string $holderName
+     * @param string $cardExpirationDate
+     * @return Card
+     */
     public function create($cardNumber, $holderName, $cardExpirationDate)
     {
         $request = new CardCreate(
@@ -21,6 +27,10 @@ class CardHandler extends AbstractHandler
         return new Card($this->client->send($request));
     }
 
+    /**
+     * @param int $cardId
+     * @return Card
+     */
     public function get($cardId)
     {
         $request = new CardGet(

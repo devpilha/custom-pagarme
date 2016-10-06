@@ -10,12 +10,34 @@ use PagarMe\Sdk\Calculation\CalculationHandler;
 
 class PagarMe
 {
+    /**
+     * @param Client | Client do PagarMe
+     */
     private $client;
+
+    /**
+     * @param CustomerHandler | Manipulador de clientes
+     */
     private $customerHandler;
+
+    /**
+     * @param TransactionHandler | Manipulador de transações
+     */
     private $transactionHandler;
+
+    /**
+     * @param CardHandler | Manipulador de cartões
+     */
     private $cardHandler;
+
+    /**
+     * @param CalculationHandler | Manipulador de calculos
+     */
     private $calculationHandler;
 
+    /**
+     * @param $apiKey
+     */
     public function __construct($apiKey)
     {
         $this->client = new Client(
@@ -28,6 +50,9 @@ class PagarMe
         );
     }
 
+    /**
+     * @return CustomerHandler
+     */
     public function customer()
     {
         if (!$this->customerHandler instanceof CustomerHandler) {
@@ -37,6 +62,9 @@ class PagarMe
         return $this->customerHandler;
     }
 
+    /**
+     * @return TransactionHandler
+     */
     public function transaction()
     {
         if (!$this->transactionHandler instanceof TransactionHandler) {
@@ -46,6 +74,9 @@ class PagarMe
         return $this->transactionHandler;
     }
 
+    /**
+     * @return CardHandler
+     */
     public function card()
     {
         if (!$this->cardHandler instanceof CardHandler) {
@@ -55,6 +86,9 @@ class PagarMe
         return $this->cardHandler;
     }
 
+    /**
+     * @return CalculationHandler
+     */
     public function calculation()
     {
         if (!$this->calculationHandler instanceof CalculationHandler) {

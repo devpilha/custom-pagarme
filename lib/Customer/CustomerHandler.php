@@ -10,6 +10,15 @@ use PagarMe\Sdk\Customer\Request\CustomerList;
 
 class CustomerHandler extends AbstractHandler
 {
+    /**
+     * @param string $name
+     * @param string $email
+     * @param int $documentNumber
+     * @param Address $address
+     * @param Phone $phone
+     * @param string $bornAt
+     * @param string $gender
+     */
     public function create(
         $name,
         $email,
@@ -34,6 +43,9 @@ class CustomerHandler extends AbstractHandler
         return new Customer($this->getCustomerInfo($response));
     }
 
+    /**
+     * @param int $customerID
+     */
     public function get($customerId)
     {
         $request = new CustomerGet($customerId);
@@ -42,6 +54,10 @@ class CustomerHandler extends AbstractHandler
         return new Customer($this->getCustomerInfo($response));
     }
 
+    /**
+     * @param int $page
+     * @param int $count
+     */
     public function getList($page = 1, $count = 10)
     {
         $request = new CustomerList($page, $count);
@@ -55,6 +71,10 @@ class CustomerHandler extends AbstractHandler
         return $customers;
     }
 
+    /**
+     * @param array $addressData
+     * @return Address
+     */
     private function buildAddress($addressData)
     {
         $address = new Address(
@@ -72,6 +92,10 @@ class CustomerHandler extends AbstractHandler
         return $address;
     }
 
+    /**
+     * @param array $phoneData
+     * @return Phone
+     */
     private function buildPhone($phoneData)
     {
         $phone = new Phone(
@@ -83,6 +107,10 @@ class CustomerHandler extends AbstractHandler
         return $phone;
     }
 
+    /**
+     * @param array $addressData
+     * @return array
+     */
     private function getCustomerInfo($response)
     {
         $customerInfo = get_object_vars($response);

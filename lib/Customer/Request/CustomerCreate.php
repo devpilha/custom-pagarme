@@ -8,14 +8,50 @@ use PagarMe\Sdk\Customer\Phone;
 
 class CustomerCreate implements Request
 {
+     /**
+     * @var string | Nome ou razão social do comprador
+     */
     private $name;
+
+     /**
+     * @var string | E-mail do comprador
+     */
     private $email;
+
+     /**
+     * @var int | Número do CPF ou CNPJ do cliente
+     */
     private $documentNumber;
+
+     /**
+     * @var Address | Endereço do comprador
+     */
     private $address;
+
+     /**
+     * @var Phone | Telefone do comprador
+     */
     private $phone;
+
+     /**
+     * @var string | Data de nascimento ex: '13121988'
+     */
     private $bornAt;
+
+     /**
+     * @var string | Gênero
+     */
     private $gender;
 
+    /**
+    * @param string $name
+    * @param string $email
+    * @param int $documentNumber
+    * @param Address $address
+    * @param Phone $phone
+    * @param string $bornAt
+    * @param string $gender
+    */
     public function __construct(
         $name,
         $email,
@@ -34,6 +70,9 @@ class CustomerCreate implements Request
         $this->gender         = $gender;
     }
 
+    /**
+     *  @return array
+     */
     public function getPayload()
     {
         return [
@@ -47,16 +86,25 @@ class CustomerCreate implements Request
         ];
     }
 
+    /**
+     *  @return string
+     */
     public function getPath()
     {
         return 'customers';
     }
 
+    /**
+     *  @return string
+     */
     public function getMethod()
     {
         return 'POST';
     }
 
+    /**
+     *  @return array
+     */
     private function getAddresssData()
     {
         $addressData = [
@@ -85,6 +133,9 @@ class CustomerCreate implements Request
         return $addressData;
     }
 
+    /**
+     *  @return array
+     */
     private function getPhoneData()
     {
         $phoneData = [

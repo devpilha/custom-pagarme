@@ -8,6 +8,13 @@ use PagarMe\Sdk\Calculation\Request\CalculateInstallmentsRequest;
 
 class CalculationHandler extends AbstractHandler
 {
+    /**
+     * @param int $amount
+     * @param int $interestRate
+     * @param int $freeInstallments
+     * @param int $maxInstallments
+     * @return array
+     */
     public function calculateInstallmentsAmount(
         $amount,
         $interestRate,
