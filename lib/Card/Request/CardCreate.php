@@ -6,10 +6,26 @@ use PagarMe\Sdk\Request;
 
 class CardCreate implements Request
 {
+    /**
+     * @var int | Número no cartão do portador
+     */
     private $cardNumber;
+
+    /**
+     * @var int | Nome no cartão do portador
+     */
     private $holderName;
+
+    /**
+     * @var int | Data de expiração do cartão
+     */
     private $cardExpirationDate;
 
+    /**
+    * @param int $cardNumber
+    * @param int $holderName
+    * @param int $cardExpirationDate
+    */
     public function __construct($cardNumber, $holderName, $cardExpirationDate)
     {
         $this->cardNumber         = $cardNumber;
@@ -17,6 +33,9 @@ class CardCreate implements Request
         $this->cardExpirationDate = $cardExpirationDate;
     }
 
+    /**
+     * @return array
+     */
     public function getPayload()
     {
         return [
@@ -26,11 +45,17 @@ class CardCreate implements Request
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return 'cards';
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return 'POST';

@@ -6,6 +6,9 @@ trait Fillable
 {
     use CaseConverter;
 
+    /**
+     * @param $arrayData
+     */
     private function fill($arrayData)
     {
         foreach ($arrayData as $key => $value) {

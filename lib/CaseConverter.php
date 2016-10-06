@@ -6,6 +6,10 @@ trait CaseConverter
 {
     use CaseConverter;
 
+    /**
+     * @param string $sentence
+     * @return string
+     */
     public function snakeToUpperCamel($sentence)
     {
         return preg_replace_callback("/(?:^|_)([a-zA-Z])/", function ($word) {
@@ -13,6 +17,10 @@ trait CaseConverter
         }, $sentence);
     }
 
+    /**
+     * @param string $sentence
+     * @return string
+     */
     public function snakeToLowerCamel($sentence)
     {
         return lcfirst($this->snakeToUpperCamel($sentence));

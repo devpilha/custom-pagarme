@@ -7,15 +7,31 @@ use GuzzleHttp\Message\Response as Response;
 
 class Client
 {
+    /**
+     * @var string | Chave da API
+     */
     private $apiKey;
+
+    /**
+     * @var GuzzleClient | Client do Guzzle
+     */
     private $client;
 
+    /**
+     * @param GuzzleClient $client
+     * @param string $apiKey
+     */
     public function __construct(GuzzleClient $client, $apiKey)
     {
-        $this->client        = $client;
-        $this->apiKey        = $apiKey;
+        $this->client = $client;
+        $this->apiKey = $apiKey;
     }
 
+    /**
+     * @param Request $apiRequest
+     * @return object
+     * @throws ClientException
+     */
     public function send(Request $apiRequest)
     {
         $request = $this->client->createRequest(
@@ -39,6 +55,10 @@ class Client
         }
     }
 
+    /**
+     * @param Request $apiRequest
+     * @return array
+     */
     private function buildBody(Request $request)
     {
         return [

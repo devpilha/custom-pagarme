@@ -6,11 +6,32 @@ use PagarMe\Sdk\Request;
 
 class CalculateInstallmentsRequest implements Request
 {
-    private $amount;
-    private $interestRate;
-    private $freeInstallments;
+    /**
+     * @var int | Valor máximo de parcelas
+     */
     private $maxInstallments;
 
+    /**
+     * @var int | Número de parcelas isentas de juros
+     */
+    private $freeInstallments;
+
+    /**
+     * @var int | Valor da taxa de juros
+     */
+    private $interestRate;
+
+    /**
+     * @var int | Valor do produto/serviço vendido
+     */
+    private $amount;
+
+    /**
+     * @param int $amount
+     * @param int $interestRate
+     * @param int $freeInstallments
+     * @param int $maxInstallments
+     */
     public function __construct(
         $amount,
         $interestRate,
@@ -23,6 +44,9 @@ class CalculateInstallmentsRequest implements Request
         $this->maxInstallments  = $maxInstallments;
     }
 
+    /**
+     * @return array
+     */
     public function getPayload()
     {
         return [
@@ -33,11 +57,17 @@ class CalculateInstallmentsRequest implements Request
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return 'transactions/calculate_installments_amount';
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return 'GET';
