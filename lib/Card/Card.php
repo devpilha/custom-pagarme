@@ -90,4 +90,60 @@ class Card
     {
         return $this->lastDigits;
     }
+
+    /**
+     * @return string
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateUpdated()
+    {
+        return $this->dateUpdated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHolderName()
+    {
+        return $this->holderName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFingerprint()
+    {
+        return $this->fingerprint;
+    }
+
+    /**
+     * @return object
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
 }
