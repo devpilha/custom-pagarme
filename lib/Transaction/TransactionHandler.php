@@ -2,6 +2,7 @@
 
 namespace PagarMe\Sdk\Transaction;
 
+use PagarMe\Sdk\AbstractHandler;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\Transaction\Request\CreditCardTransactionCreate;
 use PagarMe\Sdk\Transaction\Request\BoletoTransactionCreate;
@@ -14,15 +15,8 @@ use PagarMe\Sdk\Account\Account;
 use PagarMe\Sdk\Card\Card;
 use PagarMe\Sdk\Customer\Customer;
 
-class Handler
+class TransactionHandler extends AbstractHandler
 {
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     public function creditCardTransaction(
         $amount,
         Card $card,
@@ -30,9 +24,10 @@ class Handler
         $installments = 1,
         $capture = true,
         $postBackUrl = null,
-        $metaData = null
+        $metaData = null,
+        $extraAttributes = []
     ) {
-        $transaction = new CreditCardTransaction(
+        $transactionData = array_merge(
             [
                 'amount'       => $amount,
                 'card'         => $card,
@@ -41,8 +36,11 @@ class Handler
                 'capture'      => $capture,
                 'postbackUrl'  => $postBackUrl,
                 'metaData'     => $metaData
-            ]
+            ],
+            $extraAttributes
         );
+
+        $transaction = new CreditCardTransaction($transactionData);
         $request = new CreditCardTransactionCreate($transaction);
 
         $result = $this->client->send($request);
@@ -53,15 +51,19 @@ class Handler
     public function boletoTransaction(
         $amount,
         Customer $customer,
-        $postBackUrl
+        $postBackUrl,
+        $extraAttributes = []
     ) {
-        $transaction = new BoletoTransaction(
+        $transactionData = array_merge(
             [
                 'amount'      => $amount,
                 'customer'    => $customer,
                 'postBackUrl' => $postBackUrl
-            ]
+            ],
+            $extraAttributes
         );
+
+        $transaction = new BoletoTransaction($transactionData);
 
         $request = new BoletoTransactionCreate($transaction);
 
@@ -92,9 +94,9 @@ class Handler
         return $transactions;
     }
 
-    public function capture($transactionId, $amount = null)
+    public function capture(CreditCardTransaction $transaction, $amount = null)
     {
-        $request = new TransactionCapture($transactionId, $amount);
+        $request = new TransactionCapture($transaction->getId(), $amount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);

@@ -2,7 +2,7 @@
 
 namespace PagarMe\Sdk\Transaction;
 
-class CreditCardTransaction extends Transaction
+class CreditCardTransaction extends AbstractTransaction
 {
     const PAYMENT_METHOD = 'credit_card';
 

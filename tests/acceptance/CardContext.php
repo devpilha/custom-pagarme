@@ -14,19 +14,36 @@ class CardContext extends BasicContext
     private $createdCard;
     private $queryCard;
 
+    private $number;
+    private $holder;
+    private $expiration;
+
     /**
-     * @Given I register a card with :number, :holder and :expiration
+     * @Given a card with :number, :holder and :expiration
      */
     public function aCardWithAnd($number, $holder, $expiration)
     {
-        $this->createdCard = self::getPagarMe()
-            ->card()
-            ->create($number, $holder, $expiration);
+        $this->number     = $number;
+        $this->holder     = $holder;
+        $this->expiration = $expiration;
     }
 
+    /**
+     * @When register the card
+     */
+    public function registerTheCard()
+    {
+        $this->createdCard = self::getPagarMe()
+            ->card()
+            ->create(
+                $this->number,
+                $this->holder,
+                $this->expiration
+            );
+    }
 
     /**
-     * @Then I should have a card starting with :start and ending with :end
+     * @Then should have a card starting with :start and ending with :end
      */
     public function iShouldHaveACardStartingWithAndEndingWith($start, $end)
     {
@@ -35,7 +52,7 @@ class CardContext extends BasicContext
     }
 
     /**
-     * @When I query for the card
+     * @When query for the card
      */
     public function iQueryForCard()
     {
@@ -47,7 +64,7 @@ class CardContext extends BasicContext
     }
 
     /**
-     * @Then I should have the same card
+     * @Then should have the same card
      */
     public function iShouldHaveTheSameCard()
     {

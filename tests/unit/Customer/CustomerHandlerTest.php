@@ -2,11 +2,15 @@
 
 namespace Pagarme\SdkTests\Customer;
 
-use PagarMe\Sdk\Customer\Handler;
+use PagarMe\Sdk\Customer\CustomerHandler;
 use PagarMe\Sdk\Customer\Customer;
 
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class CustomerHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    const NAME = 'João Silva';
+    const EMAIL = 'joao@silva.com';
+    const DOCUMENT_NUMBER = '78863832064';
+
     /**
      * @test
     **/
@@ -18,7 +22,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerListResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
         $this->assertContainsOnly(
             'PagarMe\Sdk\Customer\Customer',
@@ -37,7 +41,7 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerGetResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Customer\Customer',
@@ -46,7 +50,6 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
     **/
     public function mustReturnCustomerWithId()
     {
@@ -56,31 +59,19 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
         $clientMock->method('send')
             ->willReturn(json_decode($this->customerGetResponse()));
 
-        $handler = new Handler($clientMock);
+        $handler = new CustomerHandler($clientMock);
 
-        $data = [
-            'bornAt' => '15071991',
-            'documentNumber' => '44628816808',
-            'email' => 'cliente@empresa.com',
-            'gender' => 'M',
-            'name' => 'João Silva',
-            'address' => [
-                'street' => 'rua teste',
-                'street_number' => 42,
-                'neighborhood' => 'centro',
-                'zipcode' => '01227200'
-            ],
-            'phone' => [
-                'ddd' => 15,
-                'number' => 987523421
-            ]
-        ];
-
-        $customer = new Customer($data);
+        $customer = $handler->create(
+            self::NAME,
+            self::EMAIL,
+            self::DOCUMENT_NUMBER,
+            new \PagarMe\Sdk\Customer\Address(),
+            new \PagarMe\Sdk\Customer\Phone()
+        );
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Customer\Customer',
-            $handler->create($customer)
+            $customer
         );
     }
 

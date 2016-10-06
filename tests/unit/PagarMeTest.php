@@ -14,7 +14,7 @@ class PagarMeTest extends \PHPUnit_Framework_TestCase
     {
         $pagarMe = new PagarMe('apiKey');
         $this->assertInstanceOf(
-            'PagarMe\Sdk\Card\Handler',
+            'PagarMe\Sdk\Card\CardHandler',
             $pagarMe->card()
         );
     }
@@ -26,7 +26,7 @@ class PagarMeTest extends \PHPUnit_Framework_TestCase
     {
         $pagarMe = new PagarMe('apiKey');
         $this->assertInstanceOf(
-            'PagarMe\Sdk\Customer\Handler',
+            'PagarMe\Sdk\Customer\CustomerHandler',
             $pagarMe->customer()
         );
     }
@@ -51,7 +51,7 @@ class PagarMeTest extends \PHPUnit_Framework_TestCase
     {
         $pagarMe = new PagarMe('apiKey');
         $this->assertInstanceOf(
-            'PagarMe\Sdk\Transaction\Handler',
+            'PagarMe\Sdk\Transaction\TransactionHandler',
             $pagarMe->transaction()
         );
     }

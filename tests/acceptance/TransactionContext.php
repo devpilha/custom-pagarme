@@ -42,7 +42,8 @@ class TransactionContext extends BasicContext
 
 
      /**
-     * @Given make a credit card transaction with :amount and :installments
+     * @When make a credit card transaction with :arg1 and :arg2
+     * @And make a credit card transaction with :amount and :installments
      */
     public function makeACreditCardTransactionWithAnd($amount, $installments)
     {
@@ -73,7 +74,7 @@ class TransactionContext extends BasicContext
     public function aValidTransactionMustBeCreated()
     {
         assertInstanceOf(
-            'PagarMe\Sdk\Transaction\Transaction',
+            'PagarMe\Sdk\Transaction\AbstractTransaction',
             $this->transaction
         );
     }
@@ -124,15 +125,15 @@ class TransactionContext extends BasicContext
      */
     public function captureTheTransaction($amount = null)
     {
-        $transactionId = $this->transaction->getId();
+        $transaction = $this->transaction;
 
         self::getPagarMe()
             ->transaction()
-            ->capture($transactionId, $amount);
+            ->capture($transaction, $amount);
 
         $this->transaction = self::getPagarMe()
             ->transaction()
-            ->get($transactionId);
+            ->get($transaction->getId());
     }
 
     /**
@@ -197,7 +198,7 @@ class TransactionContext extends BasicContext
      */
     public function anArrayOfTransactionsMustBeReturned()
     {
-        assertContainsOnly('PagarMe\Sdk\Transaction\Transaction', $this->transactionList);
+        assertContainsOnly('PagarMe\Sdk\Transaction\AbstractTransaction', $this->transactionList);
         assertGreaterThanOrEqual(2, count($this->transactionList));
     }
 
@@ -219,7 +220,7 @@ class TransactionContext extends BasicContext
     }
 
     /**
-     * @When full refund the transaction
+     * @Then full refund the transaction
      */
     public function fullRefundTheTransaction()
     {
@@ -230,6 +231,7 @@ class TransactionContext extends BasicContext
 
     /**
      * @Then the transaction must be refunded
+     * @And the transaction must be refunded
      */
     public function theTransactionMustBeRefunded()
     {

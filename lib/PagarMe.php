@@ -3,10 +3,10 @@
 namespace PagarMe\Sdk;
 
 use GuzzleHttp\Client as GuzzleClient;
-use PagarMe\Sdk\Customer\Handler as CustomerHandler;
-use PagarMe\Sdk\Transaction\Handler as TransactionHandler;
-use PagarMe\Sdk\Card\Handler as CardHandler;
-use PagarMe\Sdk\Calculation\Handler as CalculationHandler;
+use PagarMe\Sdk\Customer\CustomerHandler;
+use PagarMe\Sdk\Transaction\TransactionHandler;
+use PagarMe\Sdk\Card\CardHandler;
+use PagarMe\Sdk\Calculation\CalculationHandler;
 
 class PagarMe
 {
