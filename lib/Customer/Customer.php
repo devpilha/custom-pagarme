@@ -57,7 +57,7 @@ class Customer
     private $phone;
 
     /**
-     * @var array $arrayData
+     * @param array $arrayData
      */
     public function __construct($arrayData)
     {
@@ -66,7 +66,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param int $id
+     * @return int
      */
     public function getId()
     {
@@ -75,7 +75,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param string $bornAt
+     * @return string
      */
     public function getBornAt()
     {
@@ -84,7 +84,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param int $documentNumber
+     * @return int
      */
     public function getDocumentNumber()
     {
@@ -93,7 +93,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param string $email
+     * @return string
      */
     public function getEmail()
     {
@@ -102,7 +102,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param string $gender
+     * @return string
      */
     public function getGender()
     {
@@ -111,7 +111,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param string $name
+     * @return string
      */
     public function getName()
     {
@@ -120,7 +120,7 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param string $address
+     * @return string
      */
     public function getAddress()
     {
@@ -129,10 +129,28 @@ class Customer
 
     /**
      * @codeCoverageIgnore
-     * @param object $phone
+     * @return object
      */
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     * @return string
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     * @return string
+     */
+    public function getDocumentType()
+    {
+        return $this->documentType;
     }
 }
