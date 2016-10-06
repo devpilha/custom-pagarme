@@ -94,10 +94,12 @@ class Address
 
     /**
      * @param string $complementary
+     * @return Address
      */
     public function setComplementary($complementary)
     {
         $this->complementary = $complementary;
+        return $this;
     }
 
     /**
@@ -110,10 +112,12 @@ class Address
 
     /**
      * @param string $city
+     * @return Address
      */
     public function setCity($city)
     {
         $this->city = $city;
+        return $this;
     }
 
     /**
@@ -126,10 +130,12 @@ class Address
 
     /**
      * @param string $state
+     * @return Address
      */
     public function setState($state)
     {
         $this->state = $state;
+        return $this;
     }
 
     /**
@@ -142,10 +148,12 @@ class Address
 
     /**
      * @param string $country
+     * @return Address
      */
     public function setCountry($country)
     {
         $this->country = $country;
+        return $this;
     }
 
     /**
