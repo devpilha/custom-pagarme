@@ -24,9 +24,10 @@ class TransactionHandler extends AbstractHandler
         $installments = 1,
         $capture = true,
         $postBackUrl = null,
-        $metaData = null
+        $metaData = null,
+        $extraAttributes = []
     ) {
-        $transaction = new CreditCardTransaction(
+        $transactionData = array_merge(
             [
                 'amount'       => $amount,
                 'card'         => $card,
@@ -35,8 +36,11 @@ class TransactionHandler extends AbstractHandler
                 'capture'      => $capture,
                 'postbackUrl'  => $postBackUrl,
                 'metaData'     => $metaData
-            ]
+            ],
+            $extraAttributes
         );
+
+        $transaction = new CreditCardTransaction($transactionData);
         $request = new CreditCardTransactionCreate($transaction);
 
         $result = $this->client->send($request);
@@ -47,15 +51,19 @@ class TransactionHandler extends AbstractHandler
     public function boletoTransaction(
         $amount,
         Customer $customer,
-        $postBackUrl
+        $postBackUrl,
+        $extraAttributes = []
     ) {
-        $transaction = new BoletoTransaction(
+        $transactionData = array_merge(
             [
                 'amount'      => $amount,
                 'customer'    => $customer,
                 'postBackUrl' => $postBackUrl
-            ]
+            ],
+            $extraAttributes
         );
+
+        $transaction = new BoletoTransaction($transactionData);
 
         $request = new BoletoTransactionCreate($transaction);
 
