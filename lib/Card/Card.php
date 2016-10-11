@@ -57,6 +57,11 @@ class Card
     private $valid;
 
     /**
+     * @var string | Hash dos dados do cartão
+     */
+    private $hash;
+
+    /**
      * @param array $arrayData
      */
     public function __construct($arrayData)
@@ -145,5 +150,13 @@ class Card
     public function getValid()
     {
         return $this->valid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 }

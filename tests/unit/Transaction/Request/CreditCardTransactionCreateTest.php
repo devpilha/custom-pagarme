@@ -10,7 +10,8 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
     const PATH   = 'transactions';
     const METHOD = 'POST';
 
-    const CARD_ID = 1;
+    const CARD_ID   = 1;
+    const CARD_HASH = 'FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm';
 
     public function installmentsProvider()
     {
@@ -35,6 +36,64 @@ class CreditCardTransactionCreateTest extends \PHPUnit_Framework_TestCase
             [
                 'amount'         => 1337,
                 'card_id'        => self::CARD_ID,
+                'installments'   => $installments,
+                'payment_method' => 'credit_card',
+                'capture'        => $capture,
+                'postback_url'   => $postbackUrl,
+                'customer' => [
+                    'name'            => 'Eduardo Nascimento',
+                    'born_at'         => '15071991',
+                    'document_number' => '10586649727',
+                    'email'           => 'eduardo@eduardo.com',
+                    'sex'             => 'M',
+                    'address' => [
+                        'street'        => 'rua teste',
+                        'street_number' => 42,
+                        'neighborhood'  => 'centro',
+                        'zipcode'       => '01227200',
+                        'complementary' => null
+                    ],
+                    'phone' => [
+                        'ddd'    => 15,
+                        'number' => 987523421
+                    ]
+                ]
+            ],
+            $transactionCreate->getPayload()
+        );
+    }
+
+    /**
+     * @dataProvider installmentsProvider
+     * @test
+    **/
+    public function mustPayloadContainCardHash($installments, $capture, $postbackUrl)
+    {
+        $customerMock = $this->getCustomerMock();
+        $cardMock = $this->getMockBuilder('PagarMe\Sdk\Card\Card')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cardMock->method('getHash')
+            ->willReturn(self::CARD_HASH);
+
+        $transaction =  new CreditCardTransaction(
+            [
+                'amount'       => 1337,
+                'card'         => $cardMock,
+                'customer'     => $customerMock,
+                'installments' => $installments,
+                'capture'      => $capture,
+                'postbackUrl'  => $postbackUrl
+            ]
+        );
+
+        $transactionCreate = new CreditCardTransactionCreate($transaction);
+
+        $this->assertEquals(
+            [
+                'amount'         => 1337,
+                'card_hash'      => self::CARD_HASH,
                 'installments'   => $installments,
                 'payment_method' => 'credit_card',
                 'capture'        => $capture,

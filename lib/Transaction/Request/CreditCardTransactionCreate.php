@@ -16,11 +16,26 @@ class CreditCardTransactionCreate extends TransactionCreate
         $basicData = parent::getPayload();
 
         $cardData = [
-            'card_id'      => $this->transaction->getCardId(),
             'installments' => $this->transaction->getInstallments(),
             'capture'      => $this->transaction->isCapturable()
         ];
 
-        return array_merge($basicData, $cardData);
+        return array_merge($basicData, $cardData, $this->getCardInfo());
+    }
+
+    /**
+     * @return array
+     */
+    private function getCardInfo()
+    {
+        if (!is_null($this->transaction->getCardId()))
+        {
+            return ['card_id' => $this->transaction->getCardId()];
+        }
+
+        if (!is_null($this->transaction->getCardHash()))
+        {
+            return ['card_hash' => $this->transaction->getCardHash()];
+        }
     }
 }
