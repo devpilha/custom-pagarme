@@ -7,6 +7,7 @@ use PagarMe\Sdk\Customer\CustomerHandler;
 use PagarMe\Sdk\Transaction\TransactionHandler;
 use PagarMe\Sdk\Card\CardHandler;
 use PagarMe\Sdk\Calculation\CalculationHandler;
+use PagarMe\Sdk\Recipient\RecipientHandler;
 
 class PagarMe
 {
@@ -34,6 +35,11 @@ class PagarMe
      * @param CalculationHandler | Manipulador de calculos
      */
     private $calculationHandler;
+
+    /**
+     * @param RecipientHandler | Manipulador de recebedores
+     */
+    private $recipientHandler;
 
     /**
      * @param $apiKey
@@ -96,5 +102,17 @@ class PagarMe
         }
 
         return $this->calculationHandler;
+    }
+
+    /**
+     * @return RecipientHandler
+     */
+    public function recipient()
+    {
+        if (!$this->recipientHandler instanceof RecipientHandler) {
+            $this->recipientHandler = new RecipientHandler($this->client);
+        }
+
+        return $this->recipientHandler;
     }
 }
