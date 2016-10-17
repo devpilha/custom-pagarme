@@ -20,3 +20,8 @@ default:
         - %paths.base%/tests/acceptance/features/calculation.feature
       contexts:
         - PagarMe\Acceptance\CalculationContext
+    recipient:
+      paths:
+        - %paths.base%/tests/acceptance/features/recipient.feature
+      contexts:
+        - PagarMe\Acceptance\RecipientContext

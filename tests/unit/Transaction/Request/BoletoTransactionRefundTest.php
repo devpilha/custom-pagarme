@@ -28,7 +28,7 @@ class BoletoTransactionRefundTest extends \PHPUnit_Framework_TestCase
         $accountMock = $this->getMockBuilder('PagarMe\Sdk\Account\Account')
             ->disableOriginalConstructor()
             ->getMock();
-        $accountMock->method('getBankAccountId')
+        $accountMock->method('getId')
             ->willReturn(self::BANKACCOUNT_ID);
 
         $transactionCreate = new BoletoTransactionRefund(

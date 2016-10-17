@@ -47,7 +47,7 @@ class BoletoTransactionRefund implements Request
     {
         $account = $this->account;
 
-        if (is_null($account->getBankAccountId())) {
+        if (is_null($account->getId())) {
             return [
                 'bank_code'       => $account->getBankCode(),
                 'agencia'         => $account->getAgencia(),
@@ -59,6 +59,6 @@ class BoletoTransactionRefund implements Request
             ];
         }
 
-        return ['bank_account_id' => $account->getBankAccountId()];
+        return ['bank_account_id' => $account->getId()];
     }
 }
