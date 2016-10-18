@@ -5,6 +5,7 @@ namespace PagarMe\Sdk\Recipient;
 use PagarMe\Sdk\AbstractHandler;
 use PagarMe\Sdk\Account\Account;
 use PagarMe\Sdk\Recipient\Request\RecipientCreate;
+use PagarMe\Sdk\Recipient\Request\RecipientList;
 
 class RecipientHandler extends AbstractHandler
 {
@@ -32,5 +33,25 @@ class RecipientHandler extends AbstractHandler
         );
 
         return new Recipient($result);
+    }
+
+    public function getList($page = null, $count = null)
+    {
+        $request = new RecipientList($page, $count);
+
+        $result = $this->client->send($request);
+
+        $recipients = [];
+        foreach ($result as $recipient) {
+            $recipient->bank_account = new Account(
+                get_object_vars($recipient->bank_account)
+            );
+
+            $recipients[] = new Recipient(
+                get_object_vars($recipient)
+            );
+        }
+
+        return $recipients;
     }
 }

@@ -26,6 +26,7 @@ class RecipientContext extends BasicContext
     private $legalName;
 
     private $recipient;
+    private $recipients;
 
     /**
      * @Given recipient data :interval, :day, :transfer, :anticipation and :percentage
@@ -126,5 +127,102 @@ class RecipientContext extends BasicContext
         }
 
         return $param;
+    }
+
+    /**
+     * @Given previous created recipients
+     */
+    public function previousCreatedRecipients()
+    {
+        foreach ($this->getRecipientsData() as $recipientData) {
+            $this->recipientData(
+                $recipientData['interval'],
+                $recipientData['day'],
+                $recipientData['transfer'],
+                $recipientData['anticipation'],
+                $recipientData['percentage']
+            );
+
+            $this->bankData(
+                $recipientData['bank_code'],
+                $recipientData['agencia'],
+                $recipientData['agencia_dv'],
+                $recipientData['conta'],
+                $recipientData['conta_dv'],
+                $recipientData['document'],
+                $recipientData['legal_name']
+            );
+
+            $this->registerTheRecipient();
+        }
+    }
+
+    /**
+     * @When query for recipients
+     */
+    public function queryForRecipients()
+    {
+        $this->recipients = self::getPagarMe()
+            ->recipient()
+            ->getList();
+    }
+
+    /**
+     * @Then a list of recipients must be returned
+     */
+    public function aListOfRecipientsMustBeReturned()
+    {
+        assertContainsOnly(
+            'PagarMe\Sdk\Recipient\Recipient',
+            $this->recipients
+        );
+    }
+
+    public function getRecipientsData()
+    {
+        return [
+            [
+                'interval' => 'null',
+                'day' => 'null',
+                'transfer' => 'null',
+                'anticipation' => 'null',
+                'percentage' => 'null',
+                'bank_code' => '237',
+                'agencia' => '1383',
+                'agencia_dv' => '0',
+                'conta' => '13399',
+                'conta_dv' => '1',
+                'document' => '44318031144',
+                'legal_name' => 'João'
+            ],
+            [
+                'interval' => 'daily',
+                'day' => '0',
+                'transfer' => 'true',
+                'anticipation' => 'false',
+                'percentage' => '50',
+                'bank_code' => '341',
+                'agencia' => '1384',
+                'agencia_dv' => '1',
+                'conta' => '13400',
+                'conta_dv' => '2',
+                'document' => '16360841843',
+                'legal_name' => 'Maria'
+            ],
+            [
+                'interval' => 'weekly',
+                'day' => '3',
+                'transfer' => 'false',
+                'anticipation' => 'true',
+                'percentage' => 'null',
+                'bank_code' => '001',
+                'agencia' => '1385',
+                'agencia_dv' => '2',
+                'conta' => '13401',
+                'conta_dv' => '2',
+                'document' => '19050151434',
+                'legal_name' => 'José'
+            ]
+        ];
     }
 }
