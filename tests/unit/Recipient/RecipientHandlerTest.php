@@ -31,9 +31,9 @@ class RecipientHandlerTest extends \PHPUnit_Framework_TestCase
 
         $recipient = $handler->create(
             $bankAccountMock,
-            TRANSFER_INTERVAL,
-            TRANSFER_DAY,
-            TRANSFER_ENABLED
+            self::TRANSFER_INTERVAL,
+            self::TRANSFER_DAY,
+            self::TRANSFER_ENABLED
         );
 
         $this->assertInstanceOf(
