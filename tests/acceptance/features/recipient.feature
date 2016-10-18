@@ -27,7 +27,7 @@ Scenario Outline: Creating recipient previous created bank account
     | daily     | 0     | true      | false         | 50            | 341       | 1384      | 1             | 13400 | 2         | 16360841843   | Maria Silva|
     | weekly    | 3     | false     | true          | null          | 001       | 1385      | 2             | 13401 | 2         | 19050151434   | José Silva |
     | monthly   | 15    | null      | null          | 50            | 033       | 1385      | 3             | 13405 | x         | 74748484225   | Luiza Silva|
-@only
+
 Scenario: Listing recipients
     Given previous created recipients
     When query for recipients
