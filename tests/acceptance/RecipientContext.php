@@ -273,4 +273,31 @@ class RecipientContext extends BasicContext
         assertEquals($this->recipientId, $this->recipient->getId());
     }
 
+    /**
+     * @When I change the recipient transfer interval to weekly
+     */
+    public function iChangeTheRecipientTransferIntervalToWeekly()
+    {
+        $this->recipient->setTransferDay(3);
+        $this->recipient->setTransferInterval('weekly');
+    }
+
+    /**
+     * @When make update
+     */
+    public function makeUpdate()
+    {
+        $this->recipient = self::getPagarMe()
+            ->recipient()
+            ->update($this->recipient);
+    }
+
+    /**
+     * @Then the transfer interval must be weekly
+     */
+    public function theTransferIntervalMustBeWeekly()
+    {
+        assertEquals($this->recipient->getTransferDay(), 3);
+        assertEquals($this->recipient->getTransferInterval(), 'weekly');
+    }
 }

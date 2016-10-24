@@ -78,11 +78,31 @@ class Recipient
     }
 
     /**
+     * @param PagarMe
+     * @return Recipient
+     **/
+    public function setBankAccount($bankAccount)
+    {
+        $this->bankAccount = $bankAccount;
+        return $this;
+    }
+
+    /**
      * @return bool
      **/
     public function getTransferEnabled()
     {
         return $this->transferEnabled;
+    }
+
+    /**
+     * @param bool
+     * @return Recipient
+     **/
+    public function setTransferEnabled($transferEnabled)
+    {
+        $this->transferEnabled = $transferEnabled;
+        return $this;
     }
 
     /**
@@ -94,11 +114,31 @@ class Recipient
     }
 
     /**
+     * @param string
+     * @return Recipient
+     **/
+    public function setLastTransfer($lastTransfer)
+    {
+        $this->lastTransfer = $lastTransfer;
+        return $this;
+    }
+
+    /**
      * @return string
      **/
     public function getTransferInterval()
     {
         return $this->transferInterval;
+    }
+
+    /**
+     * @param string
+     * @return Recipient
+     **/
+    public function setTransferInterval($transferInterval)
+    {
+        $this->transferInterval = $transferInterval;
+        return $this;
     }
 
     /**
@@ -110,6 +150,16 @@ class Recipient
     }
 
     /**
+     * @param int
+     * @return Recipient
+     **/
+    public function setTransferDay($transferDay)
+    {
+        $this->transferDay = $transferDay;
+        return $this;
+    }
+
+    /**
      * @return bool
      **/
     public function getAutomaticAnticipationEnabled()
@@ -118,11 +168,31 @@ class Recipient
     }
 
     /**
+     * @param bool
+     * @return Recipient
+     **/
+    public function setAutomaticAnticipationEnabled($automaticAnticipationEnabled)
+    {
+        $this->automaticAnticipationEnabled = $automaticAnticipationEnabled;
+        return $this;
+    }
+
+    /**
      * @return int
      **/
     public function getAnticipatableVolumePercentage()
     {
         return $this->anticipatableVolumePercentage;
+    }
+
+    /**
+     * @param int
+     * @return Recipient
+     **/
+    public function setAnticipatableVolumePercentage($anticipatableVolumePercentage)
+    {
+        $this->anticipatableVolumePercentage = $anticipatableVolumePercentage;
+        return $this;
     }
 
     /**

@@ -7,6 +7,7 @@ use PagarMe\Sdk\Account\Account;
 use PagarMe\Sdk\Recipient\Request\RecipientCreate;
 use PagarMe\Sdk\Recipient\Request\RecipientList;
 use PagarMe\Sdk\Recipient\Request\RecipientGet;
+use PagarMe\Sdk\Recipient\Request\RecipientUpdate;
 
 class RecipientHandler extends AbstractHandler
 {
@@ -59,6 +60,21 @@ class RecipientHandler extends AbstractHandler
     public function get($recipientId)
     {
         $request = new RecipientGet($recipientId);
+
+        $result = $this->client->send($request);
+
+        $result->bank_account = new Account(
+            $result->bank_account
+        );
+
+        return new Recipient(
+            $result
+        );
+    }
+
+    public function update(Recipient $recipient)
+    {
+        $request = new RecipientUpdate($recipient);
 
         $result = $this->client->send($request);
 

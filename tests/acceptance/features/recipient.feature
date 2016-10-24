@@ -37,3 +37,9 @@ Scenario: Getting a recipient
     Given previous created recipient
     When query specific
     Then a recipient must be returned
+
+Scenario: Updating a recipient
+    Given previous created recipient
+    When I change the recipient transfer interval to weekly
+    And make update
+    Then the transfer interval must be weekly
