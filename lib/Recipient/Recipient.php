@@ -7,52 +7,52 @@ class Recipient
     use \PagarMe\Sdk\Fillable;
 
     /**
-     * @param string $id
+     * @var string $id
      **/
     protected $id;
 
     /**
-     * @param PagarMe\Sdk\Account\Account $bankAccount
+     * @var PagarMe\Sdk\Account\Account $bankAccount
      **/
     protected $bankAccount;
 
     /**
-     * @param bool $id
+     * @var bool $id
      **/
     protected $transferEnabled;
 
     /**
-     * @param string $lastTransfer
+     * @var string $lastTransfer
      **/
     protected $lastTransfer;
 
     /**
-     * @param string $transferInterval
+     * @var string $transferInterval
      **/
     protected $transferInterval;
 
     /**
-     * @param int $transferDay
+     * @var int $transferDay
      **/
     protected $transferDay;
 
     /**
-     * @param bool $automaticAnticipationEnabled
+     * @var bool $automaticAnticipationEnabled
      **/
     protected $automaticAnticipationEnabled;
 
     /**
-     * @param int $anticipatableVolumePercentage
+     * @var int $anticipatableVolumePercentage
      **/
     protected $anticipatableVolumePercentage;
 
     /**
-     * @param string $dateCreated
+     * @var string $dateCreated
      **/
     protected $dateCreated;
 
     /**
-     * @param string $dateUpdated
+     * @var string $dateUpdated
      **/
     protected $dateUpdated;
 
