@@ -8,6 +8,8 @@ use PagarMe\Sdk\Recipient\Request\RecipientCreate;
 use PagarMe\Sdk\Recipient\Request\RecipientList;
 use PagarMe\Sdk\Recipient\Request\RecipientGet;
 use PagarMe\Sdk\Recipient\Request\RecipientUpdate;
+use PagarMe\Sdk\Recipient\Request\RecipientBalance;
+use PagarMe\Sdk\Balance\Balance;
 
 class RecipientHandler extends AbstractHandler
 {
@@ -85,5 +87,14 @@ class RecipientHandler extends AbstractHandler
         return new Recipient(
             $result
         );
+    }
+
+    public function balance(Recipient $recipient)
+    {
+        $request = new RecipientBalance($recipient);
+
+        $result = $this->client->send($request);
+
+        return new Balance($result);
     }
 }

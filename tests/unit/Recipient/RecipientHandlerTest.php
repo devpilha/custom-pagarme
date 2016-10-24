@@ -84,6 +84,34 @@ class RecipientHandlerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+    **/
+    public function mustReturnBalance()
+    {
+        $clientMock =  $this->getMockBuilder('PagarMe\Sdk\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $recipientMock =  $this->getMockBuilder('PagarMe\Sdk\Recipient\Recipient')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $recipientMock->method('getId')->willReturn('re_x1y2z3');
+
+        $clientMock->method('send')
+            ->willReturn(json_decode('{"object": "balance", "waiting_funds": {"amount": 0 }, "available": {"amount": 3019898 }, "transferred": {"amount": 3163500 }}'));
+
+        $handler = new RecipientHandler($clientMock);
+
+        $balance = $handler->balance($recipientMock);
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Balance\Balance',
+            $balance
+        );
+    }
+
     public function recipientsListResponse()
     {
         $response = $this->recipientsGetResponse();
