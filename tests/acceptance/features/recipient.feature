@@ -32,3 +32,8 @@ Scenario: Listing recipients
     Given previous created recipients
     When query for recipients
     Then a list of recipients must be returned
+
+Scenario: Getting a recipient
+    Given previous created recipient
+    When query specific
+    Then a recipient must be returned

@@ -26,6 +26,7 @@ class RecipientContext extends BasicContext
     private $legalName;
 
     private $recipient;
+    private $recipientId;
     private $recipients;
 
     /**
@@ -225,4 +226,51 @@ class RecipientContext extends BasicContext
             ]
         ];
     }
+
+    /**
+     * @Given previous created recipient
+     */
+    public function previousCreatedRecipient()
+    {
+        $this->recipientData(
+            'null',
+            'null',
+            'null',
+            'null',
+            'null'
+        );
+
+        $this->bankData(
+            '237',
+            '1383',
+            '0',
+            '13399',
+            '1',
+            '44318031144',
+            'João'
+        );
+
+        $this->registerTheRecipient();
+    }
+
+    /**
+     * @When query specific
+     */
+    public function querySpecific()
+    {
+        $this->recipientId = $this->recipient->getId();
+
+        $this->recipient = self::getPagarMe()
+            ->recipient()
+            ->get($this->recipientId);
+    }
+
+    /**
+     * @Then a recipient must be returned
+     */
+    public function aRecipientMustBeReturned()
+    {
+        assertEquals($this->recipientId, $this->recipient->getId());
+    }
+
 }
