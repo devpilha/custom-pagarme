@@ -43,3 +43,8 @@ Scenario: Updating a recipient
     When I change the recipient transfer interval to weekly
     And make update
     Then the transfer interval must be weekly
+@only
+Scenario: Getting recipient balance
+    Given previous created recipient
+    When I query balance
+    Then a balance must be returned

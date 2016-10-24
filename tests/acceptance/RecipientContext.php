@@ -300,4 +300,26 @@ class RecipientContext extends BasicContext
         assertEquals($this->recipient->getTransferDay(), 3);
         assertEquals($this->recipient->getTransferInterval(), 'weekly');
     }
+
+    /**
+     * @When I query balance
+     */
+    public function iQueryBalance()
+    {
+        $this->balance = self::getPagarMe()
+            ->recipient()
+            ->balance($this->recipient);
+    }
+
+    /**
+     * @Then a balance must be returned
+     */
+    public function aBalanceMustBeReturned()
+    {
+        assertInstanceOf(
+            'PagarMe\Sdk\Balance\Balance',
+            $this->balance
+        );
+    }
+
 }
