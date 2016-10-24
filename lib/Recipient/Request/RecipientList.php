@@ -10,7 +10,7 @@ class RecipientList implements Request
     private $page;
     private $count;
 
-    public function __construct($page, $count )
+    public function __construct($page, $count)
     {
         $this->page  = $page;
         $this->count = $count;

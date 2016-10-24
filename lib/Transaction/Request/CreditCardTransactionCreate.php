@@ -28,13 +28,11 @@ class CreditCardTransactionCreate extends TransactionCreate
      */
     private function getCardInfo()
     {
-        if (!is_null($this->transaction->getCardId()))
-        {
+        if (!is_null($this->transaction->getCardId())) {
             return ['card_id' => $this->transaction->getCardId()];
         }
 
-        if (!is_null($this->transaction->getCardHash()))
-        {
+        if (!is_null($this->transaction->getCardHash())) {
             return ['card_hash' => $this->transaction->getCardHash()];
         }
     }

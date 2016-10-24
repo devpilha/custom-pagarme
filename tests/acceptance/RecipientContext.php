@@ -107,7 +107,7 @@ class RecipientContext extends BasicContext
         $contaDv,
         $document,
         $legalName
-    ){
+    ) {
         return new Account(
             [
                 'bank_code'       => $this->bankCode,
@@ -321,5 +321,4 @@ class RecipientContext extends BasicContext
             $this->balance
         );
     }
-
 }
