@@ -112,4 +112,22 @@ class RecipientHandler extends AbstractHandler
 
         return new Operation(get_object_vars($result));
     }
+
+    public function balanceOperations(
+        Recipient $recipient,
+        $page = null,
+        $count = null
+    ) {
+        $request = new RecipientBalanceOperations($recipient, $page, $count);
+
+        $result = $this->client->send($request);
+        $operations = [];
+
+        foreach ($result as $operation) {
+            $operation->movement = new Movement($operation->movement_object);
+            $operations[]= new Operation(get_object_vars($operation));
+        }
+
+        return $operations;
+    }
 }
