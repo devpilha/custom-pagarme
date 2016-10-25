@@ -10,12 +10,12 @@ class RecipientBalanceOperation implements Request
 {
 
     private $recipient;
-    private $operation;
+    private $operationId;
 
-    public function __construct(Recipient $recipient, Operation $operation)
+    public function __construct(Recipient $recipient, $operationId)
     {
-        $this->recipient  = $recipient;
-        $this->operation  = $operation;
+        $this->recipient   = $recipient;
+        $this->operationId = $operationId;
     }
 
     public function getPayload()
@@ -28,7 +28,7 @@ class RecipientBalanceOperation implements Request
         return sprintf(
             'recipients/%s/balance/operations/%d',
             $this->recipient->getId(),
-            $this->operation->getId()
+            $this->operationId
         );
     }
 

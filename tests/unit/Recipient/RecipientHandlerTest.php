@@ -127,17 +127,12 @@ class RecipientHandlerTest extends \PHPUnit_Framework_TestCase
 
         $recipientMock->method('getId')->willReturn('re_x1y2z3');
 
-        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $operationMock->method('getId')->willReturn(123);
-
         $clientMock->method('send')
             ->willReturn(json_decode('{"object": "balance_operation", "id": 4861, "status": "available", "balance_amount": 3019898, "balance_old_amount": 2920013, "movement_type": "payable", "amount": 100000, "fee": 115, "date_created": "2015-03-06T21:00:31.000Z", "movement_object": {"object": "payable", "id": 1297, "status": "paid", "amount": 100000, "fee": 115, "installment": 1, "transaction_id": 185537, "payment_date": "2015-03-06T03:00:00.000Z", "date_created": "2015-03-06T21:00:31.000Z"}}'));
 
         $handler = new RecipientHandler($clientMock);
 
-        $operation = $handler->balanceOperation($recipientMock, $operationMock);
+        $operation = $handler->balanceOperation($recipientMock, 3861);
 
         $this->assertInstanceOf(
             'PagarMe\Sdk\Balance\Operation',
@@ -160,17 +155,12 @@ class RecipientHandlerTest extends \PHPUnit_Framework_TestCase
 
         $recipientMock->method('getId')->willReturn('re_x1y2z3');
 
-        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $operationMock->method('getId')->willReturn(123);
-
         $clientMock->method('send')
             ->willReturn(json_decode('[{"object":"balance_operation","id":4861,"status":"available","balance_amount":3019898,"balance_old_amount":2920013,"movement_type":"payable","amount":100000,"fee":115,"date_created":"2015-03-06T21:00:31.000Z","movement_object":{"object":"payable","id":1297,"status":"paid","amount":100000,"fee":115,"installment":1,"transaction_id":185537,"payment_date":"2015-03-06T03:00:00.000Z","date_created":"2015-03-06T21:00:31.000Z"}},{"object":"balance_operation","id":4852,"status":"available","balance_amount":2920013,"balance_old_amount":2910128,"movement_type":"payable","amount":10000,"fee":115,"date_created":"2015-03-06T18:44:42.000Z","movement_object":{"object":"payable","id":1294,"status":"paid","amount":10000,"fee":115,"installment":1,"transaction_id":185507,"payment_date":"2015-03-06T03:00:00.000Z","date_created":"2015-03-06T18:44:42.000Z"}},{"object":"balance_operation","id":4840,"status":"available","balance_amount":2910128,"balance_old_amount":2880243,"movement_type":"payable","amount":30000,"fee":115,"date_created":"2015-03-05T19:32:36.000Z","movement_object":{"object":"payable","id":1290,"status":"paid","amount":30000,"fee":115,"installment":1,"transaction_id":185273,"payment_date":"2015-03-05T03:00:00.000Z","date_created":"2015-03-05T19:32:35.000Z"}}]'));
 
         $handler = new RecipientHandler($clientMock);
 
-        $operations = $handler->balanceOperations($recipientMock, $operationMock);
+        $operations = $handler->balanceOperations($recipientMock);
 
         $this->assertGreaterThan(2, count($operations));
 

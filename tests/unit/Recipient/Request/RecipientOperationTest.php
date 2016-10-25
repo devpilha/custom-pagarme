@@ -21,14 +21,9 @@ class RecipientBalanceOperationTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $recipientMock->method('getId')->willReturn(self::RECIPIENT_ID);
 
-        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $operationMock->method('getId')->willReturn(self::OPERATION_ID);
-
         $recipientBalanceOperation = new RecipientBalanceOperation(
             $recipientMock,
-            $operationMock
+            self::OPERATION_ID
         );
 
         $this->assertEquals(self::PATH, $recipientBalanceOperation->getPath());
@@ -44,14 +39,9 @@ class RecipientBalanceOperationTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $recipientMock->method('getId')->willReturn(self::RECIPIENT_ID);
 
-        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $operationMock->method('getId')->willReturn(self::OPERATION_ID);
-
         $recipientBalanceOperation = new RecipientBalanceOperation(
             $recipientMock,
-            $operationMock
+            self::OPERATION_ID
         );
 
         $this->assertEquals(self::METHOD, $recipientBalanceOperation->getMethod());
@@ -67,16 +57,10 @@ class RecipientBalanceOperationTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $recipientMock->method('getId')->willReturn(self::RECIPIENT_ID);
 
-        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $operationMock->method('getId')->willReturn(self::OPERATION_ID);
-
         $recipientBalanceOperation = new RecipientBalanceOperation(
             $recipientMock,
-            $operationMock
+            self::OPERATION_ID
         );
-
 
         $this->assertEquals(
             [],
