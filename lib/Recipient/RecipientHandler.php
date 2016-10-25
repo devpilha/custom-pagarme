@@ -9,7 +9,11 @@ use PagarMe\Sdk\Recipient\Request\RecipientList;
 use PagarMe\Sdk\Recipient\Request\RecipientGet;
 use PagarMe\Sdk\Recipient\Request\RecipientUpdate;
 use PagarMe\Sdk\Recipient\Request\RecipientBalance;
+use PagarMe\Sdk\Recipient\Request\RecipientBalanceOperation;
+use PagarMe\Sdk\Recipient\Request\RecipientBalanceOperations;
 use PagarMe\Sdk\Balance\Balance;
+use PagarMe\Sdk\Balance\Operation;
+use PagarMe\Sdk\Balance\Movement;
 
 class RecipientHandler extends AbstractHandler
 {
@@ -96,5 +100,16 @@ class RecipientHandler extends AbstractHandler
         $result = $this->client->send($request);
 
         return new Balance($result);
+    }
+
+    public function balanceOperation(Recipient $recipient, Operation $operation)
+    {
+        $request = new RecipientBalanceOperation($recipient, $operation);
+
+        $result = $this->client->send($request);
+
+        $result->movement = new Movement($result->movement_object);
+
+        return new Operation(get_object_vars($result));
     }
 }

@@ -112,6 +112,39 @@ class RecipientHandlerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+    **/
+    public function mustReturnOperation()
+    {
+        $clientMock =  $this->getMockBuilder('PagarMe\Sdk\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $recipientMock =  $this->getMockBuilder('PagarMe\Sdk\Recipient\Recipient')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $recipientMock->method('getId')->willReturn('re_x1y2z3');
+
+        $operationMock = $this->getMockBuilder('PagarMe\Sdk\Balance\Operation')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $operationMock->method('getId')->willReturn(123);
+
+        $clientMock->method('send')
+            ->willReturn(json_decode('{"object": "balance_operation", "id": 4861, "status": "available", "balance_amount": 3019898, "balance_old_amount": 2920013, "movement_type": "payable", "amount": 100000, "fee": 115, "date_created": "2015-03-06T21:00:31.000Z", "movement_object": {"object": "payable", "id": 1297, "status": "paid", "amount": 100000, "fee": 115, "installment": 1, "transaction_id": 185537, "payment_date": "2015-03-06T03:00:00.000Z", "date_created": "2015-03-06T21:00:31.000Z"}}'));
+
+        $handler = new RecipientHandler($clientMock);
+
+        $balance = $handler->balanceOperation($recipientMock, $operationMock);
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Balance\Operation',
+            $balance
+        );
+    }
+
     public function recipientsListResponse()
     {
         $response = $this->recipientsGetResponse();
