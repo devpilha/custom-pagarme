@@ -79,4 +79,30 @@ class PagarMeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($customerHandlerA, $customerHandlerB);
     }
+
+    /**
+     * @test
+     **/
+    public function mustReturnRecipientsHandler()
+    {
+        $pagarMe =  new PagarMe('apiKey');
+
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Recipient\RecipientHandler',
+            $pagarMe->recipient()
+        );
+    }
+
+    /**
+     * @test
+    **/
+    public function mustReturnSameRecipientHandler()
+    {
+        $pagarMe = new PagarMe('apiKey');
+
+        $recipientHandlerA = $pagarMe->recipient();
+        $recipientHandlerB = $pagarMe->recipient();
+
+        $this->assertSame($recipientHandlerA, $recipientHandlerB);
+    }
 }

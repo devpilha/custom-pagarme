@@ -9,7 +9,7 @@ class Account
     /**
      * @var int | Identificador da conta bancária
      */
-    private $bankAccountId;
+    private $id;
 
     /**
      * @var int | Valor identificador do código do banco
@@ -58,9 +58,9 @@ class Account
     /**
      * @return int
      */
-    public function getBankAccountId()
+    public function getId()
     {
-        return $this->bankAccountId;
+        return $this->id;
     }
 
     /**
