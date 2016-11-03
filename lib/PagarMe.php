@@ -8,6 +8,7 @@ use PagarMe\Sdk\Transaction\TransactionHandler;
 use PagarMe\Sdk\Card\CardHandler;
 use PagarMe\Sdk\Calculation\CalculationHandler;
 use PagarMe\Sdk\Recipient\RecipientHandler;
+use PagarMe\Sdk\Plan\PlanHandler;
 use PagarMe\Sdk\SplitRule\SplitRuleHandler;
 
 class PagarMe
@@ -41,6 +42,11 @@ class PagarMe
      * @param RecipientHandler | Manipulador de recebedores
      */
     private $recipientHandler;
+
+    /**
+     * @param PlanHandler | Manipulador de planos
+     */
+    private $planHandler;
 
     /**
      * @param SplitRuleHandler | Manipulador de splitRule
@@ -120,6 +126,18 @@ class PagarMe
         }
 
         return $this->recipientHandler;
+    }
+
+    /**
+     * @return PlanHandler
+     */
+    public function plan()
+    {
+        if (!$this->planHandler instanceof PlanHandler) {
+            $this->planHandler = new PlanHandler($this->client);
+        }
+
+        return $this->planHandler;
     }
 
     /**
