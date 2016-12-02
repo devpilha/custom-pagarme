@@ -1,8 +1,8 @@
 <?php
 
-namespace PagarMe\Sdk\Account;
+namespace PagarMe\Sdk\BankAccount;
 
-class Account
+class BankAccount
 {
     use \PagarMe\Sdk\Fillable;
 
