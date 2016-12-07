@@ -10,6 +10,7 @@ use PagarMe\Sdk\Calculation\CalculationHandler;
 use PagarMe\Sdk\Recipient\RecipientHandler;
 use PagarMe\Sdk\Plan\PlanHandler;
 use PagarMe\Sdk\SplitRule\SplitRuleHandler;
+use PagarMe\Sdk\Subscription\SubscriptionHandler;
 
 class PagarMe
 {
@@ -52,6 +53,11 @@ class PagarMe
      * @param SplitRuleHandler | Manipulador de splitRule
      */
     private $splitRuleHandler;
+
+    /**
+     * @param SubscriptionHandler | Manipulador de assinaturas
+     */
+    private $subscriptionHandler;
 
     /**
      * @param $apiKey
@@ -150,5 +156,17 @@ class PagarMe
         }
 
         return $this->splitRuleHandler;
+    }
+
+    /**
+     * @return SubscriptionHandler
+     */
+    public function subscription()
+    {
+        if (!$this->subscriptionHandler instanceof SubscriptionHandler) {
+            $this->subscriptionHandler = new SubscriptionHandler($this->client);
+        }
+
+        return $this->subscriptionHandler;
     }
 }
