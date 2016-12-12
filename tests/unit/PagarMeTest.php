@@ -135,6 +135,23 @@ class PagarMeTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function mustReturnSameCompanyHandler()
+    {
+        $pagarMe = new PagarMe('apiKey');
+
+        $companyHandlerA = $pagarMe->company();
+        $companyHandlerB = $pagarMe->company();
+
+        $this->assertSame($companyHandlerA, $companyHandlerB);
+        $this->assertInstanceOf(
+            'PagarMe\Sdk\Company\CompanyHandler',
+            $companyHandlerA
+        );
+    }
+
+    /**
+     * @test
+     */
     public function mustReturnSameBankAccountHandler()
     {
         $pagarMe = new PagarMe('apiKey');
