@@ -10,52 +10,58 @@ use PagarMe\Sdk\Calculation\CalculationHandler;
 use PagarMe\Sdk\Recipient\RecipientHandler;
 use PagarMe\Sdk\Plan\PlanHandler;
 use PagarMe\Sdk\SplitRule\SplitRuleHandler;
+use PagarMe\Sdk\BankAccount\BankAccountHandler;
 use PagarMe\Sdk\Subscription\SubscriptionHandler;
 
 class PagarMe
 {
     /**
-     * @param Client | Client do PagarMe
+     * @param Client
      */
     private $client;
 
     /**
-     * @param CustomerHandler | Manipulador de clientes
+     * @param CustomerHandler
      */
     private $customerHandler;
 
     /**
-     * @param TransactionHandler | Manipulador de transações
+     * @param TransactionHandler
      */
     private $transactionHandler;
 
     /**
-     * @param CardHandler | Manipulador de cartões
+     * @param CardHandler
      */
     private $cardHandler;
 
     /**
-     * @param CalculationHandler | Manipulador de calculos
+     * @param CalculationHandler
      */
     private $calculationHandler;
 
     /**
-     * @param RecipientHandler | Manipulador de recebedores
+     * @param RecipientHandler
      */
     private $recipientHandler;
 
     /**
-     * @param PlanHandler | Manipulador de planos
+     * @param PlanHandler
      */
     private $planHandler;
 
     /**
-     * @param SplitRuleHandler | Manipulador de splitRule
+     * @param SplitRuleHandler
      */
     private $splitRuleHandler;
 
     /**
-     * @param SubscriptionHandler | Manipulador de assinaturas
+     * @param BankAccount
+     */
+    private $bankAccountHandler;
+
+    /**
+     * @param SubscriptionHandler
      */
     private $subscriptionHandler;
 
@@ -156,6 +162,18 @@ class PagarMe
         }
 
         return $this->splitRuleHandler;
+    }
+
+    /**
+     * @return BankAccountHandler
+     */
+    public function bankAccount()
+    {
+        if (!$this->bankAccountHandler instanceof BankAccountHandler) {
+            $this->bankAccountHandler = new BankAccountHandler($this->client);
+        }
+
+        return $this->bankAccountHandler;
     }
 
     /**
