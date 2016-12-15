@@ -10,6 +10,7 @@ use PagarMe\Sdk\Calculation\CalculationHandler;
 use PagarMe\Sdk\Recipient\RecipientHandler;
 use PagarMe\Sdk\Plan\PlanHandler;
 use PagarMe\Sdk\SplitRule\SplitRuleHandler;
+use PagarMe\Sdk\Transfer\TransferHandler;
 use PagarMe\Sdk\Company\CompanyHandler;
 use PagarMe\Sdk\BankAccount\BankAccountHandler;
 use PagarMe\Sdk\Subscription\SubscriptionHandler;
@@ -55,6 +56,11 @@ class PagarMe
      * @param SplitRuleHandler
      */
     private $splitRuleHandler;
+
+    /**
+     * @param TransferHandler
+     */
+    private $transferHandler;
 
     /**
      * @param CompanyHandler | Manipulador de companhia
@@ -168,6 +174,18 @@ class PagarMe
         }
 
         return $this->splitRuleHandler;
+    }
+
+    /**
+     * @return transferHandler
+     */
+    public function transfer()
+    {
+        if (!$this->transferHandler instanceof TransferHandler) {
+            $this->transferHandler = new TransferHandler($this->client);
+        }
+
+        return $this->transferHandler;
     }
 
     /**
