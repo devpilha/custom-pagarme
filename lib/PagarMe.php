@@ -100,9 +100,9 @@ class PagarMe
     private $zipcodeHandler;
 
     /**
-     * @param BalanceOperationsHandler
+     * @param BalanceOperationHandler
      */
-    private $balanceOperationsHandler;
+    private $balanceOperationHandler;
 
     /**
      * @param PostbackHandler
