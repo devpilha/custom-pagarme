@@ -31,7 +31,6 @@ class PlanUpdate implements Request
             'id'              => $plan->getId(),
             'name'            => $plan->getName(),
             'trial_days'      => $plan->getTrialDays(),
-            'color'           => $plan->getColor(),
             'charges'         => $plan->getCharges(),
         ];
     }
