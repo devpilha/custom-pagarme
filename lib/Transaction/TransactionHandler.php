@@ -161,10 +161,9 @@ class TransactionHandler extends AbstractHandler
      */
     public function boletoRefund(
         BoletoTransaction $transaction,
-        BankAccount $bankAccount,
-        $amount = null
+        BankAccount $bankAccount
     ) {
-        $request = new BoletoTransactionRefund($transaction, $bankAccount, $amount);
+        $request = new BoletoTransactionRefund($transaction, $bankAccount);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);

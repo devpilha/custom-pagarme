@@ -16,24 +16,17 @@ class BoletoTransactionRefund implements RequestInterface
      * @var BankAccount
      */
     protected $bankAccount;
-    /**
-     * @var int
-     */
-    protected $amount;
 
     /**
      * @param BoletoTransaction $transaction
      * @param BankAccount $bankAccount
-     * @param int $amount
      */
     public function __construct(
         BoletoTransaction $transaction,
-        BankAccount $bankAccount,
-        $amount
+        BankAccount $bankAccount
     ) {
         $this->transaction = $transaction;
         $this->bankAccount = $bankAccount;
-        $this->amount      = $amount;
     }
 
     /**
@@ -41,10 +34,7 @@ class BoletoTransactionRefund implements RequestInterface
      */
     public function getPayload()
     {
-        return array_merge(
-            ['amount' => $this->amount],
-            $this->getBankAccountData()
-        );
+        return $this->getBankAccountData();
     }
 
     /**
