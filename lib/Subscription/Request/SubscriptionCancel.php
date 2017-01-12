@@ -2,21 +2,22 @@
 
 namespace PagarMe\Sdk\Subscription\Request;
 
+use PagarMe\Sdk\Subscription\Subscription;
 use PagarMe\Sdk\RequestInterface;
 
 class SubscriptionCancel implements RequestInterface
 {
     /**
-     * @var int $subscriptionId
+     * @var Subscription
      */
-    protected $subscriptionId;
+    protected $subscription;
 
     /**
-     * @var int $subscriptionId
+     * @var Subscription $subscription
      */
-    public function __construct($subscriptionId)
+    public function __construct(Subscription $subscription)
     {
-        $this->subscriptionId = $subscriptionId;
+        $this->subscription = $subscription;
     }
 
     /**
@@ -32,7 +33,7 @@ class SubscriptionCancel implements RequestInterface
      */
     public function getPath()
     {
-        return sprintf('subscriptions/%d/cancel', $this->subscriptionId);
+        return sprintf('subscriptions/%d/cancel', $this->subscription->getId());
     }
 
     /**
