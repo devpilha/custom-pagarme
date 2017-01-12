@@ -11,7 +11,6 @@ class BoletoTransactionRefundTest extends \PHPUnit_Framework_TestCase
     const PATH            = 'transactions/1337/refund';
     const TRANSACTION_ID  = 1337;
     const BANKACCOUNT_ID  = 12345;
-    const AMOUNT          = 500;
     const BANK_CODE       = 237;
     const AGENCIA         = 1382;
     const AGENCIA_DV      = 0;
@@ -33,13 +32,11 @@ class BoletoTransactionRefundTest extends \PHPUnit_Framework_TestCase
 
         $transactionCreate = new BoletoTransactionRefund(
             $this->getTransactionMock(),
-            $bankAccountMock,
-            self::AMOUNT
+            $bankAccountMock
         );
 
         $this->assertEquals(
             [
-                'amount'          => self::AMOUNT,
                 'bank_account_id' => self::BANKACCOUNT_ID
             ],
             $transactionCreate->getPayload()
@@ -72,13 +69,11 @@ class BoletoTransactionRefundTest extends \PHPUnit_Framework_TestCase
 
         $transactionCreate = new BoletoTransactionRefund(
             $this->getTransactionMock(),
-            $bankAccountMock,
-            self::AMOUNT
+            $bankAccountMock
         );
 
         $this->assertEquals(
             [
-                'amount'          => self::AMOUNT,
                 'bank_code'       => self::BANK_CODE,
                 'agencia'         => self::AGENCIA,
                 'agencia_dv'      => self::AGENCIA_DV,
