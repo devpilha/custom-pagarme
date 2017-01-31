@@ -2,6 +2,7 @@
 
 namespace PagarMe\SdkTest;
 
+use GuzzleHttp\Client as GuzzleClient;
 use PagarMe\Sdk\Client;
 use PagarMe\Sdk\RequestInterface;
 
@@ -155,5 +156,41 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
 
         $client->send($request);
+    }
+
+    /**
+     * @test
+     */
+    public function mustSetDefaultTimeout()
+    {
+        $guzzleClient = new GuzzleClient();
+
+        $client = new Client(
+            $guzzleClient,
+            self::API_KEY
+        );
+
+        $defaultTimeout = 144;
+
+        $client->setDefaultTimeout($defaultTimeout);
+
+        $this->assertEquals($guzzleClient->getDefaultOption('timeout'), $defaultTimeout);
+        $this->assertEquals($guzzleClient->getDefaultOption('timeout'), $client->getDefaultTimeout());
+    }
+
+    /**
+     * @test
+     */
+    public function mustCreateWithDefaultTimeout()
+    {
+        $guzzleClient = new GuzzleClient();
+
+        $client = new Client(
+            $guzzleClient,
+            self::API_KEY,
+            132
+        );
+
+        $this->assertEquals($guzzleClient->getDefaultOption('timeout'), $client->getDefaultTimeout());
     }
 }

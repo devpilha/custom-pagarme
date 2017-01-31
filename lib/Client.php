@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client
 {
+
     /**
      * @var string
      */
@@ -19,11 +20,32 @@ class Client
     /**
      * @param GuzzleClient $client
      * @param string $apiKey
+     * @param int $timeout
      */
-    public function __construct(GuzzleClient $client, $apiKey)
+    public function __construct(GuzzleClient $client, $apiKey, $timeout = null)
     {
         $this->client = $client;
         $this->apiKey = $apiKey;
+
+        if ($timeout != null) {
+            $this->setDefaultTimeout($timeout);
+        }
+    }
+
+    /**
+     * @param int $timeout
+     */
+    public function setDefaultTimeout($timeout)
+    {
+        $this->client->setDefaultOption('timeout', $timeout);
+    }
+
+    /**
+     * @return int
+     */
+    public function getDefaultTimeout()
+    {
+        return $this->client->getDefaultOption('timeout');
     }
 
     /**
