@@ -130,7 +130,7 @@ class PagarMe
 
     /**
      * @param string $apiKey
-     * @param int $timeout
+     * @param int|null $timeout
      */
     public function __construct($apiKey, $timeout = null)
     {

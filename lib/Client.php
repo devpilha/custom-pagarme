@@ -26,7 +26,7 @@ class Client
      * @param \GuzzleHttp\Client $client
      * @param string $apiKey
      * @param \Raven_Client $sentryClient
-     * @param int $timeout
+     * @param int|null $timeout
      */
     public function __construct(GuzzleClient $client, $apiKey, \Raven_Client $sentryClient, $timeout = null)
     {
