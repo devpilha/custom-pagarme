@@ -19,11 +19,11 @@ class TransactionContext extends BasicContext
     private $creditCard;
     private $customer;
     private $transaction;
-    private $transactionList;
+    private $transactionList = [];
     private $events;
     private $metadata;
 
-     /**
+    /**
      * @When register a card with :number, :holder and :expiration
      */
     public function registerACardWithAnd($number, $holder, $expiration)
@@ -69,7 +69,6 @@ class TransactionContext extends BasicContext
             ->boletoTransaction($amount, $this->customer, self::POSTBACK_URL);
     }
 
-
     /**
      * @Then a valid transaction must be created
      */
@@ -79,6 +78,38 @@ class TransactionContext extends BasicContext
             'PagarMe\Sdk\Transaction\AbstractTransaction',
             $this->transaction
         );
+    }
+
+    /**
+     * @Given make a boleto transaction with :amount, using Customers from the API
+     */
+    public function makeABoletoTransactionWithAGivenAmountUsingCustomersFromTheAPI($amount)
+    {
+        $customersIdList = $this->getCustomerIdsFromAPI();
+
+        foreach($customersIdList as $id) {
+            /** @var $customer \PagarMe\Sdk\Customer\Customer */
+            $customer = self::getPagarMe()
+                ->customer()
+                ->get($id);
+
+            $this->transactionList[] = self::getPagarMe()
+                ->transaction()
+                ->boletoTransaction($amount, $customer, self::POSTBACK_URL);
+        }
+    }
+
+    /**
+     * @Then a list of valid transactions must be created
+     */
+    public function aListOfValidTransactionsMustBeCreated()
+    {
+        foreach ($this->transactionList as $transaction) {
+            assertInstanceOf(
+                'PagarMe\Sdk\Transaction\AbstractTransaction',
+                $transaction
+            );
+        }
     }
 
     /**
@@ -334,5 +365,19 @@ class TransactionContext extends BasicContext
     private function getRandomMetadata()
     {
         $this->metadata = [uniqid('key') => uniqid('value')];
+    }
+
+    private function getCustomerIdsFromAPI()
+    {
+        $ids = [];
+        $customerList = self::getPagarMe()
+            ->customer()
+            ->getList();
+
+        foreach ($customerList as $customer) {
+            $ids[] = $customer->getId();
+        }
+
+        return $ids;
     }
 }
