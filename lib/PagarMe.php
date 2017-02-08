@@ -25,9 +25,6 @@ use PagarMe\Sdk\Balance\BalanceHandler;
 
 class PagarMe
 {
-    const SENTRY_KEY = '06042a806f5e462f82462e25756a722e:2c9b6895d6594cc8801a8e6f4c65258e';
-    const SENTRY_PROJECT_ID = 8;
-
     /**
      * @param Client
      */
@@ -134,14 +131,6 @@ class PagarMe
      */
     public function __construct($apiKey, $timeout = null)
     {
-        $sentryClient = new \Raven_Client(
-            sprintf(
-                'https://%s@sentry.pagar.me/%d',
-                self::SENTRY_KEY,
-                self::SENTRY_PROJECT_ID
-            )
-        );
-
         $this->client = new Client(
             new GuzzleClient(
                 [
@@ -149,7 +138,6 @@ class PagarMe
                 ]
             ),
             $apiKey,
-            $sentryClient,
             $timeout
         );
     }

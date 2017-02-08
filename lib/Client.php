@@ -18,21 +18,14 @@ class Client
     private $client;
 
     /**
-     * @var \Raven_Client
-     */
-    private $sentryClient;
-
-    /**
      * @param \GuzzleHttp\Client $client
      * @param string $apiKey
-     * @param \Raven_Client $sentryClient
      * @param int|null $timeout
      */
-    public function __construct(GuzzleClient $client, $apiKey, \Raven_Client $sentryClient, $timeout = null)
+    public function __construct(GuzzleClient $client, $apiKey, $timeout = null)
     {
         $this->client = $client;
         $this->apiKey = $apiKey;
-        $this->sentryClient = $sentryClient;
 
         if ($timeout != null) {
             $this->setDefaultTimeout($timeout);
@@ -74,10 +67,8 @@ class Client
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
             $response = $exception->getResponse()->getBody()->getContents();
             $code = $exception->getResponse()->getStatusCode();
-            $this->sentryClient->captureException($exception);
             throw new ClientException($response, $code);
         } catch (\GuzzleHttp\Exception\RequestException $exception) {
-            $this->sentryClient->captureException($exception);
             throw new ClientException(
                 $exception->getMessage(),
                 $exception->getCode()

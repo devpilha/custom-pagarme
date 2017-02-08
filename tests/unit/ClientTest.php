@@ -12,16 +12,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     const CONTENT        = 'sample content';
     const API_KEY        = 'myApiKey';
 
-    private $sentryClientMock;
     private $guzzleClientMock;
     private $requestMock;
 
     public function setup()
     {
-        $this->sentryClientMock = $this->getMockBuilder('Raven_Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->guzzleClientMock = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
@@ -62,8 +57,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client(
             $this->guzzleClientMock,
-            self::API_KEY,
-            $this->sentryClientMock
+            self::API_KEY
         );
 
         $client->send($this->requestMock);
@@ -104,47 +98,38 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client(
             $this->guzzleClientMock,
-            self::API_KEY,
-            $this->sentryClientMock
+            self::API_KEY
         );
 
         $client->send($this->requestMock);
     }
 
     /**
-     * @expectedException PagarMe\Sdk\ClientException
-     * @test
+    * @expectedException PagarMe\Sdk\ClientException
+    * @test
      */
     public function mustReturnClientExeptionWhenGetRequestException()
     {
-        $this->sentryClientMock->expects($this->once())
-            ->method('captureException')
-            ->willReturn(uniqid());
-
-        $requestMock = $this->getMock('GuzzleHttp\Message\RequestInterface');
+        $guzzleRequestMock = $this->getMock('GuzzleHttp\Message\RequestInterface');
 
         $this->guzzleClientMock->expects($this->once())
             ->method('createRequest')
-            ->willReturn($requestMock);
-
+            ->willReturn($guzzleRequestMock);
         $this->guzzleClientMock->method('send')
             ->will(
                 $this->throwException(
                     new \GuzzleHttp\Exception\RequestException(
                         'Exception',
-                        $requestMock
+                        $guzzleRequestMock
                     )
                 )
             );
-
         $this->guzzleClientMock->expects($this->once())->method('send');
 
         $client = new Client(
             $this->guzzleClientMock,
-            self::API_KEY,
-            $this->sentryClientMock
+            self::API_KEY
         );
-
         $client->send($this->requestMock);
     }
 
@@ -165,8 +150,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client(
             $this->guzzleClientMock,
-            self::API_KEY,
-            $this->sentryClientMock
+            self::API_KEY
         );
 
         $client->setDefaultTimeout($defaultTimeout);
@@ -184,7 +168,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client(
             $guzzleClient,
             self::API_KEY,
-            $this->sentryClientMock,
             $defaultTimeout
         );
 
