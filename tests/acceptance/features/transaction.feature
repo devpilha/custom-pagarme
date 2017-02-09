@@ -100,6 +100,13 @@ Feature: Transaction
       |  123456  |
       |  1000001 |
 
+  Scenario Outline: Creating a Boleto Transaction using Customers from the API
+    Given make a boleto transaction with "<amount>", using Customers from the API
+    Then a list of valid transactions must be created
+    Examples:
+      |  amount  |
+      |  2345678 |
+
   Scenario: Retrieving a Credit Card Transaction
     Given a valid customer
     And a valid card

@@ -5,17 +5,16 @@ namespace PagarMe\Sdk\Transaction\Request;
 use PagarMe\Sdk\RequestInterface;
 use PagarMe\Sdk\Transaction\Transaction;
 use PagarMe\Sdk\SplitRule\SplitRuleCollection;
-use PagarMe\Sdk\SplitRule\SplitRule;
 
 class TransactionCreate implements RequestInterface
 {
     /**
-     * @var Transaction
+     * @var \PagarMe\Sdk\Transaction\Transaction
      */
     protected $transaction;
 
     /**
-     * @param Transaction $transaction
+     * @param \PagarMe\Sdk\Transaction\Transaction $transaction
      */
     public function __construct(Transaction $transaction)
     {
@@ -29,8 +28,14 @@ class TransactionCreate implements RequestInterface
     {
         $customer = $this->transaction->getCustomer();
 
-        $address  = $customer->getAddress();
-        $phone    = $customer->getPhone();
+        $address = $customer->getAddress();
+        if (is_array($address)) {
+            $address = new \PagarMe\Sdk\Customer\Address($address);
+        }
+        $phone = $customer->getPhone();
+        if (is_array($phone)) {
+            $phone = new \PagarMe\Sdk\Customer\Phone($phone);
+        }
 
         $transactionData = [
             'amount'         => $this->transaction->getAmount(),
@@ -43,15 +48,15 @@ class TransactionCreate implements RequestInterface
                 'sex'             => $customer->getGender(),
                 'born_at'         => $customer->getBornAt(),
                 'address' => [
-                    'street'        => $address['street'],
-                    'street_number' => $address['street_number'],
-                    'complementary' => isset($address['complementary']) ? $address['complementary']: null,
-                    'neighborhood'  => $address['neighborhood'],
-                    'zipcode'       => $address['zipcode']
+                    'street'        => $address->getStreet(),
+                    'street_number' => $address->getStreetNumber(),
+                    'complementary' => $address->getComplementary(),
+                    'neighborhood'  => $address->getNeighborhood(),
+                    'zipcode'       => $address->getZipcode()
                 ],
                 'phone' => [
-                    'ddd'    => (string) $phone['ddd'],
-                    'number' => (string) $phone['number']
+                    'ddd'    => (string) $phone->getDdd(),
+                    'number' => (string) $phone->getNumber()
                 ]
             ],
             'metadata' => $this->transaction->getMetadata()
@@ -83,7 +88,7 @@ class TransactionCreate implements RequestInterface
     }
 
     /**
-     * @param PagarMe\Sdk\SplitRule\SplitRuleCollection $splitRules
+     * @param \PagarMe\Sdk\SplitRule\SplitRuleCollection $splitRules
      * @return array
      */
     private function getSplitRulesInfo(SplitRuleCollection $splitRules)
@@ -104,7 +109,7 @@ class TransactionCreate implements RequestInterface
     }
 
     /**
-     * @param PagarMe\Sdk\SplitRule\SplitRule $splitRule
+     * @param \PagarMe\Sdk\SplitRule\SplitRule $splitRule
      * @return array
      */
     private function getRuleValue($splitRule)
