@@ -6,7 +6,6 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client
 {
-
     /**
      * @var string
      */
