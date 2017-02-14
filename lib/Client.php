@@ -26,7 +26,7 @@ class Client
         $this->client = $client;
         $this->apiKey = $apiKey;
 
-        if ($timeout != null) {
+        if (!is_null($timeout)) {
             $this->setDefaultTimeout($timeout);
         }
     }
