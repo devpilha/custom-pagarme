@@ -10,6 +10,8 @@ Feature: Split Rule
     When make a credit card transaction
     Then a transaction must be created
     And the transaction must contain split rule
+    And the split rule must be countable
+    And the split rules count must be "2"
 
   Scenario: Create a boleto transaction with split rule
     Given a valid customer
@@ -17,3 +19,5 @@ Feature: Split Rule
     When make a boleto transaction
     Then a transaction must be created
     And the transaction must contain split rule
+    And the split rule must be countable
+    And the split rules count must be "2"
