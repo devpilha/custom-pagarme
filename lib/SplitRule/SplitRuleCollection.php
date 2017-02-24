@@ -2,7 +2,7 @@
 
 namespace PagarMe\Sdk\SplitRule;
 
-class SplitRuleCollection implements \ArrayAccess, \Iterator
+class SplitRuleCollection implements \ArrayAccess, \Iterator, \Countable
 {
 
     /**
@@ -69,5 +69,12 @@ class SplitRuleCollection implements \ArrayAccess, \Iterator
     public function valid()
     {
         return isset($this->rules[$this->position]);
+    }
+
+    /**
+     * @return int
+     */
+    public function count() {
+        return count($this->rules);
     }
 }
