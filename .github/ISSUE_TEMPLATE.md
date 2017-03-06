@@ -6,7 +6,6 @@
 
 [caso essa issue se trate de um bug, descreva como é o ambiente que ele ocorre, por exemplo:]
 
-* Magento Community 1.8.1.0
 * Módulo Pagar.me 0.1.6
 * Servidor Linux
 * PHP 5.4
@@ -16,13 +15,7 @@
 
 ## Passos para reproduzir
 
-[lista organizada de processos para reproduzir a issue, por exemplo:]
-
-1. Acesse o painel administrativo do Magento
-2. Clique em `Sistema > Configurações > Métodos de Pagamento`
-3. Encontre a sessão `PagarMe - Configurações`
-4. Informe uma API KEY e uma Encryption Key
-5. Salve a configuração
+[lista organizada de processos para reproduzir a issue e/ou trecho de código do SDK utilizado]
 
 ## Resultado esperado
 
@@ -32,7 +25,7 @@
 
 [descreva o que atualmente está ocorrendo com a execução do processo e explique o problema]
 
-## Posssível correção
+## Possível correção
 
 [opcional, mas você pode sugerir possíveis correções para este problema]
 
