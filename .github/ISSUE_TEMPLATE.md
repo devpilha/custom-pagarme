@@ -6,7 +6,7 @@
 
 [caso essa issue se trate de um bug, descreva como é o ambiente que ele ocorre, por exemplo:]
 
-* Módulo Pagar.me 0.1.6
+* SDK Pagar.me 0.1.6
 * Servidor Linux
 * PHP 5.4
 * Apache 2.2
