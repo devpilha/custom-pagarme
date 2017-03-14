@@ -28,7 +28,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
         $amount,
         $payload
     ) {
-        $transaction = $this->getAbstractClassMock();
+        $transaction = $this->getAbstractTransactionMock();
 
         $transaction->method('getId')->willReturn($transactionId);
 
@@ -53,7 +53,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
      */
     public function mustPayloadBeCorrectWithToken($token, $amount, $payload)
     {
-        $transaction = $this->getAbstractClassMock();
+        $transaction = $this->getAbstractTransactionMock();
 
         $transaction->method('getToken')->willReturn($token);
 
@@ -78,7 +78,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
     public function mustUseTransactionIdInsteadOfToken()
     {
         $transactionId = 123456;
-        $transaction = $this->getAbstractClassMock();
+        $transaction = $this->getAbstractTransactionMock();
 
         $transaction->method('getToken')->willReturn('abcdef');
         $transaction->method('getId')->willReturn($transactionId);
@@ -91,7 +91,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    protected function getAbstractClassMock()
+    protected function getAbstractTransactionMock()
     {
         return $this->getMockBuilder(
             'PagarMe\Sdk\Transaction\AbstractTransaction'
