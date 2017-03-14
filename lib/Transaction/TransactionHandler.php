@@ -129,11 +129,11 @@ class TransactionHandler extends AbstractHandler
     }
 
     /**
-     * @param CreditCardTransaction $transaction
+     * @param AbstractTransaction $transaction
      * @param int $amount
-     * @return CreditCardTransaction
+     * @return AbstractTransaction
      */
-    public function capture(CreditCardTransaction $transaction, $amount = null)    {
+    public function capture(AbstractTransaction $transaction, $amount = null)    {
         $request = new TransactionCapture($transaction, $amount);
         $response = $this->client->send($request);
 
