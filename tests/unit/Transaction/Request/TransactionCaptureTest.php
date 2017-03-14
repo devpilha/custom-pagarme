@@ -25,7 +25,8 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
      */
     public function mustPayloadBeCorrect($transactionId, $amount, $payload)
     {
-        $transactionCreate = new TransactionCapture($transactionId, $amount);
+        $transaction = new CreditCardTransaction(['id' => $transactionId]);
+        $transactionCreate = new TransactionCapture($transaction, $amount);
 
         $this->assertEquals(
             $payload,

@@ -9,19 +9,19 @@ class TransactionCapture implements RequestInterface
     /**
      * @var int
      */
-    protected $transactionId;
+    protected $transaction;
     /**
      * @var int
      */
     protected $amount;
 
     /**
-     * @param int $transaction
+     * @param PagarMe\Sdk\Transaction\Transaction $transaction
      * @param int $amount
      */
-    public function __construct($transactionId, $amount)
+    public function __construct($transaction, $amount)
     {
-        $this->transactionId = $transactionId;
+        $this->transaction = $transaction;
         $this->amount = $amount;
     }
 
@@ -43,7 +43,7 @@ class TransactionCapture implements RequestInterface
      */
     public function getPath()
     {
-        return sprintf('transactions/%d/capture', $this->transactionId);
+        return sprintf('transactions/%d/capture', $this->transaction->getId());
     }
 
     /**
