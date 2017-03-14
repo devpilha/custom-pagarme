@@ -23,9 +23,18 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
      * @dataProvider transactionCaptureProvider
      * @test
      */
-    public function mustPayloadBeCorrect($transactionId, $amount, $payload)
-    {
-        $transaction = new CreditCardTransaction(['id' => $transactionId]);
+    public function mustPayloadBeCorrectWithTransactionId(
+        $transactionId,
+        $amount,
+        $payload
+    ) {
+        $transaction = $this->getMockBuilder(
+                'PagarMe\Sdk\Transaction\AbstractTransaction'
+            )->disableOriginalConstructor()
+            ->getMock();
+
+        $transaction->method('getId')->willReturn($transactionId);
+
         $transactionCreate = new TransactionCapture($transaction, $amount);
 
         $this->assertEquals(
@@ -39,5 +48,55 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(RequestInterface::HTTP_POST, $transactionCreate->getMethod());
+    }
+
+    /**
+     * @dataProvider transactionCaptureProvider
+     * @test
+     */
+    public function mustPayloadBeCorrectWithToken($token, $amount, $payload)
+    {
+        $transaction = $this->getMockBuilder(
+                'PagarMe\Sdk\Transaction\AbstractTransaction'
+            )->disableOriginalConstructor()
+            ->getMock();
+
+        $transaction->method('getToken')->willReturn($token);
+
+        $transactionCreate = new TransactionCapture($transaction, $amount);
+
+        $this->assertEquals(
+            $payload,
+            $transactionCreate->getPayload()
+        );
+
+        $this->assertEquals(
+            sprintf(self::PATH, $token),
+            $transactionCreate->getPath()
+        );
+
+        $this->assertEquals(RequestInterface::HTTP_POST, $transactionCreate->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function mustUseTransactionIdInsteadOfToken()
+    {
+        $transactionId = 123456;
+        $transaction = $this->getMockBuilder(
+                'PagarMe\Sdk\Transaction\AbstractTransaction'
+            )->disableOriginalConstructor()
+            ->getMock();
+
+        $transaction->method('getToken')->willReturn('abcdef');
+        $transaction->method('getId')->willReturn($transactionId);
+
+        $transactionCreate = new TransactionCapture($transaction, null);
+
+        $this->assertEquals(
+            sprintf(self::PATH, $transactionId),
+            $transactionCreate->getPath()
+        );
     }
 }
