@@ -44,6 +44,7 @@ class TransactionCapture implements RequestInterface
     protected function getTransactionId()
     {
         $transactionId = $this->transaction->getId();
+
         if ($transactionId) {
             return $transactionId;
         }
@@ -56,7 +57,7 @@ class TransactionCapture implements RequestInterface
      */
     public function getPath()
     {
-        return sprintf('transactions/%d/capture', $this->getTransactionId());
+        return sprintf('transactions/%s/capture', $this->getTransactionId());
     }
 
     /**
