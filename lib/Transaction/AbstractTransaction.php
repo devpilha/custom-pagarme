@@ -153,6 +153,11 @@ abstract class AbstractTransaction
     protected $splitRules;
 
     /**
+     * @var string
+     */
+    protected $token;
+
+    /**
      * @param array $transactionData
      */
     public function __construct($transactionData)
@@ -475,5 +480,13 @@ abstract class AbstractTransaction
     public function getSplitRules()
     {
         return $this->splitRules;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }
