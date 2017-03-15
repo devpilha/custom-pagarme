@@ -10,7 +10,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
 {
     const PATH   = 'transactions/%s/capture';
 
-    public function transactionCaptureProvider()
+    public function transactionIdProvider()
     {
         return [
             [555, null , []],
@@ -20,7 +20,7 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider transactionCaptureProvider
+     * @dataProvider transactionIdProvider
      * @test
      */
     public function mustPayloadBeCorrectWithTransactionId(
@@ -47,8 +47,17 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(RequestInterface::HTTP_POST, $transactionCreate->getMethod());
     }
 
+    public function tokenProvider()
+    {
+        return [
+            [uniqid('token'), null , []],
+            [uniqid('token'), 500 , ['amount'   => 500]],
+            [uniqid('token'), 76500 , ['amount' => 76500]]
+        ];
+    }
+
     /**
-     * @dataProvider transactionCaptureProvider
+     * @dataProvider tokenProvider
      * @test
      */
     public function mustPayloadBeCorrectWithToken($token, $amount, $payload)
