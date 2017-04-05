@@ -10,6 +10,6 @@ Feature: Bulk Anticipation
     Then a anticipation must be created
     And must anticipation contain same data
     Examples:
-    | payment_date | timeframe | requested_amount | build |
-    | 2017-04-01   | start     | 1000             | true  |
-    | 2017-04-01   | start     | 1000             | false |
+    | payment_date  | timeframe | requested_amount | build |
+    | +5 days       | start     | 1000             | true  |
+    | +6 days       | start     | 1000             | false |
