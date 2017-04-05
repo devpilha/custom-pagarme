@@ -131,10 +131,15 @@ class TransactionHandler extends AbstractHandler
     /**
      * @param AbstractTransaction $transaction
      * @param int $amount
+     * @param array $metadata
      * @return AbstractTransaction
      */
-    public function capture(AbstractTransaction $transaction, $amount = null)    {
-        $request = new TransactionCapture($transaction, $amount);
+    public function capture(
+        AbstractTransaction $transaction,
+        $amount = null,
+        $metadata = []
+    ) {
+        $request = new TransactionCapture($transaction, $amount, $metadata);
         $response = $this->client->send($request);
 
         return $this->buildTransaction($response);

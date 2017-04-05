@@ -10,6 +10,8 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
 {
     const PATH   = 'transactions/%s/capture';
 
+    private $defaultMetadata = ['foo' => 'bar'];
+
     public function transactionIdProvider()
     {
         return [
@@ -106,5 +108,36 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
             'PagarMe\Sdk\Transaction\AbstractTransaction'
         )->disableOriginalConstructor()
         ->getMock();
+    }
+
+    public function transactionMetadataProvider()
+    {
+        return [
+            [555, null , ['metadata' => $this->defaultMetadata], $this->defaultMetadata],
+            [273690, 500 , ['amount' => 500, 'metadata' => $this->defaultMetadata], $this->defaultMetadata],
+            [888888, 76500 , ['amount' => 76500, 'metadata' => $this->defaultMetadata], $this->defaultMetadata]
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider transactionMetadataProvider
+     */
+    public function payloadMustBeEqualWhenProvidingMetadataAtTheCaptureStep(
+        $transactionId,
+        $amount,
+        $payload,
+        $metadata
+    ) {
+        $transaction = $this->getAbstractTransactionMock();
+
+        $transaction->method('getId')->willReturn($transactionId);
+
+        $transactionCreate = new TransactionCapture($transaction, $amount, $metadata);
+
+        $this->assertEquals(
+            $payload,
+            $transactionCreate->getPayload()
+        );
     }
 }
