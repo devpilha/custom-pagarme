@@ -113,9 +113,9 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
     public function transactionMetadataProvider()
     {
         return [
-            [555, null , ['metadata' => $this->defaultMetadata], $this->defaultMetadata],
-            [273690, 500 , ['amount' => 500, 'metadata' => $this->defaultMetadata], $this->defaultMetadata],
-            [888888, 76500 , ['amount' => 76500, 'metadata' => $this->defaultMetadata], $this->defaultMetadata]
+            [null, $this->defaultMetadata, ['metadata' => $this->defaultMetadata]],
+            [500 , $this->defaultMetadata, ['amount' => 500, 'metadata' => $this->defaultMetadata]],
+            [76500, $this->defaultMetadata, ['amount' => 76500, 'metadata' => $this->defaultMetadata]]
         ];
     }
 
@@ -124,19 +124,18 @@ class TransactionCaptureTest extends \PHPUnit_Framework_TestCase
      * @dataProvider transactionMetadataProvider
      */
     public function payloadMustBeEqualWhenProvidingMetadataAtTheCaptureStep(
-        $transactionId,
         $amount,
-        $payload,
-        $metadata
+        $metadata,
+        $expectedPayload
     ) {
-        $transaction = $this->getAbstractTransactionMock();
-
-        $transaction->method('getId')->willReturn($transactionId);
-
-        $transactionCreate = new TransactionCapture($transaction, $amount, $metadata);
+        $transactionCreate = new TransactionCapture(
+            $this->getAbstractTransactionMock(),
+            $amount,
+            $metadata
+        );
 
         $this->assertEquals(
-            $payload,
+            $expectedPayload,
             $transactionCreate->getPayload()
         );
     }
