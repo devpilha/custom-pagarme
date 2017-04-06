@@ -104,7 +104,7 @@ Feature: Transaction
     Given a paid Boleto Transaction
     And suficient funds
     When refund the Boleto Transaction
-    Then refunded transacition must be returned
+    Then refunded transaction must be returned
 
   Scenario Outline: Creating a Boleto Transaction using Customers from the API
     Given make a boleto transaction with "<amount>", using Customers from the API

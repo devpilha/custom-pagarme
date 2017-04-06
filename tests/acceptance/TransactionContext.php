@@ -420,9 +420,9 @@ class TransactionContext extends BasicContext
     }
 
     /**
-     * @Then refunded transacition must be returned
+     * @Then refunded transaction must be returned
      */
-    public function refundedTransacitionMustBeReturned()
+    public function refundedTransactionMustBeReturned()
     {
         assertTrue($this->transaction->isPendingRefund());
     }
