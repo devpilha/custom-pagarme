@@ -87,7 +87,7 @@ class TransactionContext extends BasicContext
     {
         $customersIdList = $this->getCustomerIdsFromAPI();
 
-        foreach($customersIdList as $id) {
+        foreach ($customersIdList as $id) {
             /** @var $customer \PagarMe\Sdk\Customer\Customer */
             $customer = self::getPagarMe()
                 ->customer()
@@ -360,6 +360,71 @@ class TransactionContext extends BasicContext
                 self::POSTBACK_URL,
                 $this->metadata
             );
+    }
+
+    /**
+     * @Given a paid Boleto Transaction
+     */
+    public function aPaidBoletoTransaction()
+    {
+        $this->aValidCustomer();
+        $this->makeABoletoTransactionWith(rand(1000, 10000));
+
+        self::getPagarMe()
+            ->transaction()
+            ->payTransaction($this->transaction);
+    }
+
+    /**
+     * @Given suficient funds
+     */
+    public function suficientFunds()
+    {
+        $transaction = self::getPagarMe()
+            ->transaction()
+            ->boletoTransaction(
+                rand(10000, 10001),
+                $this->customer,
+                self::POSTBACK_URL
+            );
+
+        self::getPagarMe()
+            ->transaction()
+            ->payTransaction($transaction);
+    }
+
+
+    /**
+     * @When refund the Boleto Transaction
+     */
+    public function refundTheBoletoTransaction()
+    {
+        $bankAccount = new \PagarMe\Sdk\BankAccount\BankAccount(
+            [
+                'bank_code'       => '237',
+                'agencia'         => '13383',
+                'agencia_dv'      => '1',
+                'conta'           => '133999',
+                'conta_dv'        => '1',
+                'document_number' => $this->customer->getDocumentNumber(),
+                'legal_name'      => $this->customer->getName()
+            ]
+        );
+
+        $this->transaction = self::getPagarMe()
+            ->transaction()
+            ->boletoRefund(
+                $this->transaction,
+                $bankAccount
+            );
+    }
+
+    /**
+     * @Then refunded transaction must be returned
+     */
+    public function refundedTransactionMustBeReturned()
+    {
+        assertTrue($this->transaction->isPendingRefund());
     }
 
     private function getRandomMetadata()

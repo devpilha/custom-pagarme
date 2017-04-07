@@ -100,6 +100,12 @@ Feature: Transaction
       |  123456  |
       |  1000001 |
 
+  Scenario: Refund a Boleto Transaction
+    Given a paid Boleto Transaction
+    And suficient funds
+    When refund the Boleto Transaction
+    Then refunded transaction must be returned
+
   Scenario Outline: Creating a Boleto Transaction using Customers from the API
     Given make a boleto transaction with "<amount>", using Customers from the API
     Then a list of valid transactions must be created
@@ -128,7 +134,6 @@ Feature: Transaction
     When query transactions events
     Then an array of events must be returned
 
-  @only
   Scenario: Create credit card transaction with metadata
     Given a valid customer
     And register a card with "4556425889100276", "João Silva" and "0623"
@@ -136,7 +141,6 @@ Feature: Transaction
     Then a valid transaction must be created
     And must contain same metadata
 
-  @only
   Scenario: Creating a Boleto Transaction
     Given a valid customer
     When make a boleto transaction with random amount and metadata

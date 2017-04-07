@@ -68,6 +68,8 @@ class BulkAnticipationContext extends BasicContext
 
         $paymentDate = new \Datetime($paymentDate);
 
+        $paymentDate->setTime(0, 0, 0);
+
         $this->expectedPaymentDate = $paymentDate;
         $this->expectedTimeframe = $timeframe;
         $this->expectedRequestedAmount = $requestedAmount;
