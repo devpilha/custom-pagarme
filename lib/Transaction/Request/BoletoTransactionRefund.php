@@ -62,13 +62,15 @@ class BoletoTransactionRefund implements RequestInterface
 
         if (is_null($bankAccount->getId())) {
             return [
-                'bank_code'       => $bankAccount->getBankCode(),
-                'agencia'         => $bankAccount->getAgencia(),
-                'agencia_dv'      => $bankAccount->getAgenciaDv(),
-                'conta'           => $bankAccount->getConta(),
-                'conta_dv'        => $bankAccount->getContaDv(),
-                'document_number' => $bankAccount->getDocumentNumber(),
-                'legal_name'      => $bankAccount->getLegalName()
+                'bank_account' => [
+                    'bank_code'       => $bankAccount->getBankCode(),
+                    'agencia'         => $bankAccount->getAgencia(),
+                    'agencia_dv'      => $bankAccount->getAgenciaDv(),
+                    'conta'           => $bankAccount->getConta(),
+                    'conta_dv'        => $bankAccount->getContaDv(),
+                    'document_number' => $bankAccount->getDocumentNumber(),
+                    'legal_name'      => $bankAccount->getLegalName()
+                ]
             ];
         }
 
