@@ -19,6 +19,8 @@ class SplitRuleContext extends BasicContext
     private $customer;
     private $splitRules;
     private $creditCard;
+    /** @var \PagarMe\Sdk\Transaction\AbstractTransaction */
+    private $transaction;
 
     /**
      * @Given a valid customer
@@ -109,6 +111,27 @@ class SplitRuleContext extends BasicContext
             'PagarMe\Sdk\SplitRule\SplitRuleCollection',
             $this->transaction->getSplitRules()
         );
+    }
+
+    /**
+     * @Then the split rule must be countable
+     */
+    public function theSplitRuleMustBeCountable()
+    {
+        assertInstanceOf(
+            'Countable',
+            $this->transaction->getSplitRules()
+        );
+    }
+
+    /**
+     * @Then the split rules count must be :quantity
+     */
+    public function theSplitRulesCountMustBe($quantity)
+    {
+        $countedSplitRules = count($this->transaction->getSplitRules());
+        assertInternalType('int', $countedSplitRules);
+        assertEquals($quantity, $countedSplitRules);
     }
 
     private function createRecipient()
