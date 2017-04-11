@@ -138,7 +138,9 @@ class PagarMe
             new GuzzleClient(
                 [
                     'base_url' => 'https://api.pagar.me/1/',
-                    'headers' => $headers
+                    'defaults' => [
+                        'headers' => $headers
+                    ]
                 ]
             ),
             $apiKey,
