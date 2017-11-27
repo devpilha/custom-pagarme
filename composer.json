@@ -5,8 +5,8 @@
             "url" : "https://github.com/pagarme/git-hooks.git"
         }
     ],
-    "name": "palmamatheus/pagarme-php",
-    "description": "Pagar.Me PHP Library Custom Fork",
+    "name": "pilhadigital/pagarme-php",
+    "description": "Pagar.Me PHP Library with few Custom's",
     "type": "lib",
     "keywords": [
         "pagar.me",
