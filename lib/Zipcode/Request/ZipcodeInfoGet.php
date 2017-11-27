@@ -9,7 +9,7 @@ class ZipcodeInfoGet implements RequestInterface
     /**
      * @var string
      */
-    private $zipcode;
+    public $zipcode;
 
     /**
      * @param string $zipcode

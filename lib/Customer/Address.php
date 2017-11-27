@@ -9,42 +9,42 @@ class Address
     /**
      * @var string
      */
-    private $street;
+    public $street;
 
     /**
      * @var string
      */
-    private $streetNumber;
+    public $streetNumber;
 
     /**
      * @var string
      */
-    private $neighborhood;
+    public $neighborhood;
 
     /**
      * @var string
      */
-    private $zipcode;
+    public $zipcode;
 
     /**
      * @var string
      */
-    private $complementary;
+    public $complementary;
 
     /**
      * @var string
      */
-    private $city;
+    public $city;
 
     /**
      * @var string
      */
-    private $state;
+    public $state;
 
     /**
      * @var string
      */
-    private $country;
+    public $country;
 
     /**
      * @param array $addressData

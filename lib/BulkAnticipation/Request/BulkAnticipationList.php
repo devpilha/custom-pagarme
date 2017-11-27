@@ -10,17 +10,17 @@ class BulkAnticipationList implements RequestInterface
     /**
      * @var Recipient
      */
-    private $recipient;
+    public $recipient;
 
     /**
      * @var int
      */
-    private $count;
+    public $count;
 
     /**
      * @var int
      */
-    private $page;
+    public $page;
 
     /**
      * @param  Recipient $recipient

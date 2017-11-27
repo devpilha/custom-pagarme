@@ -9,12 +9,12 @@ class CustomerList implements RequestInterface
     /**
      * @var int | Página da listagem
      */
-    private $page;
+    public $page;
 
     /**
      * @var int | Quantidades de itens a retornar
      */
-    private $count;
+    public $count;
 
     /**
      * @param int $page

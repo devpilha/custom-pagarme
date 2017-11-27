@@ -8,7 +8,7 @@ trait CustomerBuilder
      * @param array $customerData
      * @return Customer
      */
-    private function buildCustomer($customerData)
+    public function buildCustomer($customerData)
     {
         $customerData->address = new Address(
             get_object_vars($customerData->addresses[0])

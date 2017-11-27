@@ -9,7 +9,7 @@ class CardCreateFromHash implements RequestInterface
     /**
      * @var string
      */
-    private $cardHash;
+    public $cardHash;
 
     /**
      * @param string $cardHash

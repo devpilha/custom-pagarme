@@ -9,27 +9,27 @@ class CreditCardTransaction extends AbstractTransaction
     /**
      * @var \PagarMe\Sdk\Card\Card
      */
-    protected $card;
+    public $card;
 
     /**
      * @var int
      */
-    protected $installments;
+    public $installments;
 
     /**
      * @var boolean
      */
-    protected $capture;
+    public $capture;
 
     /**
      * @var string
      */
-    protected $cardCvv;
+    public $cardCvv;
 
     /**
      * @var boolean
      */
-    protected $async;
+    public $async;
 
     /**
      * @param array $transactionData

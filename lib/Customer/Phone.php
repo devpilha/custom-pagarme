@@ -9,17 +9,17 @@ class Phone
     /**
      * @var int $ddd
      */
-    private $ddd;
+    public $ddd;
 
     /**
      * @var int $number
      */
-    private $number;
+    public $number;
 
     /**
      * @var int $ddi
      */
-    private $ddi;
+    public $ddi;
 
     /**
      * @param array $phoneData

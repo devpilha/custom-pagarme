@@ -9,42 +9,42 @@ class BankAccountCreate implements RequestInterface
     /**
      * @var int
      */
-    private $bankCode;
+    public $bankCode;
 
     /**
      * @var int
      */
-    private $office;
+    public $office;
 
     /**
      * @var int
      */
-    private $officeDigit;
+    public $officeDigit;
 
     /**
      * @var int
      */
-    private $accountNumber;
+    public $accountNumber;
 
     /**
      * @var int
      */
-    private $accountDigit;
+    public $accountDigit;
 
     /**
      * @var int
      */
-    private $documentNumber;
+    public $documentNumber;
 
     /**
      * @var string
      */
-    private $legalName;
+    public $legalName;
 
     /**
      * @var string
      */
-    private $type;
+    public $type;
 
     /**
      * @param int $bankCode

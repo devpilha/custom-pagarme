@@ -9,17 +9,17 @@ class Balance
     /**
      * @var int
      */
-    protected $waitingFunds;
+    public $waitingFunds;
 
     /**
      * @var int
      */
-    protected $available;
+    public $available;
 
     /**
      * @var int
      */
-    protected $transferred;
+    public $transferred;
 
     /**
      * @param array $recipientData

@@ -11,37 +11,37 @@ class CustomerCreate implements RequestInterface
      /**
      * @var string | Nome ou razão social do comprador
      */
-    private $name;
+    public $name;
 
      /**
      * @var string | E-mail do comprador
      */
-    private $email;
+    public $email;
 
      /**
      * @var int | Número do CPF ou CNPJ do cliente
      */
-    private $documentNumber;
+    public $documentNumber;
 
      /**
      * @var Address | Endereço do comprador
      */
-    private $address;
+    public $address;
 
      /**
      * @var Phone | Telefone do comprador
      */
-    private $phone;
+    public $phone;
 
      /**
      * @var string | Data de nascimento ex: '13121988'
      */
-    private $bornAt;
+    public $bornAt;
 
      /**
      * @var string | Gênero
      */
-    private $gender;
+    public $gender;
 
     /**
      * @param string $name
@@ -105,7 +105,7 @@ class CustomerCreate implements RequestInterface
     /**
      *  @return array
      */
-    private function getAddresssData()
+    public function getAddresssData()
     {
         $addressData = [
             'street'        => $this->address->getStreet(),
@@ -136,7 +136,7 @@ class CustomerCreate implements RequestInterface
     /**
      *  @return array
      */
-    private function getPhoneData()
+    public function getPhoneData()
     {
         $phoneData = [
             'ddd'    => $this->phone->getDdd(),

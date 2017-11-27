@@ -10,7 +10,7 @@ class PlanUpdate implements RequestInterface
     /**
      * @var Plan $plan
      */
-    private $plan;
+    public $plan;
 
     /**
      * @param Plan $plan

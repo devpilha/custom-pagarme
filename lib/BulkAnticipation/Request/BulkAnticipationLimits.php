@@ -12,17 +12,17 @@ class BulkAnticipationLimits implements RequestInterface
     /**
      * @var  Recipient
      */
-    private $recipient;
+    public $recipient;
 
     /**
      * @var  DateTime
      */
-    private $paymentDate;
+    public $paymentDate;
 
     /**
      * @var  string
      */
-    private $timeframe;
+    public $timeframe;
 
     /**
      * @param  Recipient $recipient

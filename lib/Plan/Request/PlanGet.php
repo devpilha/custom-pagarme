@@ -10,7 +10,7 @@ class PlanGet implements RequestInterface
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @param int $id

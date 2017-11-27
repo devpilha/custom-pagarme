@@ -9,62 +9,62 @@ class Card
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    public $dateCreated;
 
     /**
      * @var \DateTime
      */
-    private $dateUpdated;
+    public $dateUpdated;
 
     /**
      * @var string
      */
-    private $brand;
+    public $brand;
 
     /**
      * @var string
      */
-    private $holderName;
+    public $holderName;
 
     /**
      * @var string
      */
-    private $firstDigits;
+    public $firstDigits;
 
     /**
      * @var string
      */
-    private $lastDigits;
+    public $lastDigits;
 
     /**
      * @var string
      */
-    private $fingerprint;
+    public $fingerprint;
 
     /**
      * @var object
      */
-    private $customer;
+    public $customer;
 
     /**
      * @var boolean
      */
-    private $valid;
+    public $valid;
 
     /**
      * @var string
      */
-    private $expirationDate;
+    public $expirationDate;
 
     /**
      * @var string
      */
-    private $hash;
+    public $hash;
 
     /**
      * @param array $arrayData

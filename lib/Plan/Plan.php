@@ -9,42 +9,42 @@ class Plan
     /**
      * @var int
      */
-    private $amount;
+    public $amount;
 
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var int
      */
-    private $days;
+    public $days;
 
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var int
      */
-    private $trialDays;
+    public $trialDays;
 
     /**
      * @var array
      */
-    private $paymentMethods;
+    public $paymentMethods;
 
     /**
      * @var int
      */
-    private $charges;
+    public $charges;
 
     /**
      * @var int
      */
-    private $installments;
+    public $installments;
 
 
     /**

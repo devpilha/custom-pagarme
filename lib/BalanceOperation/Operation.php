@@ -9,47 +9,47 @@ class Operation
     /**
      * @var int
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $status;
+    public $status;
 
     /**
      * @var int
      */
-    protected $balanceAmount;
+    public $balanceAmount;
 
     /**
      * @var int
      */
-    protected $balanceOldAmount;
+    public $balanceOldAmount;
 
     /**
      * @var string
      */
-    protected $movementType;
+    public $movementType;
 
     /**
      * @var int
      */
-    protected $amount;
+    public $amount;
 
     /**
      * @var int
      */
-    protected $fee;
+    public $fee;
 
     /**
      * @var \DateTime
      */
-    protected $dateCreated;
+    public $dateCreated;
 
     /**
      * @var Movement
      */
-    protected $movement;
+    public $movement;
 
     public function __construct($recipientData)
     {

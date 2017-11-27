@@ -9,67 +9,67 @@ class Transfer
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var int
      */
-    private $amount;
+    public $amount;
 
     /**
      * @var string
      */
-    private $type;
+    public $type;
 
     /**
      * @var string
      */
-    private $status;
+    public $status;
 
     /**
      * @var int
      */
-    private $fee;
+    public $fee;
 
     /**
      * @var \DateTime
      */
-    private $fundingEstimatedDate;
+    public $fundingEstimatedDate;
 
     /**
      * @var PagarMe\Sdk\BankAccount\BankAccount
      */
-    private $bankAccount;
+    public $bankAccount;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    public $dateCreated;
 
     /**
      * @var string
      */
-    private $sourceType;
+    public $sourceType;
 
     /**
      * @var string
      */
-    private $sourceId;
+    public $sourceId;
 
     /**
      * @var string
      */
-    private $targetType;
+    public $targetType;
 
     /**
      * @var int
      */
-    private $targetId;
+    public $targetId;
 
     /**
      * @var \DateTime
      */
-    private $fundingDate;
+    public $fundingDate;
 
 
     /**

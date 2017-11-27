@@ -9,17 +9,17 @@ class CardCreate implements RequestInterface
     /**
      * @var int
      */
-    private $cardNumber;
+    public $cardNumber;
 
     /**
      * @var string
      */
-    private $holderName;
+    public $holderName;
 
     /**
      * @var int
      */
-    private $cardExpirationDate;
+    public $cardExpirationDate;
 
     /**
      * @param int $cardNumber

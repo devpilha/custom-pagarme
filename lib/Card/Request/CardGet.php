@@ -9,7 +9,7 @@ class CardGet implements RequestInterface
     /**
      * @var int
      */
-    private $cardId;
+    public $cardId;
 
     /**
      * @param int $cardId

@@ -8,7 +8,7 @@ trait AntifraudAnalysisBuilder
      * @param array antifraudAnalysisData
      * @return AntifraudAnalysis
      */
-    private function buildAntifraudAnalysis($antifraudAnalysisData)
+    public function buildAntifraudAnalysis($antifraudAnalysisData)
     {
         $antifraudAnalysisData->date_created = new \DateTime(
             $antifraudAnalysisData->date_created

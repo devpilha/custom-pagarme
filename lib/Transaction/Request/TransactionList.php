@@ -9,12 +9,12 @@ class TransactionList implements RequestInterface
     /**
      * @var int
      */
-    private $page;
+    public $page;
 
     /**
      * @var int
      */
-    private $count;
+    public $count;
 
     /**
      * @param int $page

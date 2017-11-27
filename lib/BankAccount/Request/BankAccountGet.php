@@ -9,7 +9,7 @@ class BankAccountGet implements RequestInterface
     /**
      * @var int
      */
-    private $bankAccountId;
+    public $bankAccountId;
 
     /**
      * @param int $bankAccountId

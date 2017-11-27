@@ -9,7 +9,7 @@ class BalanceOperationGet implements RequestInterface
     /**
      * @var int
      */
-    private $balanceOperationId;
+    public $balanceOperationId;
 
     /**
      * @param int $balanceOperationId

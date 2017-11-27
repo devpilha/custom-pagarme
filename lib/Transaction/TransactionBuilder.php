@@ -10,7 +10,7 @@ trait TransactionBuilder
      * @param array transactionData
      * @return Transaction
      */
-    private function buildTransaction($transactionData)
+    public function buildTransaction($transactionData)
     {
         if (isset($transactionData->split_rules)) {
             $transactionData->split_rules = $this->buildSplitRules(
@@ -52,7 +52,7 @@ trait TransactionBuilder
      * @param array $transactionData
      * @return array
      */
-    private function parseMetadata($transactionData)
+    public function parseMetadata($transactionData)
     {
         if (!isset($transactionData->metadata)) {
             return [];

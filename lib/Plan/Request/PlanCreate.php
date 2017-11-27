@@ -10,37 +10,37 @@ class PlanCreate implements RequestInterface
     /**
      * @var int
      */
-    private $amount;
+    public $amount;
 
     /**
      * @var int
      */
-    private $days;
+    public $days;
 
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var int
      */
-    private $trialDays;
+    public $trialDays;
 
     /**
      * @var array
      */
-    private $paymentsMethods;
+    public $paymentsMethods;
 
     /**
      * @var int
      */
-    private $charges;
+    public $charges;
 
     /**
      * @var int
      */
-    private $installments;
+    public $installments;
 
 
     /**

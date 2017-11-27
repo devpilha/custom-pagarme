@@ -14,57 +14,57 @@ class BankAccount
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var int
      */
-    private $bankCode;
+    public $bankCode;
 
     /**
      * @var int
      */
-    private $agencia;
+    public $agencia;
 
     /**
      * @var int
      */
-    private $agenciaDv;
+    public $agenciaDv;
 
     /**
      * @var int
      */
-    private $conta;
+    public $conta;
 
     /**
      * @var int
      */
-    private $contaDv;
+    public $contaDv;
 
     /**
      * @var int
      */
-    private $documentNumber;
+    public $documentNumber;
 
     /**
      * @var string
      */
-    private $documentType;
+    public $documentType;
 
     /**
      * @var string
      */
-    private $legalName;
+    public $legalName;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    public $dateCreated;
 
     /**
      * @var string
      */
-    private $type;
+    public $type;
 
     /**
      * @param array $arrayData

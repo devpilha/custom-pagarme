@@ -11,7 +11,7 @@ trait OperationBuilder
      * @param \stdClass $operationData
      * @return Operation
      */
-    private function buildOperation(\stdClass $operationData)
+    public function buildOperation(\stdClass $operationData)
     {
         $operationData->movement = $this->buildMovement(
             $operationData->movement_object
@@ -26,7 +26,7 @@ trait OperationBuilder
      * @param \stdClass $movementData
      * @return \PagarMe\Sdk\Payable\Payable | \PagarMe\Sdk\Transfer\Transfer
      */
-    private function buildMovement(\stdClass $movementData)
+    public function buildMovement(\stdClass $movementData)
     {
         if ($movementData->object == 'payable') {
             return $this->buildPayable($movementData);

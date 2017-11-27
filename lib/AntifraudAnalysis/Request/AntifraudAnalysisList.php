@@ -9,7 +9,7 @@ class AntifraudAnalysisList implements RequestInterface
     /**
      * @var PagarMe\Sdk\Transaction\AbstractTransaction
      */
-    private $transaction;
+    public $transaction;
 
     /**
      * @param PagarMe\Sdk\Transaction\AbstractTransaction $transaction

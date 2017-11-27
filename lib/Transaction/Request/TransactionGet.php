@@ -9,7 +9,7 @@ class TransactionGet implements RequestInterface
     /**
      * @var int
      */
-    protected $transactionId;
+    public $transactionId;
 
     /**
      * @param int transactionId

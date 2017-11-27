@@ -11,17 +11,17 @@ class TransferCreate implements RequestInterface
     /**
      * @var int
      */
-    private $amount;
+    public $amount;
 
     /**
      * @var Recipient
      */
-    private $recipient;
+    public $recipient;
 
     /**
      * @var \PagarMe\Sdk\BankAccount\BankAccount
      */
-    private $bankAccount;
+    public $bankAccount;
 
     /**
      * @param int $amount

@@ -12,27 +12,27 @@ class BulkAnticipationCreate implements RequestInterface
     /**
      * @var  Recipient
      */
-    private $recipient;
+    public $recipient;
 
     /**
      * @var  DateTime
      */
-    private $paymentDate;
+    public $paymentDate;
 
     /**
      * @var  string
      */
-    private $timeframe;
+    public $timeframe;
 
     /**
      * @var  int
      */
-    private $requestedAmount;
+    public $requestedAmount;
 
     /**
      * @var  boolean
      */
-    private $building;
+    public $building;
 
     /**
      * @param  Recipient $recipient

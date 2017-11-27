@@ -10,7 +10,7 @@ class TransactionEvents implements RequestInterface
     /**
      * @var AbstractTransaction
      */
-    protected $transaction;
+    public $transaction;
 
     /**
      * @param AbstractTransaction $transaction

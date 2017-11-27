@@ -9,12 +9,12 @@ class AntifraudAnalysisGet implements RequestInterface
     /**
      * @var PagarMe\Sdk\Transaction\AbstractTransaction
      */
-    private $transaction;
+    public $transaction;
 
     /**
      * @var int
      */
-    private $antifraudAnalysis;
+    public $antifraudAnalysis;
 
     /**
      * @param PagarMe\Sdk\Transaction\AbstractTransaction $transaction

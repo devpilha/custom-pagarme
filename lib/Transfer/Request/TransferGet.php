@@ -9,7 +9,7 @@ class TransferGet implements RequestInterface
     /**
      * @var int
      */
-    private $transferId;
+    public $transferId;
 
     /**
      * @param int $transferId

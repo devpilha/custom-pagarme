@@ -9,52 +9,52 @@ class Customer
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var PagarMe\Sdk\Customer\Address
      */
-    private $address;
+    public $address;
 
     /**
      * @var string
      */
-    private $bornAt;
+    public $bornAt;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    public $dateCreated;
 
     /**
      * @var int
      */
-    private $documentNumber;
+    public $documentNumber;
 
     /**
      * @var string
      */
-    private $documentType;
+    public $documentType;
 
     /**
      * @var string
      */
-    private $email;
+    public $email;
 
     /**
      * @var string
      */
-    private $gender;
+    public $gender;
 
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var PagarMe\Sdk\Customer\Phone
      */
-    private $phone;
+    public $phone;
 
     /**
      * @param array $arrayData

@@ -9,37 +9,37 @@ class AntifraudAnalysis
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var int
      */
-    private $cost;
+    public $cost;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    public $dateCreated;
 
     /**
      * @var \DateTime
      */
-    private $dateUpdated;
+    public $dateUpdated;
 
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var int
      */
-    private $score;
+    public $score;
 
     /**
      * @var string
      */
-    private $status;
+    public $status;
 
     /**
      * @param array $antifraudAnalysisData

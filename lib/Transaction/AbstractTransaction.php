@@ -20,142 +20,142 @@ abstract class AbstractTransaction
     /**
      * @var int
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $status;
+    public $status;
 
     /**
      * @var string
      */
-    protected $refuseReason;
+    public $refuseReason;
 
     /**
      * @var string
      */
-    protected $statusReason;
+    public $statusReason;
 
     /**
      * @var string
      */
-    protected $acquirerName;
+    public $acquirerName;
 
     /**
      * @var string
      */
-    protected $acquirerResponseCode;
+    public $acquirerResponseCode;
 
     /**
      * @var string
      */
-    protected $authorizationCode;
+    public $authorizationCode;
 
     /**
      * @var string
      */
-    protected $softDescriptor;
+    public $softDescriptor;
 
     /**
      * @var string
      */
-    protected $tid;
+    public $tid;
 
     /**
      * @var string
      */
-    protected $nsu;
+    public $nsu;
 
     /**
      * @var \DateTime
      */
-    protected $dateCreated;
+    public $dateCreated;
 
     /**
      * @var \DateTime
      */
-    protected $dateUpdated;
+    public $dateUpdated;
 
     /**
      * @var int
      */
-    protected $amount;
+    public $amount;
 
     /**
      * @var int
      */
-    protected $cost;
+    public $cost;
 
     /**
      * @var string
      */
-    protected $postbackUrl;
+    public $postbackUrl;
 
     /**
      * @var string
      */
-    protected $paymentMethod;
+    public $paymentMethod;
 
     /**
      * @var int
      */
-    protected $antifraudScore;
+    public $antifraudScore;
 
     /**
      * @var string
      */
-    protected $referer;
+    public $referer;
 
     /**
      * @var string
      */
-    protected $ip;
+    public $ip;
 
     /**
      * @var int
      */
-    protected $subscriptionId;
+    public $subscriptionId;
 
     /**
      * @var \PagarMe\Sdk\Customer\Phone
      */
-    protected $phone;
+    public $phone;
 
     /**
      * @var \PagarMe\Sdk\Customer\Address
      */
-    protected $address;
+    public $address;
 
     /**
      * @var \PagarMe\Sdk\Customer\Customer
      */
-    protected $customer;
+    public $customer;
 
     /**
      * @var array
      */
-    protected $metadata;
+    public $metadata;
 
     /**
      * @var int
      */
-    protected $paidAmount;
+    public $paidAmount;
 
     /**
      * @var int
      */
-    protected $refundedAmount;
+    public $refundedAmount;
 
     /**
      * @var \PagarMe\Sdk\SplitRule\SplitRuleCollection
      */
-    protected $splitRules;
+    public $splitRules;
 
     /**
      * @var string
      */
-    protected $token;
+    public $token;
 
     /**
      * @param array $transactionData

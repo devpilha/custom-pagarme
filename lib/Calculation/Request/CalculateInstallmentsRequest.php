@@ -9,22 +9,22 @@ class CalculateInstallmentsRequest implements RequestInterface
     /**
      * @var int
      */
-    private $maxInstallments;
+    public $maxInstallments;
 
     /**
      * @var int
      */
-    private $freeInstallments;
+    public $freeInstallments;
 
     /**
      * @var int
      */
-    private $interestRate;
+    public $interestRate;
 
     /**
      * @var int
      */
-    private $amount;
+    public $amount;
 
     /**
      * @param int $amount

@@ -10,7 +10,7 @@ trait TransferBuilder
      * @param array transferData
      * @return Transfer
      */
-    private function buildTransfer($transferData)
+    public function buildTransfer($transferData)
     {
         $transferData->bank_account = new BankAccount(
             $transferData->bank_account

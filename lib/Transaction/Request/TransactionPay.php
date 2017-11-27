@@ -10,7 +10,7 @@ class TransactionPay implements RequestInterface
     /**
      * @var BoletoTransaction
      */
-    protected $transaction;
+    public $transaction;
 
     /**
      * @param BoletoTransaction $transaction

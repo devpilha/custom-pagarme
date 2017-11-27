@@ -14,7 +14,7 @@ class TransactionCreate implements RequestInterface
     /**
      * @var \PagarMe\Sdk\Transaction\Transaction
      */
-    protected $transaction;
+    public $transaction;
 
     /**
      * @param \PagarMe\Sdk\Transaction\Transaction $transaction

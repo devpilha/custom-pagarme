@@ -11,12 +11,12 @@ class BulkAnticipationDelete implements RequestInterface
     /**
      * @var Recipient
      */
-    private $recipient;
+    public $recipient;
 
     /**
      * @var BulkAnticipation
      */
-    private $bulkAnticipation;
+    public $bulkAnticipation;
 
     /**
      * @param Recipient $recipient

@@ -11,7 +11,7 @@ class TransferCancel implements RequestInterface
      * @var Transfer
      */
 
-    private $transfer;
+    public $transfer;
 
     /**
      * @param $transfer

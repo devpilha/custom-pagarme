@@ -9,15 +9,15 @@ class TransactionCapture implements RequestInterface
     /**
      * @var int
      */
-    protected $transaction;
+    public $transaction;
     /**
      * @var int
      */
-    protected $amount;
+    public $amount;
     /**
      * @var array
      */
-    protected $metadata;
+    public $metadata;
 
     /**
      * @param PagarMe\Sdk\Transaction\Transaction $transaction
@@ -52,7 +52,7 @@ class TransactionCapture implements RequestInterface
     /**
      * @return mixed
      */
-    protected function getTransactionId()
+    public function getTransactionId()
     {
         $transactionId = $this->transaction->getId();
 

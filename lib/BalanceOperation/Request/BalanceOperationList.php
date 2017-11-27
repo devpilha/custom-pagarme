@@ -10,17 +10,17 @@ class BalanceOperationList implements RequestInterface
     /**
      * @var int
      */
-    private $page;
+    public $page;
 
     /**
      * @var int
      */
-    private $count;
+    public $count;
 
     /**
      * @var string
      */
-    private $status;
+    public $status;
 
     /**
      * @param int $page

@@ -11,15 +11,15 @@ class BoletoTransactionRefund implements RequestInterface
     /**
      * @var BoletoTransaction
      */
-    protected $transaction;
+    public $transaction;
     /**
      * @var BankAccount
      */
-    protected $bankAccount;
+    public $bankAccount;
     /**
      * @var int
      */
-    protected $amount;
+    public $amount;
 
     /**
      * @param BoletoTransaction $transaction

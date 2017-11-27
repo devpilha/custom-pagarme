@@ -9,7 +9,7 @@ class CustomerGet implements RequestInterface
     /**
      * @var int | Identificador do cliente
      */
-    private $customerId;
+    public $customerId;
 
     /**
      * @param int

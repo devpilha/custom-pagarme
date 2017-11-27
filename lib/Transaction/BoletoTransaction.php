@@ -9,27 +9,27 @@ class BoletoTransaction extends AbstractTransaction
     /**
      * @var string
      */
-    protected $boletoUrl;
+    public $boletoUrl;
 
     /**
      * @var string
      */
-    protected $boletoBarcode;
+    public $boletoBarcode;
 
     /**
      * @var \DateTime
      */
-    protected $boletoExpirationDate;
+    public $boletoExpirationDate;
 
     /**
      * @var boolean
      */
-    protected $async;
+    public $async;
 
     /**
      * @var string
      */
-    protected $boletoInstructions;
+    public $boletoInstructions;
 
     /**
      * @param array $transactionData
